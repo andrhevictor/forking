@@ -1,4 +1,4 @@
-unit uCadastraProduto;
+unit uVisualizaProduto;
 
 interface
 
@@ -11,7 +11,7 @@ uses
   Vcl.ExtCtrls, Vcl.StdCtrls;
 
 type
-  TfCadastraProduto = class(TForm)
+  TfVisualizarProduto = class(TForm)
     panelTop: TPanel;
     Panel1: TPanel;
     dbgProdutos: TDBGrid;
@@ -34,7 +34,7 @@ type
   end;
 
 var
-  fCadastraProduto: TfCadastraProduto;
+  fVisualizarProduto: TfVisualizarProduto;
 
 implementation
 
@@ -42,7 +42,7 @@ implementation
 
 uses dmDados;
 
-procedure TfCadastraProduto.btnLimpaFiltrosClick(Sender: TObject);
+procedure TfVisualizarProduto.btnLimpaFiltrosClick(Sender: TObject);
 begin
    edtFiltroNome.Text := '';
    fdqProdutos.SQL.Clear;
@@ -50,7 +50,7 @@ begin
    fdqProdutos.Open();
 end;
 
-procedure TfCadastraProduto.dbgCategoriasCellClick(Column: TColumn);
+procedure TfVisualizarProduto.dbgCategoriasCellClick(Column: TColumn);
 var
 idCategoria: Integer;
 begin
@@ -62,7 +62,7 @@ begin
       fdqProdutos.Open();
 end;
 
-procedure TfCadastraProduto.edtFiltroNomeChange(Sender: TObject);
+procedure TfVisualizarProduto.edtFiltroNomeChange(Sender: TObject);
 var
   filtro: String;
 begin
@@ -80,7 +80,7 @@ begin
    end;
 end;
 
-procedure TfCadastraProduto.FormCreate(Sender: TObject);
+procedure TfVisualizarProduto.FormCreate(Sender: TObject);
 begin
   fdqProdutos.SQL.Add('SELECT * FROM produtos');
   fdqProdutos.Open();

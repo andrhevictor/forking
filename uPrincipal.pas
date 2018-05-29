@@ -30,11 +30,11 @@ implementation
 
 {$R *.dfm}
 
-uses dmDados, uCadastraProduto;
+uses dmDados, uVisualizaProduto;
 
 procedure TfPrincipal.Cadastrar1Click(Sender: TObject);
 begin
-  fCadastraProduto.Show;
+  fVisualizarProduto.Show;
 end;
 
 end.

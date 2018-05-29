@@ -108,8 +108,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="uCadastraProduto.pas">
-            <Form>fCadastraProduto</Form>
+        <DCCReference Include="uVisualizaProduto.pas">
+            <Form>fVisualizarProduto</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

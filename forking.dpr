@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   uPrincipal in 'uPrincipal.pas' {fPrincipal},
   dmDados in 'dmDados.pas' {dmConnection: TDataModule},
-  uCadastraProduto in 'uCadastraProduto.pas' {fCadastraProduto};
+  uVisualizaProduto in 'uVisualizaProduto.pas' {fVisualizarProduto};
 
 {$R *.res}
 
@@ -13,6 +13,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfPrincipal, fPrincipal);
   Application.CreateForm(TdmConnection, dmConnection);
-  Application.CreateForm(TfCadastraProduto, fCadastraProduto);
+  Application.CreateForm(TfVisualizarProduto, fVisualizarProduto);
   Application.Run;
 end.

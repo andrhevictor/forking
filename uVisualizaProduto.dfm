@@ -1,7 +1,7 @@
-object fCadastraProduto: TfCadastraProduto
+object fVisualizarProduto: TfVisualizarProduto
   Left = 0
   Top = 0
-  Caption = 'Cadastro de Produtos'
+  Caption = 'Visualizar Produtos'
   ClientHeight = 708
   ClientWidth = 1079
   Color = clBtnFace
