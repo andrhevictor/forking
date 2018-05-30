@@ -21,7 +21,6 @@ object fVisualizarProduto: TfVisualizarProduto
     Height = 89
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 979
   end
   object panelMid: TPanel
     Left = 0
@@ -30,13 +29,10 @@ object fVisualizarProduto: TfVisualizarProduto
     Height = 619
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 80
-    ExplicitWidth = 835
-    ExplicitHeight = 368
     object lblFiltro: TLabel
       Left = 256
       Top = 14
-      Width = 65
+      Width = 48
       Height = 23
       Caption = 'Filtrar'
       Font.Charset = DEFAULT_CHARSET
@@ -47,7 +43,7 @@ object fVisualizarProduto: TfVisualizarProduto
       ParentFont = False
     end
     object dbgProdutos: TDBGrid
-      Left = 248
+      Left = 288
       Top = 110
       Width = 817
       Height = 491

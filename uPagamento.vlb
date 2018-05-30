@@ -1,0 +1,10 @@
+﻿[panelTop]
+Coordinates=10,10,68,58
+
+[]
+Coordinates=161,1,91,36
+
+[panelMid]
+Coordinates=88,10,55,58
+Visible=True
+

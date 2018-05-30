@@ -36,6 +36,7 @@ object fPrincipal: TfPrincipal
       Height = 76
       Caption = 'Pagamento'
       TabOrder = 1
+      OnClick = btnPagamentoClick
     end
   end
   object panelMid: TPanel

@@ -23,6 +23,7 @@ type
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
     procedure VisualizarTodas1Click(Sender: TObject);
+    procedure btnPagamentoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +38,12 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
-  uVisualizaFichas;
+  uVisualizaFichas, uPagamento;
+
+procedure TfPrincipal.btnPagamentoClick(Sender: TObject);
+begin
+  fPagamento.Show;
+end;
 
 procedure TfPrincipal.Cadastrar1Click(Sender: TObject);
 begin

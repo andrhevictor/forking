@@ -7,7 +7,7 @@ uses
   uVisualizaProduto in 'uVisualizaProduto.pas' {fVisualizarProduto},
   uCadastraProduto in 'uCadastraProduto.pas' {fCadastraProduto},
   uEditaProduto in 'uEditaProduto.pas' {fEditaProduto},
-  uVisualizaFichas in 'uVisualizaFichas.pas' {fVisualizaFichas};
+  uVisualizaFichas in 'uVisualizaFichas.pas' {fVisualizaFichas},
   uPagamento in 'uPagamento.pas' {fPagamento};
 
 {$R *.res}
