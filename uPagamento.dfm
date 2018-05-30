@@ -20,37 +20,37 @@ object fPagamento: TfPagamento
     Height = 411
     Align = alClient
     TabOrder = 0
-    object Label1: TLabel
+    object lblNumeroPedido: TLabel
       Left = 16
       Top = 24
-      Width = 46
+      Width = 87
       Height = 13
-      Caption = 'pedido_id'
-      FocusControl = DBEdit1
+      Caption = 'Numero do Pedido'
+      FocusControl = edtNumeroPedido
     end
-    object Label2: TLabel
+    object lblMeioPagament: TLabel
       Left = 264
       Top = 21
-      Width = 101
+      Width = 94
       Height = 13
-      Caption = 'meios_pagamento_id'
+      Caption = 'Meio de Pagamento'
     end
-    object Label3: TLabel
-      Left = 730
+    object lblValor: TLabel
+      Left = 698
       Top = 376
-      Width = 24
+      Width = 51
       Height = 13
-      Caption = 'valor'
-      FocusControl = DBEdit3
+      Caption = 'Valor Total'
+      FocusControl = edtValorTotal
     end
     object lblListaProdutos: TLabel
       Left = 16
-      Top = 101
+      Top = 77
       Width = 83
       Height = 13
       Caption = 'Lista de Produtos'
     end
-    object DBEdit1: TDBEdit
+    object edtNumeroPedido: TDBEdit
       Left = 16
       Top = 40
       Width = 199
@@ -59,7 +59,7 @@ object fPagamento: TfPagamento
       DataSource = dsPagamento
       TabOrder = 0
     end
-    object DBEdit3: TDBEdit
+    object edtValorTotal: TDBEdit
       Left = 760
       Top = 376
       Width = 80
@@ -68,7 +68,7 @@ object fPagamento: TfPagamento
       DataSource = dsPagamento
       TabOrder = 1
     end
-    object DBLookupComboBox1: TDBLookupComboBox
+    object lcbMeioPagamento: TDBLookupComboBox
       Left = 264
       Top = 40
       Width = 145
@@ -80,9 +80,9 @@ object fPagamento: TfPagamento
       ListSource = dsMeioPagamento
       TabOrder = 2
     end
-    object DBGrid1: TDBGrid
+    object grdListaProdutos: TDBGrid
       Left = 16
-      Top = 85
+      Top = 94
       Width = 849
       Height = 276
       TabOrder = 3

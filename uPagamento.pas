@@ -22,15 +22,15 @@ type
     fdqPagamentopedido_id: TLargeintField;
     fdqPagamentomeios_pagamento_id: TLargeintField;
     fdqPagamentovalor: TFMTBCDField;
-    Label1: TLabel;
-    DBEdit1: TDBEdit;
-    Label2: TLabel;
-    Label3: TLabel;
-    DBEdit3: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
+    lblNumeroPedido: TLabel;
+    edtNumeroPedido: TDBEdit;
+    lblMeioPagament: TLabel;
+    lblValor: TLabel;
+    edtValorTotal: TDBEdit;
+    lcbMeioPagamento: TDBLookupComboBox;
     dsMeioPagamento: TDataSource;
     fdqMeioPagamento: TFDQuery;
-    DBGrid1: TDBGrid;
+    grdListaProdutos: TDBGrid;
     lblListaProdutos: TLabel;
   private
     { Private declarations }
