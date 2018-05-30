@@ -21,6 +21,7 @@ type
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
+    procedure VisualizarTodas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +35,8 @@ implementation
 
 {$R *.dfm}
 
-uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto;
+uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
+  uVisualizaFichas;
 
 procedure TfPrincipal.Cadastrar1Click(Sender: TObject);
 begin
@@ -44,6 +46,11 @@ end;
 procedure TfPrincipal.Editar1Click(Sender: TObject);
 begin
   fEditaProduto.Show;
+end;
+
+procedure TfPrincipal.VisualizarTodas1Click(Sender: TObject);
+begin
+  fVisualizaFichas.Show;
 end;
 
 procedure TfPrincipal.VisualizarTodos1Click(Sender: TObject);

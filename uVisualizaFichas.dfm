@@ -38,6 +38,7 @@ object fVisualizaFichas: TfVisualizaFichas
       Width = 201
       Height = 473
       DataSource = dsFichas
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
