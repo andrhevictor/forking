@@ -13,7 +13,7 @@ uses
 type
   TfVisualizarProduto = class(TForm)
     panelTop: TPanel;
-    Panel1: TPanel;
+    panelMid: TPanel;
     dbgProdutos: TDBGrid;
     dbgCategorias: TDBGrid;
     fdqProdutos: TFDQuery;

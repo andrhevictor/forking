@@ -55,6 +55,7 @@ object fPrincipal: TfPrincipal
       end
       object VisualizarTodos1: TMenuItem
         Caption = 'Visualizar Todos'
+        OnClick = VisualizarTodos1Click
       end
     end
   end

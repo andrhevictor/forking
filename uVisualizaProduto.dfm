@@ -23,7 +23,7 @@ object fVisualizarProduto: TfVisualizarProduto
     TabOrder = 0
     ExplicitWidth = 979
   end
-  object Panel1: TPanel
+  object panelMid: TPanel
     Left = 0
     Top = 89
     Width = 1079
@@ -112,24 +112,24 @@ object fVisualizarProduto: TfVisualizarProduto
           Visible = True
         end>
     end
-  end
-  object edtFiltroNome: TEdit
-    Left = 256
-    Top = 132
-    Width = 257
-    Height = 21
-    TabOrder = 2
-    TextHint = 'Filtre pelo nome do produto'
-    OnChange = edtFiltroNomeChange
-  end
-  object btnLimpaFiltros: TButton
-    Left = 527
-    Top = 130
-    Width = 122
-    Height = 25
-    Caption = 'Limpar Filtro'
-    TabOrder = 3
-    OnClick = btnLimpaFiltrosClick
+    object edtFiltroNome: TEdit
+      Left = 256
+      Top = 43
+      Width = 257
+      Height = 21
+      TabOrder = 2
+      TextHint = 'Filtre pelo nome do produto'
+      OnChange = edtFiltroNomeChange
+    end
+    object btnLimpaFiltros: TButton
+      Left = 535
+      Top = 41
+      Width = 122
+      Height = 25
+      Caption = 'Limpar Filtro'
+      TabOrder = 3
+      OnClick = btnLimpaFiltrosClick
+    end
   end
   object fdqProdutos: TFDQuery
     Connection = dmConnection.fdcDatabase
