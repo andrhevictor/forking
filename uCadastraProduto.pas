@@ -39,6 +39,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,6 +68,13 @@ procedure TfCadastraProduto.FormCreate(Sender: TObject);
 begin
   fdqProdutos.Insert;
   fdqProdutos.ClearFields;
+end;
+
+procedure TfCadastraProduto.FormShow(Sender: TObject);
+begin
+fdqProdutos.Insert;
+   fdqProdutos.ClearFields;
+
 end;
 
 end.
