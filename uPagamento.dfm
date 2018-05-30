@@ -20,8 +20,6 @@ object fPagamento: TfPagamento
     Height = 411
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitTop = 137
     object Label1: TLabel
       Left = 16
       Top = 24
@@ -102,9 +100,6 @@ object fPagamento: TfPagamento
     Height = 113
     Align = alTop
     TabOrder = 1
-    ExplicitLeft = 1
-    ExplicitTop = 1
-    ExplicitWidth = 882
     object lblFicha: TLabel
       Left = 16
       Top = 50
@@ -121,6 +116,7 @@ object fPagamento: TfPagamento
     end
   end
   object fdqPagamento: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'SELECT * FROM pagamentos')
@@ -157,6 +153,7 @@ object fPagamento: TfPagamento
     Top = 8
   end
   object fdqMeioPagamento: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'SELECT * FROM meios_pagamento')
