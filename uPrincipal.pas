@@ -38,7 +38,7 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
-  uVisualizaFichas, uPagamento;
+  uVisualizaFichas, uPagamento, uLogin;
 
 procedure TfPrincipal.btnPagamentoClick(Sender: TObject);
 begin

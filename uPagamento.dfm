@@ -57,6 +57,7 @@ object fPagamento: TfPagamento
       Height = 21
       DataField = 'pedido_id'
       DataSource = dsPagamento
+      Enabled = False
       TabOrder = 0
     end
     object edtValorTotal: TDBEdit
@@ -66,6 +67,7 @@ object fPagamento: TfPagamento
       Height = 21
       DataField = 'valor'
       DataSource = dsPagamento
+      Enabled = False
       TabOrder = 1
     end
     object lcbMeioPagamento: TDBLookupComboBox
