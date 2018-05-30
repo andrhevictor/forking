@@ -1,9 +1,11 @@
 object fCadastraProduto: TfCadastraProduto
   Left = 0
   Top = 0
+  BorderIcons = []
+  BorderStyle = bsSingle
   Caption = 'Cadastrar Produto'
-  ClientHeight = 568
-  ClientWidth = 907
+  ClientHeight = 536
+  ClientWidth = 883
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +13,7 @@ object fCadastraProduto: TfCadastraProduto
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -18,18 +21,21 @@ object fCadastraProduto: TfCadastraProduto
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 907
+    Width = 883
     Height = 89
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 907
   end
   object panelMid: TPanel
     Left = 0
     Top = 89
-    Width = 907
-    Height = 375
+    Width = 883
+    Height = 359
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 907
+    ExplicitHeight = 375
     object lblId: TLabel
       Left = 40
       Top = 37
@@ -122,14 +128,14 @@ object fCadastraProduto: TfCadastraProduto
   end
   object Panel1: TPanel
     Left = 0
-    Top = 464
-    Width = 907
-    Height = 104
+    Top = 448
+    Width = 883
+    Height = 88
     Align = alBottom
     TabOrder = 2
     object btnSalvar: TButton
-      Left = 792
-      Top = 32
+      Left = 776
+      Top = 24
       Width = 89
       Height = 49
       Caption = 'Salvar'
@@ -137,8 +143,8 @@ object fCadastraProduto: TfCadastraProduto
       OnClick = btnSalvarClick
     end
     object btnCancelar: TButton
-      Left = 688
-      Top = 32
+      Left = 672
+      Top = 24
       Width = 89
       Height = 49
       Caption = 'Cancelar'
