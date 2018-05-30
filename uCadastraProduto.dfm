@@ -2,8 +2,8 @@ object fCadastraProduto: TfCadastraProduto
   Left = 0
   Top = 0
   Caption = 'Cadastrar Produto'
-  ClientHeight = 615
-  ClientWidth = 1061
+  ClientHeight = 568
+  ClientWidth = 907
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,12 +11,13 @@ object fCadastraProduto: TfCadastraProduto
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 1061
+    Width = 907
     Height = 89
     Align = alTop
     TabOrder = 0
@@ -26,8 +27,8 @@ object fCadastraProduto: TfCadastraProduto
   object panelMid: TPanel
     Left = 0
     Top = 89
-    Width = 1061
-    Height = 526
+    Width = 907
+    Height = 375
     Align = alClient
     TabOrder = 1
     ExplicitLeft = -125
@@ -124,31 +125,57 @@ object fCadastraProduto: TfCadastraProduto
       TabOrder = 4
     end
   end
+  object Panel1: TPanel
+    Left = 0
+    Top = 464
+    Width = 907
+    Height = 104
+    Align = alBottom
+    TabOrder = 2
+    object btnSalvar: TButton
+      Left = 792
+      Top = 32
+      Width = 89
+      Height = 49
+      Caption = 'Salvar'
+      TabOrder = 0
+      OnClick = btnSalvarClick
+    end
+    object btnCancelar: TButton
+      Left = 688
+      Top = 32
+      Width = 89
+      Height = 49
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btnCancelarClick
+    end
+  end
   object dsProdutos: TDataSource
     DataSet = fdqProdutos
-    Left = 944
-    Top = 24
+    Left = 680
+    Top = 32
   end
   object fdqCategorias: TFDQuery
     Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from categorias')
-    Left = 872
-    Top = 24
+    Left = 608
+    Top = 32
   end
   object dsCategorias: TDataSource
     DataSet = fdqCategorias
-    Left = 792
-    Top = 24
+    Left = 528
+    Top = 32
   end
   object fdqProdutos: TFDQuery
     Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from produtos')
-    Left = 1008
-    Top = 24
+    Left = 744
+    Top = 32
     object fdqProdutosid: TLargeintField
       FieldName = 'id'
       Origin = 'id'

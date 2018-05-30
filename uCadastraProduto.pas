@@ -33,6 +33,12 @@ type
     lblDescricao: TLabel;
     DBEdit5: TDBEdit;
     lblCategoria: TLabel;
+    Panel1: TPanel;
+    btnSalvar: TButton;
+    btnCancelar: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,5 +51,22 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfCadastraProduto.btnCancelarClick(Sender: TObject);
+begin
+  fCadastraProduto.Close;
+end;
+
+procedure TfCadastraProduto.btnSalvarClick(Sender: TObject);
+begin
+  fdqProdutos.Post;
+  fCadastraProduto.Close;
+end;
+
+procedure TfCadastraProduto.FormCreate(Sender: TObject);
+begin
+  fdqProdutos.Insert;
+  fdqProdutos.ClearFields;
+end;
 
 end.
