@@ -72,8 +72,8 @@ end;
 
 procedure TfCadastraProduto.FormShow(Sender: TObject);
 begin
-fdqProdutos.Insert;
-   fdqProdutos.ClearFields;
+  fdqProdutos.Insert;
+  fdqProdutos.ClearFields;
 
 end;
 

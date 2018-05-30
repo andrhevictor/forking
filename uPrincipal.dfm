@@ -52,6 +52,7 @@ object fPrincipal: TfPrincipal
       end
       object Editar1: TMenuItem
         Caption = 'Editar'
+        OnClick = Editar1Click
       end
       object VisualizarTodos1: TMenuItem
         Caption = 'Visualizar Todos'

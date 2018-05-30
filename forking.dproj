@@ -113,6 +113,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uCadastraProduto.pas">
+            <Form>fCadastraProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uEditaProduto.pas">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>

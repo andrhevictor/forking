@@ -18,6 +18,7 @@ type
     VisualizarTodos1: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
+    procedure Editar1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,11 +32,16 @@ implementation
 
 {$R *.dfm}
 
-uses dmDados, uVisualizaProduto, uCadastraProduto;
+uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto;
 
 procedure TfPrincipal.Cadastrar1Click(Sender: TObject);
 begin
   fCadastraProduto.Show;
+end;
+
+procedure TfPrincipal.Editar1Click(Sender: TObject);
+begin
+  fEditaProduto.Show;
 end;
 
 procedure TfPrincipal.VisualizarTodos1Click(Sender: TObject);
