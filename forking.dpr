@@ -8,6 +8,7 @@ uses
   uCadastraProduto in 'uCadastraProduto.pas' {fCadastraProduto},
   uEditaProduto in 'uEditaProduto.pas' {fEditaProduto},
   uVisualizaFichas in 'uVisualizaFichas.pas' {fVisualizaFichas};
+  uPagamento in 'uPagamento.pas' {fPagamento};
 
 {$R *.res}
 
@@ -20,5 +21,6 @@ begin
   Application.CreateForm(TfCadastraProduto, fCadastraProduto);
   Application.CreateForm(TfEditaProduto, fEditaProduto);
   Application.CreateForm(TfVisualizaFichas, fVisualizaFichas);
+  Application.CreateForm(TfPagamento, fPagamento);
   Application.Run;
 end.

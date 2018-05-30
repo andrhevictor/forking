@@ -29,6 +29,14 @@ object fPrincipal: TfPrincipal
       Caption = 'Novo Pedido'
       TabOrder = 0
     end
+    object btnPagamento: TButton
+      Left = 176
+      Top = 28
+      Width = 137
+      Height = 76
+      Caption = 'Pagamento'
+      TabOrder = 1
+    end
   end
   object panelMid: TPanel
     Left = 0
@@ -37,9 +45,6 @@ object fPrincipal: TfPrincipal
     Height = 555
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 8
-    ExplicitWidth = 849
-    ExplicitHeight = 105
   end
   object mmMenu: TMainMenu
     Left = 1056

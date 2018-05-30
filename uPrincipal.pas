@@ -18,6 +18,7 @@ type
     VisualizarTodos1: TMenuItem;
     Fichas1: TMenuItem;
     VisualizarTodas1: TMenuItem;
+    btnPagamento: TButton;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
