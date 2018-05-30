@@ -6,7 +6,8 @@ uses
   dmDados in 'dmDados.pas' {dmConnection: TDataModule},
   uVisualizaProduto in 'uVisualizaProduto.pas' {fVisualizarProduto},
   uCadastraProduto in 'uCadastraProduto.pas' {fCadastraProduto},
-  uEditaProduto in 'uEditaProduto.pas' {Form1};
+  uEditaProduto in 'uEditaProduto.pas' {fEditaProduto},
+  uVisualizaFichas in 'uVisualizaFichas.pas' {fVisualizaFichas};
 
 {$R *.res}
 
@@ -17,6 +18,7 @@ begin
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TfVisualizarProduto, fVisualizarProduto);
   Application.CreateForm(TfCadastraProduto, fCadastraProduto);
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfEditaProduto, fEditaProduto);
+  Application.CreateForm(TfVisualizaFichas, fVisualizaFichas);
   Application.Run;
 end.

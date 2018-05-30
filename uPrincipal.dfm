@@ -59,5 +59,11 @@ object fPrincipal: TfPrincipal
         OnClick = VisualizarTodos1Click
       end
     end
+    object Fichas1: TMenuItem
+      Caption = 'Fichas'
+      object VisualizarTodas1: TMenuItem
+        Caption = 'Visualizar Todas'
+      end
+    end
   end
 end
