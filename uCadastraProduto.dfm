@@ -22,8 +22,6 @@ object fCadastraProduto: TfCadastraProduto
     Height = 89
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = -125
-    ExplicitWidth = 1079
   end
   object panelMid: TPanel
     Left = 0
@@ -32,10 +30,6 @@ object fCadastraProduto: TfCadastraProduto
     Height = 375
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = -125
-    ExplicitTop = -74
-    ExplicitWidth = 1079
-    ExplicitHeight = 619
     object lblId: TLabel
       Left = 40
       Top = 37

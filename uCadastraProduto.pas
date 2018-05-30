@@ -61,7 +61,9 @@ end;
 procedure TfCadastraProduto.btnSalvarClick(Sender: TObject);
 begin
   fdqProdutos.Post;
-  fCadastraProduto.Close;
+  fdqProdutos.Insert;
+  fdqProdutos.ClearFields;
+  //fCadastraProduto.Close;
 end;
 
 procedure TfCadastraProduto.FormCreate(Sender: TObject);
