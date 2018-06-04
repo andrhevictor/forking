@@ -1,6 +1,7 @@
 object fLogin: TfLogin
   Left = 0
   Top = 0
+  BorderIcons = []
   Caption = 'Login'
   ClientHeight = 230
   ClientWidth = 505
@@ -48,8 +49,6 @@ object fLogin: TfLogin
     Height = 189
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 32
-    ExplicitHeight = 199
     object lblUsuario: TLabel
       Left = 232
       Top = 37

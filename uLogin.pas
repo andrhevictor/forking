@@ -38,7 +38,7 @@ implementation
 
 uses dmDados, uPrincipal;
 
-  function TfLogin.GetUsuarioId: Integer;
+function TfLogin.GetUsuarioId: Integer;
   begin
     Result := fLogin.usuario_id;
   end;
@@ -59,7 +59,7 @@ begin
     if(n > 0) then begin
       usuario_id := fdqUsuario.FieldByName('id').AsInteger;
       fLogin.Hide;
-      fPrincipal.Show;
+//      fPrincipal.Show;
     end
     else begin
     ShowMessage('Usuario ou senha invalido!');
