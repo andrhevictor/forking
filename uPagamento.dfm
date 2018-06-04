@@ -140,12 +140,6 @@ object fPagamento: TfPagamento
       FieldName = 'meios_pagamento_id'
       Origin = 'meios_pagamento_id'
     end
-    object fdqPagamentovalor: TBCDField
-      FieldName = 'valor'
-      Origin = 'valor'
-      Precision = 6
-      Size = 2
-    end
   end
   object dsPagamento: TDataSource
     DataSet = fdqPagamento
