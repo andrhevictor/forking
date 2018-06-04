@@ -130,6 +130,12 @@ object fPagamento: TfPagamento
       FieldName = 'pedido_id'
       Origin = 'pedido_id'
     end
+    object fdqPagamentovalor: TBCDField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Precision = 6
+      Size = 2
+    end
     object fdqPagamentomeios_pagamento_id: TLargeintField
       FieldName = 'meios_pagamento_id'
       Origin = 'meios_pagamento_id'

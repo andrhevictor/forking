@@ -30,8 +30,11 @@ type
     fdqMeioPagamento: TFDQuery;
     grdListaProdutos: TDBGrid;
     lblListaProdutos: TLabel;
-    fdqPagamentovalor: TBCDField;
     edtValorTotal: TDBEdit;
+    fdqPagamentoid: TLargeintField;
+    fdqPagamentopedido_id: TLargeintField;
+    fdqPagamentovalor: TBCDField;
+    fdqPagamentomeios_pagamento_id: TLargeintField;
   private
     { Private declarations }
   public
