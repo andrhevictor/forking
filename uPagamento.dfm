@@ -116,6 +116,7 @@ object fPagamento: TfPagamento
     end
   end
   object fdqPagamento: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'SELECT * FROM pagamentos')
@@ -152,6 +153,7 @@ object fPagamento: TfPagamento
     Top = 8
   end
   object fdqMeioPagamento: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'SELECT * FROM meios_pagamento')
