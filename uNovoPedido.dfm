@@ -22,6 +22,31 @@ object fNovoPedido: TfNovoPedido
     TabOrder = 0
     ExplicitWidth = 769
     ExplicitHeight = 332
+    object lblValor: TLabel
+      Left = 312
+      Top = 480
+      Width = 124
+      Height = 23
+      Caption = 'Valor Total: R$'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblValorTotal: TLabel
+      Left = 442
+      Top = 480
+      Width = 87
+      Height = 23
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object dbgProdutos: TDBGrid
       Left = 160
       Top = 24
@@ -81,7 +106,7 @@ object fNovoPedido: TfNovoPedido
     end
     object DBGrid1: TDBGrid
       Left = 16
-      Top = 264
+      Top = 248
       Width = 513
       Height = 217
       DataSource = dsItensPedido
@@ -91,6 +116,38 @@ object fNovoPedido: TfNovoPedido
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'nome'
+          Title.Caption = 'Nome'
+          Width = 180
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'quantidade'
+          Title.Alignment = taCenter
+          Title.Caption = 'Quantidade'
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'preco'
+          Title.Alignment = taCenter
+          Title.Caption = 'Valor Unit.'
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'valor_total'
+          Title.Alignment = taCenter
+          Title.Caption = 'Valor Tot.'
+          Width = 70
+          Visible = True
+        end>
     end
   end
   object panelTop: TPanel
@@ -129,13 +186,28 @@ object fNovoPedido: TfNovoPedido
     Top = 8
   end
   object fdqItensPedido: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
+    SQL.Strings = (
+      'SELECT * FROM pedidos_itens AS itens'
+      'INNER JOIN produtos ON produtos.id = itens.produto_id'
+      'INNER JOIN categorias ON produtos.categoria_id = categorias.id')
     Left = 424
     Top = 8
   end
   object dsItensPedido: TDataSource
     DataSet = fdqItensPedido
     Left = 344
+    Top = 8
+  end
+  object fdqSomaItens: TFDQuery
+    Active = True
+    Connection = dmConnection.fdcDatabase
+    SQL.Strings = (
+      'SELECT * FROM pedidos_itens AS itens'
+      'INNER JOIN produtos ON produtos.id = itens.produto_id'
+      'INNER JOIN categorias ON produtos.categoria_id = categorias.id')
+    Left = 264
     Top = 8
   end
 end
