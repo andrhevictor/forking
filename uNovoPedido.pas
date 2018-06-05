@@ -64,21 +64,20 @@ begin
   begin
     produto_id     := dbgProdutos.DataSource.DataSet.FieldByName('id').AsInteger;
     preco_unitario := dbgProdutos.DataSource.DataSet.FieldByName('preco').AsCurrency;
-    valor_total    :=  preco_unitario * quantidade.ToInteger;
+    valor_total    :=  preco_unitario * quantidade.ToDouble;
 
     fdqItensPedido.SQL.Clear;
     fdqItensPedido.SQL.Add('INSERT INTO pedidos_itens VALUES (DEFAULT, :idPedido, :idProduto, :quantidade, :valor_total)');
     fdqItensPedido.ParamByName('idPedido').Value := idPedido;
     fdqItensPedido.ParamByName('idProduto').Value := produto_id;
-    fdqItensPedido.ParamByName('quantidade').Value := quantidade.ToInteger;
+    fdqItensPedido.ParamByName('quantidade').Value := quantidade.ToDouble;
     fdqItensPedido.ParamByName('valor_total').Value := valor_total;
     fdqItensPedido.ExecSQL;
 
   end;
   fdqItensPedido.SQL.Clear;
   fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens AS itens');
-  fdqItensPedido.SQL.Add
-    ('INNER JOIN produtos ON produtos.id = itens.produto_id');
+  fdqItensPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
   fdqItensPedido.SQL.Add('WHERE pedido_id = :idPedido');
   fdqItensPedido.ParamByName('idPedido').Value := idPedido;
   fdqItensPedido.Open();
