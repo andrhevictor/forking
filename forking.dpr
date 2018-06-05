@@ -18,13 +18,13 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfPrincipal, fPrincipal);
+  Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TfVisualizarProduto, fVisualizarProduto);
   Application.CreateForm(TfCadastraProduto, fCadastraProduto);
   Application.CreateForm(TfEditaProduto, fEditaProduto);
   Application.CreateForm(TfVisualizaFichas, fVisualizaFichas);
   Application.CreateForm(TfPagamento, fPagamento);
-  Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TfNovoPedido, fNovoPedido);
   Application.Run;
 end.

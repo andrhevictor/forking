@@ -24,6 +24,7 @@ type
     VisualizarTodas1: TMenuItem;
     btnPagamento: TButton;
     fdqInserePedido: TFDQuery;
+    Relatrios1: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
@@ -49,14 +50,16 @@ uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
 pedidoId: String;
+usuarioId: Integer;
 begin
+usuarioId := 1;                     // MUDAR AQUI ASDOAHSDUIAHSIDA
 fdqInserePedido.SQL.Clear;
 fdqInserePedido.SQL.Add('INSERT INTO pedidos');
 fdqInserePedido.SQL.Add('VALUES');
 fdqInserePedido.SQL.Add('(default,');
 fdqInserePedido.SQL.Add('null,');
 fdqInserePedido.SQL.Add(QuotedStr('EM ABERTO'));
-fdqInserePedido.SQL.Add(',1)');
+fdqInserePedido.SQL.Add(',' + usuarioId.ToString + ')');
 fdqInserePedido.SQL.Add(' RETURNING id');
 fdqInserePedido.Open();
 pedidoId := fdqInserePedido.FieldByName('id').AsString;

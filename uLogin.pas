@@ -58,8 +58,9 @@ begin
 
     if(n > 0) then begin
       usuario_id := fdqUsuario.FieldByName('id').AsInteger;
-      fLogin.Hide;
-//      fPrincipal.Show;
+      fPrincipal.Create(self);
+      fLogin.Destroy;
+
     end
     else begin
     ShowMessage('Usuario ou senha invalido!');

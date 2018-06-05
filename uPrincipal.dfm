@@ -12,6 +12,7 @@ object fPrincipal: TfPrincipal
   Font.Style = []
   Menu = mmMenu
   OldCreateOrder = False
+  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
   object panelTop: TPanel
@@ -72,6 +73,9 @@ object fPrincipal: TfPrincipal
         Caption = 'Visualizar Todas'
         OnClick = VisualizarTodas1Click
       end
+    end
+    object Relatrios1: TMenuItem
+      Caption = 'Relat'#243'rios'
     end
   end
   object fdqInserePedido: TFDQuery
