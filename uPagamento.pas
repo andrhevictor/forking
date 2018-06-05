@@ -32,6 +32,11 @@ type
     lblListaProdutos: TLabel;
     edtValorTotal: TDBEdit;
     fdqPagamentovalor: TBCDField;
+    fdqPedidoByFicha: TFDQuery;
+    dsItensPedido: TDataSource;
+    dsPedido: TDataSource;
+    fdqItensByPedido: TFDQuery;
+    procedure edtNumeroFichaChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,5 +52,29 @@ implementation
 
 uses dmDados, uCadastraProduto, uEditaProduto, uPrincipal, uVisualizaFichas,
   uVisualizaProduto;
+
+procedure TfPagamento.edtNumeroFichaChange(Sender: TObject);
+var
+  ultimo_pedido: Integer;
+begin
+  if edtNumeroFicha.Text <> '' then begin
+    fdqPedidoByFicha.SQL.Clear;
+    fdqItensByPedido.SQL.Clear;
+    fdqPedidoByFicha.SQL.Add('SELECT MAX(id) AS ultimo_pedido, *');
+    fdqPedidoByFicha.SQL.Add('FROM pedidos');
+    fdqPedidoByFicha.SQL.Add('WHERE numero_ficha = :ficha');
+    fdqPedidoByFicha.SQL.Add('GROUP BY id');
+    fdqPedidoByFicha.ParamByName('ficha').Value := StrToInt(edtNumeroFicha.Text);
+    fdqPedidoByFicha.Open();
+
+    ultimo_pedido := fdqPedidoByFicha.FieldByName('ultimo_pedido').AsInteger;
+    fdqItensByPedido.SQL.Add('SELECT * from pedidos_itens AS itens');
+    fdqItensByPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
+    fdqItensByPedido.SQL.Add('WHERE itens.pedido_id = :pedido');
+    fdqItensByPedido.ParamByName('pedido').Value := ultimo_pedido;
+    fdqItensByPedido.Open();
+
+  end;
+end;
 
 end.

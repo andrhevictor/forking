@@ -58,9 +58,11 @@ procedure TfNovoPedido.btnSalvarClick(Sender: TObject);
 var
   ficha: String;
 begin
+
   if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
     // COMMITA A TRANSAÇÃO
     ShowMessage('CLICOU NO OK COMMITA A TRANSAÇÃO');
+    fdqAtualizaPedido.SQL.Clear;
     fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
     fdqAtualizaPedido.ParamByName('ficha').Value := ficha.ToInteger();
     fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;

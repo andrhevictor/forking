@@ -76,6 +76,7 @@ object fPagamento: TfPagamento
       Top = 94
       Width = 849
       Height = 276
+      DataSource = dsItensPedido
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -113,6 +114,7 @@ object fPagamento: TfPagamento
       Width = 91
       Height = 21
       TabOrder = 0
+      OnChange = edtNumeroFichaChange
     end
   end
   object fdqPagamento: TFDQuery
@@ -158,6 +160,26 @@ object fPagamento: TfPagamento
     SQL.Strings = (
       'SELECT * FROM meios_pagamento')
     Left = 816
+    Top = 8
+  end
+  object fdqPedidoByFicha: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 504
+    Top = 8
+  end
+  object dsItensPedido: TDataSource
+    DataSet = fdqItensByPedido
+    Left = 600
+    Top = 64
+  end
+  object dsPedido: TDataSource
+    DataSet = fdqPedidoByFicha
+    Left = 504
+    Top = 64
+  end
+  object fdqItensByPedido: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 600
     Top = 8
   end
 end

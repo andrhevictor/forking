@@ -87,7 +87,7 @@ object fNovoPedido: TfNovoPedido
       Width = 129
       Height = 201
       DataSource = dsCategoria
-      Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -99,6 +99,7 @@ object fNovoPedido: TfNovoPedido
         item
           Expanded = False
           FieldName = 'nome'
+          Width = 105
           Visible = True
         end>
     end
@@ -108,6 +109,7 @@ object fNovoPedido: TfNovoPedido
       Width = 513
       Height = 217
       DataSource = dsItensPedido
+      Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
