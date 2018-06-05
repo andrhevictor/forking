@@ -4,7 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Menus, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Menus, Vcl.StdCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TfPrincipal = class(TForm)
@@ -19,11 +23,13 @@ type
     Fichas1: TMenuItem;
     VisualizarTodas1: TMenuItem;
     btnPagamento: TButton;
+    fdqInserePedido: TFDQuery;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
     procedure VisualizarTodas1Click(Sender: TObject);
     procedure btnPagamentoClick(Sender: TObject);
+    procedure btnNovoPedidoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,7 +44,30 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
-  uVisualizaFichas, uPagamento, uLogin;
+  uVisualizaFichas, uPagamento, uLogin, uNovoPedido;
+
+procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
+var
+pedidoId: String;
+begin
+fdqInserePedido.SQL.Clear;
+fdqInserePedido.SQL.Add('INSERT INTO pedidos');
+fdqInserePedido.SQL.Add('VALUES');
+fdqInserePedido.SQL.Add('(default,');
+fdqInserePedido.SQL.Add('null,');
+fdqInserePedido.SQL.Add(QuotedStr('EM ABERTO'));
+fdqInserePedido.SQL.Add(',1)');
+fdqInserePedido.SQL.Add(' RETURNING id');
+fdqInserePedido.Open();
+pedidoId := fdqInserePedido.FieldByName('id').AsString;
+ShowMessage(pedidoId);
+
+  With TfNovoPedido.Create(self, pedidoId) do
+    Begin
+      ShowModal;
+      Free;
+    End;
+end;
 
 procedure TfPrincipal.btnPagamentoClick(Sender: TObject);
 begin

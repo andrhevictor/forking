@@ -28,6 +28,7 @@ object fPrincipal: TfPrincipal
       Height = 76
       Caption = 'Novo Pedido'
       TabOrder = 0
+      OnClick = btnNovoPedidoClick
     end
     object btnPagamento: TButton
       Left = 176
@@ -72,5 +73,10 @@ object fPrincipal: TfPrincipal
         OnClick = VisualizarTodas1Click
       end
     end
+  end
+  object fdqInserePedido: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 736
+    Top = 48
   end
 end

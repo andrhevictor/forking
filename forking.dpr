@@ -9,7 +9,8 @@ uses
   uEditaProduto in 'uEditaProduto.pas' {fEditaProduto},
   uVisualizaFichas in 'uVisualizaFichas.pas' {fVisualizaFichas},
   uPagamento in 'uPagamento.pas' {fPagamento},
-  uLogin in 'uLogin.pas' {fLogin};
+  uLogin in 'uLogin.pas' {fLogin},
+  uNovoPedido in 'uNovoPedido.pas' {fNovoPedido};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfVisualizaFichas, fVisualizaFichas);
   Application.CreateForm(TfPagamento, fPagamento);
   Application.CreateForm(TfLogin, fLogin);
+  Application.CreateForm(TfNovoPedido, fNovoPedido);
   Application.Run;
 end.
