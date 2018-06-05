@@ -48,12 +48,22 @@ end;
 
 procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
 var
-quantidade: String;
+  produto_id: Integer;
+  valor_total: Double;
+  quantidade: String;
 begin
   quantidade := '1';
   if InputQuery('Quantidade', 'Insira a quantidade', quantidade)  then begin
+     produto_id := dbgProdutos.DataSource.DataSet.FieldByName('id').AsInteger;
+
      fdqItensPedido.SQL.Clear;
-     fdqItensPedido.SQL.Add('INSERT INTO pedidos_itens VALUES ()');
+     fdqItensPedido.SQL.Add('INSERT INTO pedidos_itens VALUES (DEFAULT, :idPedido, :idProduto, :quantidade, :valor_total)');
+     fdqItensPedido.ParamByName('idPedido').Value := idPedido;
+     fdqItensPedido.ParamByName('idProduto').Value := produto_id;
+     fdqItensPedido.ParamByName('quantidade').Value := quantidade.ToInteger;
+     fdqItensPedido.ParamByName('valor_total').Value := valor_total;
+     fdqItensPedido.ExecSQL;
+
   end;
   fdqItensPedido.SQL.Clear;
   fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens');
