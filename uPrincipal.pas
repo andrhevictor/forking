@@ -49,21 +49,18 @@ uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
 
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
-pedidoId: String;
-usuarioId: Integer;
+  pedidoId: String;
+  usuarioId: Integer;
 begin
-usuarioId := 1;                     // MUDAR AQUI ASDOAHSDUIAHSIDA
-fdqInserePedido.SQL.Clear;
-fdqInserePedido.SQL.Add('INSERT INTO pedidos');
-fdqInserePedido.SQL.Add('VALUES');
-fdqInserePedido.SQL.Add('(default,');
-fdqInserePedido.SQL.Add('null,');
-fdqInserePedido.SQL.Add(QuotedStr('EM ABERTO'));
-fdqInserePedido.SQL.Add(',' + usuarioId.ToString + ')');
-fdqInserePedido.SQL.Add(' RETURNING id');
-fdqInserePedido.Open();
-pedidoId := fdqInserePedido.FieldByName('id').AsString;
-ShowMessage(pedidoId);
+  usuarioId := 1;                     // MUDAR AQUI ASDOAHSDUIAHSIDA
+  fdqInserePedido.SQL.Clear;
+  fdqInserePedido.SQL.Add('INSERT INTO pedidos VALUES (DEFAULT, NULL, :status, :idUsuario)');
+  fdqInserePedido.ParamByName('status').Value := 'EM ABERTO';
+  fdqInserePedido.ParamByName('idUsuario').Value := usuarioId;
+  fdqInserePedido.SQL.Add('RETURNING id');
+  fdqInserePedido.Open();
+  pedidoId := fdqInserePedido.FieldByName('id').AsString;
+  ShowMessage(pedidoId);
 
   With TfNovoPedido.Create(self, pedidoId) do
     Begin

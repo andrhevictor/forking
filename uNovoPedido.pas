@@ -20,6 +20,9 @@ type
     dbgCategoria: TDBGrid;
     fdqCategoria: TFDQuery;
     dsCategoria: TDataSource;
+    DBGrid1: TDBGrid;
+    fdqItensPedido: TFDQuery;
+    dsItensPedido: TDataSource;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
   private
@@ -47,9 +50,14 @@ procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
 var
 quantidade: String;
 begin
-  quantidade := InputBox('QUantidade', 'Insira a quantidade', quantidade);
-  ShowMessage(quantidade);
-  ShowMessage(dbgProdutos.DataSource.DataSet.FieldByName('id').AsString);
+  quantidade := '1';
+  if InputQuery('Quantidade', 'Insira a quantidade', quantidade)  then begin
+     fdqItensPedido.SQL.Clear;
+     fdqItensPedido.SQL.Add('INSERT INTO pedidos_itens VALUES ()');
+  end;
+  fdqItensPedido.SQL.Clear;
+  fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens');
+  fdqItensPedido.Open();
 
 end;
 
