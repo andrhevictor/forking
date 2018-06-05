@@ -29,6 +29,7 @@ type
     fdqSomaItens: TFDQuery;
     btnSalvar: TButton;
     btnCancelar: TButton;
+    fdqAtualizaPedido: TFDQuery;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
     procedure btnSalvarClick(Sender: TObject);
@@ -60,6 +61,10 @@ begin
   if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
     // COMMITA A TRANSAÇÃO
     ShowMessage('CLICOU NO OK COMMITA A TRANSAÇÃO');
+    fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
+    fdqAtualizaPedido.ParamByName('ficha').Value := ficha.ToInteger();
+    fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
+    fdqAtualizaPedido.ExecSQL;
   end
   else begin
     ShowMessage('FAZ ALGO(OU NÃO)');

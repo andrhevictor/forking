@@ -20,8 +20,6 @@ object fNovoPedido: TfNovoPedido
     Height = 556
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 769
-    ExplicitHeight = 332
     object lblValor: TLabel
       Left = 312
       Top = 480
@@ -38,7 +36,7 @@ object fNovoPedido: TfNovoPedido
     object lblValorTotal: TLabel
       Left = 442
       Top = 480
-      Width = 87
+      Width = 6
       Height = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -175,7 +173,6 @@ object fNovoPedido: TfNovoPedido
     Height = 57
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 769
   end
   object fdqProdutos: TFDQuery
     Active = True
@@ -226,6 +223,11 @@ object fNovoPedido: TfNovoPedido
       'INNER JOIN produtos ON produtos.id = itens.produto_id'
       'INNER JOIN categorias ON produtos.categoria_id = categorias.id')
     Left = 264
+    Top = 8
+  end
+  object fdqAtualizaPedido: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 824
     Top = 8
   end
 end
