@@ -2,7 +2,7 @@ object fNovoPedido: TfNovoPedido
   Left = 0
   Top = 0
   Caption = 'Novo Pedido'
-  ClientHeight = 582
+  ClientHeight = 613
   ClientWidth = 884
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object fNovoPedido: TfNovoPedido
     Left = 0
     Top = 57
     Width = 884
-    Height = 525
+    Height = 556
     Align = alClient
     TabOrder = 0
     ExplicitWidth = 769
@@ -148,6 +148,24 @@ object fNovoPedido: TfNovoPedido
           Width = 70
           Visible = True
         end>
+    end
+    object btnSalvar: TButton
+      Left = 768
+      Top = 496
+      Width = 91
+      Height = 41
+      Caption = 'Salvar'
+      TabOrder = 3
+      OnClick = btnSalvarClick
+    end
+    object btnCancelar: TButton
+      Left = 656
+      Top = 496
+      Width = 91
+      Height = 41
+      Caption = 'Cancelar'
+      TabOrder = 4
+      OnClick = btnCancelarClick
     end
   end
   object panelTop: TPanel

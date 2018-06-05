@@ -27,8 +27,12 @@ type
     lblValor: TLabel;
     lblValorTotal: TLabel;
     fdqSomaItens: TFDQuery;
+    btnSalvar: TButton;
+    btnCancelar: TButton;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     idPedido: Integer;
   public
@@ -43,6 +47,24 @@ implementation
 {$R *.dfm}
 
 uses dmDados;
+
+procedure TfNovoPedido.btnCancelarClick(Sender: TObject);
+begin
+  ShowMessage('CLICOU NO CANCELAR CANCELA E DESFAZ A TRANSAÇÃO');
+end;
+
+procedure TfNovoPedido.btnSalvarClick(Sender: TObject);
+var
+  ficha: String;
+begin
+  if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
+    // COMMITA A TRANSAÇÃO
+    ShowMessage('CLICOU NO OK COMMITA A TRANSAÇÃO');
+  end
+  else begin
+    ShowMessage('FAZ ALGO(OU NÃO)');
+  end;
+end;
 
 Constructor TfNovoPedido.Create(AOwner: TComponent; pedidoId: String);
 begin
