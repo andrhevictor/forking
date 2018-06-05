@@ -25,6 +25,12 @@ type
     btnPagamento: TButton;
     fdqInserePedido: TFDQuery;
     Relatrios1: TMenuItem;
+    Arquivo1: TMenuItem;
+    Sobre1: TMenuItem;
+    Sair1: TMenuItem;
+    N1: TMenuItem;
+    SobreoSistema1: TMenuItem;
+    Ajuda1: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);

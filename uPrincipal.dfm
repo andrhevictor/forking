@@ -52,8 +52,17 @@ object fPrincipal: TfPrincipal
   object mmMenu: TMainMenu
     Left = 1056
     Top = 8
+    object Arquivo1: TMenuItem
+      Caption = 'Arquivo   '
+      object Sair1: TMenuItem
+        Caption = 'Sair'
+      end
+      object N1: TMenuItem
+        Caption = '...'
+      end
+    end
     object Produtos1: TMenuItem
-      Caption = 'Produtos'
+      Caption = 'Produtos   '
       object Cadastrar1: TMenuItem
         Caption = 'Cadastrar'
         OnClick = Cadastrar1Click
@@ -68,14 +77,23 @@ object fPrincipal: TfPrincipal
       end
     end
     object Fichas1: TMenuItem
-      Caption = 'Fichas'
+      Caption = 'Fichas   '
       object VisualizarTodas1: TMenuItem
         Caption = 'Visualizar Todas'
         OnClick = VisualizarTodas1Click
       end
     end
     object Relatrios1: TMenuItem
-      Caption = 'Relat'#243'rios'
+      Caption = 'Relat'#243'rios   '
+    end
+    object Sobre1: TMenuItem
+      Caption = 'Sobre   '
+      object SobreoSistema1: TMenuItem
+        Caption = 'Sobre o Sistema'
+      end
+      object Ajuda1: TMenuItem
+        Caption = 'Ajuda'
+      end
     end
   end
   object fdqInserePedido: TFDQuery

@@ -48,7 +48,7 @@ object fVisualizarProduto: TfVisualizarProduto
       Width = 817
       Height = 491
       DataSource = dsProdutos
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -87,7 +87,7 @@ object fVisualizarProduto: TfVisualizarProduto
       Width = 209
       Height = 315
       DataSource = dsCategorias
-      Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
@@ -105,6 +105,7 @@ object fVisualizarProduto: TfVisualizarProduto
           Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
+          Width = 150
           Visible = True
         end>
     end
