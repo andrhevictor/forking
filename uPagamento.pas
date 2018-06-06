@@ -36,6 +36,7 @@ type
     dsItensPedido: TDataSource;
     dsPedido: TDataSource;
     fdqItensByPedido: TFDQuery;
+    fdqSomaItens: TFDQuery;
     procedure edtNumeroFichaChange(Sender: TObject);
   private
     { Private declarations }
@@ -55,24 +56,36 @@ uses dmDados, uCadastraProduto, uEditaProduto, uPrincipal, uVisualizaFichas,
 
 procedure TfPagamento.edtNumeroFichaChange(Sender: TObject);
 var
+  item: TField;
+  somaTotal: Double;
   ultimo_pedido: Integer;
 begin
   if edtNumeroFicha.Text <> '' then begin
     fdqPedidoByFicha.SQL.Clear;
     fdqItensByPedido.SQL.Clear;
-    fdqPedidoByFicha.SQL.Add('SELECT MAX(id) AS ultimo_pedido, *');
+    fdqPedidoByFicha.SQL.Add('SELECT MAX(id) AS ultimo_pedido');
     fdqPedidoByFicha.SQL.Add('FROM pedidos');
     fdqPedidoByFicha.SQL.Add('WHERE numero_ficha = :ficha');
-    fdqPedidoByFicha.SQL.Add('GROUP BY id');
     fdqPedidoByFicha.ParamByName('ficha').Value := StrToInt(edtNumeroFicha.Text);
     fdqPedidoByFicha.Open();
-
     ultimo_pedido := fdqPedidoByFicha.FieldByName('ultimo_pedido').AsInteger;
+
+    ShowMessage(ultimo_pedido.ToString);
+
     fdqItensByPedido.SQL.Add('SELECT * from pedidos_itens AS itens');
     fdqItensByPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
     fdqItensByPedido.SQL.Add('WHERE itens.pedido_id = :pedido');
     fdqItensByPedido.ParamByName('pedido').Value := ultimo_pedido;
     fdqItensByPedido.Open();
+
+    fdqSomaItens.SQL.Clear;
+    fdqSomaItens.SQL.Add('SELECT SUM(valor_total) AS soma FROM pedidos_itens WHERE pedido_id = :idPedido');
+    fdqSomaItens.ParamByName('idPedido').Value := ultimo_pedido;
+    fdqSomaItens.Open();
+    somaTotal := fdqSomaItens.FieldByName('soma').AsFloat;
+
+    edtNumeroPedido.Text := fdqItensByPedido.FieldByName('pedido_id').AsString;
+    edtValorTotal.Text   := somaTotal.ToString;
 
   end;
 end;

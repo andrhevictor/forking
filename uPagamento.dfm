@@ -20,6 +20,7 @@ object fPagamento: TfPagamento
     Height = 411
     Align = alClient
     TabOrder = 0
+    ExplicitTop = 119
     object lblNumeroPedido: TLabel
       Left = 16
       Top = 24
@@ -74,15 +75,45 @@ object fPagamento: TfPagamento
     object grdListaProdutos: TDBGrid
       Left = 16
       Top = 94
-      Width = 849
+      Width = 593
       Height = 276
       DataSource = dsItensPedido
+      Options = [dgTitles, dgColumnResize, dgRowLines, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'nome'
+          Title.Caption = 'Produto'
+          Width = 170
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'quantidade'
+          Title.Caption = 'Quantidade'
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'preco'
+          Title.Caption = 'Pre'#231'o'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'valor_total'
+          Title.Caption = 'Valor Total'
+          Width = 70
+          Visible = True
+        end>
     end
     object edtValorTotal: TDBEdit
       Left = 770
@@ -91,6 +122,7 @@ object fPagamento: TfPagamento
       Height = 21
       DataField = 'valor'
       DataSource = dsPagamento
+      Enabled = False
       TabOrder = 3
     end
   end
@@ -181,5 +213,10 @@ object fPagamento: TfPagamento
     Connection = dmConnection.fdcDatabase
     Left = 600
     Top = 8
+  end
+  object fdqSomaItens: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 400
+    Top = 16
   end
 end
