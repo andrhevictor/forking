@@ -30,6 +30,7 @@ type
     btnSalvar: TButton;
     btnCancelar: TButton;
     fdqAtualizaPedido: TFDQuery;
+    fdqFichaDisponivel: TFDQuery;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
     procedure btnSalvarClick(Sender: TObject);
@@ -62,11 +63,31 @@ begin
   if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
     // COMMITA A TRANSAÇÃO
     ShowMessage('CLICOU NO OK COMMITA A TRANSAÇÃO');
-    fdqAtualizaPedido.SQL.Clear;
-    fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
-    fdqAtualizaPedido.ParamByName('ficha').Value := ficha.ToInteger();
-    fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
-    fdqAtualizaPedido.ExecSQL;
+
+    fdqFichaDisponivel.SQL.Clear;
+    fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
+    fdqFichaDisponivel.SQL.Add('WHERE numero_ficha = :ficha');
+    fdqFichaDisponivel.SQL.Add('AND disponivel = true');
+    fdqFichaDisponivel.ParamByName('ficha').Value := ficha.ToInteger();
+    fdqFichaDisponivel.Open();
+    if (fdqFichaDisponivel.RecordCount > 0) then begin
+      fdqAtualizaPedido.SQL.Clear;
+      fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
+      fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
+      fdqAtualizaPedido.ParamByName('ficha').Value := ficha.ToInteger();
+      fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
+      fdqAtualizaPedido.ExecSQL;
+
+      fdqFichaDisponivel.SQL.Clear;
+      fdqFichaDisponivel.SQL.Add('UPDATE fichas SET disponivel = false WHERE id = :ficha');
+      fdqFichaDisponivel.ParamByName('ficha').Value := ficha.ToInteger();
+      fdqFichaDisponivel.ExecSQL;
+    end
+    else begin
+      ShowMessage('Essa ficha não está dísponivel!');
+    end;
+
+
   end
   else begin
     ShowMessage('FAZ ALGO(OU NÃO)');

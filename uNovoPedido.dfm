@@ -109,7 +109,7 @@ object fNovoPedido: TfNovoPedido
       Width = 513
       Height = 217
       DataSource = dsItensPedido
-      Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -229,7 +229,12 @@ object fNovoPedido: TfNovoPedido
   end
   object fdqAtualizaPedido: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 824
+    Left = 784
     Top = 8
+  end
+  object fdqFichaDisponivel: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 792
+    Top = 201
   end
 end
