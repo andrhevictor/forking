@@ -85,6 +85,10 @@ object fPrincipal: TfPrincipal
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios   '
+      object Produtos2: TMenuItem
+        Caption = 'Produtos'
+        OnClick = Produtos2Click
+      end
     end
     object Sobre1: TMenuItem
       Caption = 'Sobre   '

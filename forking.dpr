@@ -10,7 +10,8 @@ uses
   uVisualizaFichas in 'uVisualizaFichas.pas' {fVisualizaFichas},
   uPagamento in 'uPagamento.pas' {fPagamento},
   uLogin in 'uLogin.pas' {fLogin},
-  uNovoPedido in 'uNovoPedido.pas' {fNovoPedido};
+  uNovoPedido in 'uNovoPedido.pas' {fNovoPedido},
+  uRelatorio in 'uRelatorio.pas' {fRelatorios};
 
 {$R *.res}
 
@@ -26,5 +27,6 @@ begin
   Application.CreateForm(TfVisualizaFichas, fVisualizaFichas);
   Application.CreateForm(TfPagamento, fPagamento);
   Application.CreateForm(TfNovoPedido, fNovoPedido);
+  Application.CreateForm(TfRelatorios, fRelatorios);
   Application.Run;
 end.

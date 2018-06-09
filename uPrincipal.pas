@@ -31,12 +31,14 @@ type
     N1: TMenuItem;
     SobreoSistema1: TMenuItem;
     Ajuda1: TMenuItem;
+    Produtos2: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
     procedure VisualizarTodas1Click(Sender: TObject);
     procedure btnPagamentoClick(Sender: TObject);
     procedure btnNovoPedidoClick(Sender: TObject);
+    procedure Produtos2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
-  uVisualizaFichas, uPagamento, uLogin, uNovoPedido;
+  uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio;
 
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
@@ -88,6 +90,15 @@ end;
 procedure TfPrincipal.Editar1Click(Sender: TObject);
 begin
   fEditaProduto.Show;
+end;
+
+procedure TfPrincipal.Produtos2Click(Sender: TObject);
+var
+  path: string;
+begin
+  path := ExtractFilePath(Application.ExeName);
+  fRelatorios.frxProdutos.LoadFromFile(path+'relProduto.fr3');
+  fRelatorios.frxProdutos.ShowReport();
 end;
 
 procedure TfPrincipal.VisualizarTodas1Click(Sender: TObject);

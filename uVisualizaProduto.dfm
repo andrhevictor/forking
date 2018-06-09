@@ -129,7 +129,10 @@ object fVisualizarProduto: TfVisualizarProduto
     end
   end
   object fdqProdutos: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
+    SQL.Strings = (
+      'SELECT * FROM produtos')
     Left = 1008
     Top = 24
   end
