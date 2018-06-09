@@ -33,7 +33,6 @@ type
     lblDescricao: TLabel;
     DBEdit5: TDBEdit;
     lblCategoria: TLabel;
-    Panel1: TPanel;
     btnSalvar: TButton;
     btnCancelar: TButton;
     procedure FormCreate(Sender: TObject);

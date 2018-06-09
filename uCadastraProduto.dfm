@@ -5,7 +5,7 @@ object fCadastraProduto: TfCadastraProduto
   BorderStyle = bsSingle
   Caption = 'Cadastrar Produto'
   ClientHeight = 536
-  ClientWidth = 883
+  ClientWidth = 688
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,21 +21,39 @@ object fCadastraProduto: TfCadastraProduto
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 883
+    Width = 688
     Height = 89
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 907
+    ExplicitWidth = 883
+    object btnCancelar: TButton
+      Left = 150
+      Top = 21
+      Width = 89
+      Height = 49
+      Caption = 'Cancelar'
+      TabOrder = 0
+      OnClick = btnCancelarClick
+    end
+    object btnSalvar: TButton
+      Left = 40
+      Top = 21
+      Width = 89
+      Height = 49
+      Caption = 'Salvar'
+      TabOrder = 1
+      OnClick = btnSalvarClick
+    end
   end
   object panelMid: TPanel
     Left = 0
     Top = 89
-    Width = 883
-    Height = 359
+    Width = 688
+    Height = 447
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 907
-    ExplicitHeight = 375
+    ExplicitWidth = 883
+    ExplicitHeight = 359
     object lblId: TLabel
       Left = 40
       Top = 37
@@ -126,35 +144,9 @@ object fCadastraProduto: TfCadastraProduto
       TabOrder = 4
     end
   end
-  object Panel1: TPanel
-    Left = 0
-    Top = 448
-    Width = 883
-    Height = 88
-    Align = alBottom
-    TabOrder = 2
-    object btnSalvar: TButton
-      Left = 776
-      Top = 24
-      Width = 89
-      Height = 49
-      Caption = 'Salvar'
-      TabOrder = 0
-      OnClick = btnSalvarClick
-    end
-    object btnCancelar: TButton
-      Left = 672
-      Top = 24
-      Width = 89
-      Height = 49
-      Caption = 'Cancelar'
-      TabOrder = 1
-      OnClick = btnCancelarClick
-    end
-  end
   object dsProdutos: TDataSource
     DataSet = fdqProdutos
-    Left = 680
+    Left = 544
     Top = 32
   end
   object fdqCategorias: TFDQuery
@@ -162,12 +154,12 @@ object fCadastraProduto: TfCadastraProduto
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from categorias')
-    Left = 608
+    Left = 472
     Top = 32
   end
   object dsCategorias: TDataSource
     DataSet = fdqCategorias
-    Left = 528
+    Left = 392
     Top = 32
   end
   object fdqProdutos: TFDQuery
@@ -175,7 +167,7 @@ object fCadastraProduto: TfCadastraProduto
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from produtos')
-    Left = 744
+    Left = 608
     Top = 32
     object fdqProdutosid: TLargeintField
       FieldName = 'id'

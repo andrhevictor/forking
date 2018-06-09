@@ -2,8 +2,8 @@ object fNovoPedido: TfNovoPedido
   Left = 0
   Top = 0
   Caption = 'Novo Pedido'
-  ClientHeight = 613
-  ClientWidth = 884
+  ClientHeight = 553
+  ClientWidth = 875
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,13 +16,17 @@ object fNovoPedido: TfNovoPedido
   object panelMid: TPanel
     Left = 0
     Top = 57
-    Width = 884
-    Height = 556
+    Width = 875
+    Height = 496
     Align = alClient
     TabOrder = 0
+    ExplicitTop = 63
+    DesignSize = (
+      875
+      496)
     object lblValor: TLabel
-      Left = 312
-      Top = 480
+      Left = 13
+      Top = 451
       Width = 124
       Height = 23
       Caption = 'Valor Total: R$'
@@ -46,10 +50,11 @@ object fNovoPedido: TfNovoPedido
       ParentFont = False
     end
     object dbgProdutos: TDBGrid
-      Left = 160
-      Top = 24
-      Width = 369
+      Left = 249
+      Top = 6
+      Width = 616
       Height = 201
+      Anchors = [akTop, akRight]
       DataSource = dsProdutos
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
@@ -64,30 +69,25 @@ object fNovoPedido: TfNovoPedido
           Expanded = False
           FieldName = 'nome'
           Title.Caption = 'Nome'
-          Width = 150
+          Width = 353
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'preco'
           Title.Caption = 'Pre'#231'o'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'descricao'
-          Title.Caption = 'Descri'#231#227'o'
-          Width = 150
+          Width = 233
           Visible = True
         end>
     end
     object dbgCategoria: TDBGrid
-      Left = 16
-      Top = 24
-      Width = 129
+      Left = 10
+      Top = 6
+      Width = 233
       Height = 201
+      Anchors = [akLeft, akTop, akRight]
       DataSource = dsCategoria
-      Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -99,17 +99,24 @@ object fNovoPedido: TfNovoPedido
         item
           Expanded = False
           FieldName = 'nome'
-          Width = 105
+          Title.Caption = 'Grupos'
+          Width = 212
           Visible = True
         end>
     end
     object DBGrid1: TDBGrid
-      Left = 16
-      Top = 248
-      Width = 513
-      Height = 217
+      Left = 13
+      Top = 213
+      Width = 855
+      Height = 226
+      Anchors = [akLeft, akTop, akRight]
+      Color = clBtnFace
+      Ctl3D = True
       DataSource = dsItensPedido
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentCtl3D = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -121,7 +128,7 @@ object fNovoPedido: TfNovoPedido
           Expanded = False
           FieldName = 'nome'
           Title.Caption = 'Nome'
-          Width = 180
+          Width = 575
           Visible = True
         end
         item
@@ -129,7 +136,7 @@ object fNovoPedido: TfNovoPedido
           FieldName = 'quantidade'
           Title.Alignment = taCenter
           Title.Caption = 'Quantidade'
-          Width = 70
+          Width = 74
           Visible = True
         end
         item
@@ -137,7 +144,7 @@ object fNovoPedido: TfNovoPedido
           FieldName = 'preco'
           Title.Alignment = taCenter
           Title.Caption = 'Valor Unit.'
-          Width = 70
+          Width = 96
           Visible = True
         end
         item
@@ -145,13 +152,13 @@ object fNovoPedido: TfNovoPedido
           FieldName = 'valor_total'
           Title.Alignment = taCenter
           Title.Caption = 'Valor Tot.'
-          Width = 70
+          Width = 85
           Visible = True
         end>
     end
     object btnSalvar: TButton
-      Left = 768
-      Top = 496
+      Left = 774
+      Top = 445
       Width = 91
       Height = 41
       Caption = 'Salvar'
@@ -159,8 +166,8 @@ object fNovoPedido: TfNovoPedido
       OnClick = btnSalvarClick
     end
     object btnCancelar: TButton
-      Left = 656
-      Top = 496
+      Left = 677
+      Top = 445
       Width = 91
       Height = 41
       Caption = 'Cancelar'
@@ -171,17 +178,18 @@ object fNovoPedido: TfNovoPedido
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 884
+    Width = 875
     Height = 57
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 884
   end
   object fdqProdutos: TFDQuery
     Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from produtos')
-    Left = 696
+    Left = 752
     Top = 8
   end
   object dsProdutos: TDataSource
@@ -229,7 +237,7 @@ object fNovoPedido: TfNovoPedido
   end
   object fdqAtualizaPedido: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 784
+    Left = 832
     Top = 8
   end
   object fdqFichaDisponivel: TFDQuery
