@@ -53,7 +53,8 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
-  uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio;
+  uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio,
+  uOpcaoRelatorioProdutos;
 
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
@@ -93,12 +94,8 @@ begin
 end;
 
 procedure TfPrincipal.Produtos2Click(Sender: TObject);
-var
-  path: string;
 begin
-  path := ExtractFilePath(Application.ExeName);
-  fRelatorios.frxProdutos.LoadFromFile(path+'relProdutos.fr3');
-  fRelatorios.frxProdutos.ShowReport();
+  fOpcaoRelatorioProduto.Show;
 end;
 
 procedure TfPrincipal.VisualizarTodas1Click(Sender: TObject);

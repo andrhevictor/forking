@@ -11,7 +11,8 @@ uses
   uPagamento in 'uPagamento.pas' {fPagamento},
   uLogin in 'uLogin.pas' {fLogin},
   uNovoPedido in 'uNovoPedido.pas' {fNovoPedido},
-  uRelatorio in 'uRelatorio.pas' {fRelatorios};
+  uRelatorio in 'uRelatorio.pas' {fRelatorios},
+  uOpcaoRelatorioProdutos in 'uOpcaoRelatorioProdutos.pas' {fOpcaoRelatorioProduto};
 
 {$R *.res}
 
@@ -28,5 +29,6 @@ begin
   Application.CreateForm(TfPagamento, fPagamento);
   Application.CreateForm(TfNovoPedido, fNovoPedido);
   Application.CreateForm(TfRelatorios, fRelatorios);
+  Application.CreateForm(TfOpcaoRelatorioProduto, fOpcaoRelatorioProduto);
   Application.Run;
 end.

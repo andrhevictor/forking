@@ -22,7 +22,7 @@ object fRelatorios: TfRelatorios
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43260.752307731500000000
-    ReportOptions.LastChange = 43260.794333148200000000
+    ReportOptions.LastChange = 43261.715770960600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -49,7 +49,9 @@ object fRelatorios: TfRelatorios
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
+      Frame.Style = fsDot
       Frame.Typ = []
+      Frame.BottomLine.Width = 2.000000000000000000
       HGuides.Strings = (
         '-20')
       object ReportTitle1: TfrxReportTitle
@@ -144,7 +146,6 @@ object fRelatorios: TfRelatorios
           Top = 3.779530000000000000
           Width = 86.929190000000000000
           Height = 18.897650000000000000
-          DataField = 'preco'
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
           Font.Charset = DEFAULT_CHARSET
@@ -155,7 +156,7 @@ object fRelatorios: TfRelatorios
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (
-            '[Produtos."preco"]')
+            'R$ [Produtos."preco"]')
           ParentFont = False
         end
       end
@@ -176,7 +177,7 @@ object fRelatorios: TfRelatorios
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Fill.BackColor = clGray
           Memo.UTF8W = (
@@ -195,7 +196,7 @@ object fRelatorios: TfRelatorios
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Fill.BackColor = clGray
           Memo.UTF8W = (
@@ -214,7 +215,7 @@ object fRelatorios: TfRelatorios
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Fill.BackColor = clGray
           HAlign = haRight

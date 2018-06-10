@@ -142,6 +142,10 @@
             <Form>fRelatorios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uOpcaoRelatorioProdutos.pas">
+            <Form>fOpcaoRelatorioProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
