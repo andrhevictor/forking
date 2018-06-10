@@ -97,7 +97,7 @@ var
   path: string;
 begin
   path := ExtractFilePath(Application.ExeName);
-  fRelatorios.frxProdutos.LoadFromFile(path+'relProduto.fr3');
+  fRelatorios.frxProdutos.LoadFromFile(path+'relProdutos.fr3');
   fRelatorios.frxProdutos.ShowReport();
 end;
 

@@ -251,9 +251,17 @@ object fRelatorios: TfRelatorios
   object frxDBProdutos: TfrxDBDataset
     UserName = 'Produtos'
     CloseDataSource = False
-    DataSet = fVisualizarProduto.fdqProdutos
+    DataSet = fdqTodosProdutos
     BCDToCurrency = False
     Left = 96
+    Top = 16
+  end
+  object fdqTodosProdutos: TFDQuery
+    Active = True
+    Connection = dmConnection.fdcDatabase
+    SQL.Strings = (
+      'SELECT * FROM produtos')
+    Left = 192
     Top = 16
   end
 end
