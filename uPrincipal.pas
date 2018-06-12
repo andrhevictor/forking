@@ -68,6 +68,8 @@ begin
   fdqInserePedido.ParamByName('idUsuario').Value := usuarioId;
   fdqInserePedido.SQL.Add('RETURNING id');
   fdqInserePedido.Open();
+
+
   pedidoId := fdqInserePedido.FieldByName('id').AsString;
   ShowMessage(pedidoId);
 
