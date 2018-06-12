@@ -2,7 +2,7 @@ object fNovoPedido: TfNovoPedido
   Left = 0
   Top = 0
   Caption = 'Novo Pedido'
-  ClientHeight = 553
+  ClientHeight = 550
   ClientWidth = 875
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,31 +17,19 @@ object fNovoPedido: TfNovoPedido
     Left = 0
     Top = 57
     Width = 875
-    Height = 496
+    Height = 493
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 63
+    ExplicitHeight = 496
     DesignSize = (
       875
-      496)
+      493)
     object lblValor: TLabel
       Left = 13
       Top = 451
       Width = 124
       Height = 23
       Caption = 'Valor Total: R$'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object lblValorTotal: TLabel
-      Left = 442
-      Top = 480
-      Width = 6
-      Height = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
@@ -182,7 +170,6 @@ object fNovoPedido: TfNovoPedido
     Height = 57
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 884
   end
   object fdqProdutos: TFDQuery
     Active = True

@@ -25,7 +25,6 @@ type
     fdqItensPedido: TFDQuery;
     dsItensPedido: TDataSource;
     lblValor: TLabel;
-    lblValorTotal: TLabel;
     fdqSomaItens: TFDQuery;
     btnSalvar: TButton;
     btnCancelar: TButton;
@@ -138,7 +137,7 @@ begin
  fdqSomaItens.ParamByName('idPedido').Value := idPedido;
  fdqSomaItens.Open();
  soma := fdqSomaItens.FieldByName('soma').AsFloat;
- lblValorTotal.Caption := soma.ToString;
+ lblValor.Caption := 'Valor Total: R$ ' + soma.ToString;
 
 end;
 
