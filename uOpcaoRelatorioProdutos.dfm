@@ -57,8 +57,8 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     TabOrder = 1
     ExplicitTop = 44
     object lblAte: TLabel
-      Left = 106
-      Top = 29
+      Left = 447
+      Top = 46
       Width = 18
       Height = 16
       Caption = 'at'#233
@@ -82,9 +82,16 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       Font.Style = []
       ParentFont = False
     end
+    object lblAgrupar: TLabel
+      Left = 10
+      Top = 29
+      Width = 62
+      Height = 13
+      Caption = 'Agrupar por:'
+    end
     object dtmInicial: TDateTimePicker
-      Left = 16
-      Top = 24
+      Left = 357
+      Top = 41
       Width = 81
       Height = 21
       Date = 43261.723393333330000000
@@ -92,8 +99,8 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       TabOrder = 0
     end
     object dtmFinal: TDateTimePicker
-      Left = 133
-      Top = 24
+      Left = 474
+      Top = 41
       Width = 81
       Height = 21
       Date = 43261.723393333330000000
@@ -105,12 +112,68 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       Top = 68
       Width = 566
       Height = 165
+      DataSource = dsTodoProdutos
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'id'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'categoria_id'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'nome'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'preco'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'descricao'
+          Visible = True
+        end>
     end
+  end
+  object rbAgrupaCategoria: TRadioButton
+    Left = 57
+    Top = 88
+    Width = 64
+    Height = 17
+    Caption = 'Categoria'
+    TabOrder = 2
+  end
+  object rbAgrupaSemAgrupamento: TRadioButton
+    Left = 10
+    Top = 88
+    Width = 41
+    Height = 17
+    Caption = 'Nada'
+    TabOrder = 3
+  end
+  object dsTodoProdutos: TDataSource
+    DataSet = fRelatorios.fdqTodosProdutos
+    Left = 64
+    Top = 8
+  end
+  object fdqTodosProdutos: TFDQuery
+    Active = True
+    Connection = dmConnection.fdcDatabase
+    SQL.Strings = (
+      'SELECT * FROM produtos')
+    Left = 16
+    Top = 8
   end
 end
