@@ -92,6 +92,9 @@ begin
       fdqFichaDisponivel.SQL.Add('UPDATE fichas SET disponivel = false WHERE id = :ficha');
       fdqFichaDisponivel.ParamByName('ficha').Value := ficha.ToInteger();
       fdqFichaDisponivel.ExecSQL;
+
+      ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + ficha);
+      fNovoPedido.Close;
     end
     else begin
       ShowMessage('Essa ficha não está dísponivel!');
