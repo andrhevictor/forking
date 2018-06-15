@@ -56,6 +56,7 @@ object fPrincipal: TfPrincipal
       Caption = 'Arquivo   '
       object Sair1: TMenuItem
         Caption = 'Sair'
+        OnClick = Sair1Click
       end
       object N1: TMenuItem
         Caption = '...'
@@ -102,7 +103,6 @@ object fPrincipal: TfPrincipal
   end
   object fdqInserePedido: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 736
-    Top = 48
+    Left = 360
   end
 end

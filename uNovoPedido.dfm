@@ -20,7 +20,6 @@ object fNovoPedido: TfNovoPedido
     Height = 493
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 496
     DesignSize = (
       875
       493)
@@ -231,5 +230,10 @@ object fNovoPedido: TfNovoPedido
     Connection = dmConnection.fdcDatabase
     Left = 792
     Top = 201
+  end
+  object fdqDeletePedido: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 176
+    Top = 8
   end
 end

@@ -39,6 +39,7 @@ type
     procedure btnPagamentoClick(Sender: TObject);
     procedure btnNovoPedidoClick(Sender: TObject);
     procedure Produtos2Click(Sender: TObject);
+    procedure Sair1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -98,6 +99,11 @@ end;
 procedure TfPrincipal.Produtos2Click(Sender: TObject);
 begin
   fOpcaoRelatorioProduto.Show;
+end;
+
+procedure TfPrincipal.Sair1Click(Sender: TObject);
+begin
+  Application.Terminate;
 end;
 
 procedure TfPrincipal.VisualizarTodas1Click(Sender: TObject);

@@ -30,6 +30,7 @@ type
     btnCancelar: TButton;
     fdqAtualizaPedido: TFDQuery;
     fdqFichaDisponivel: TFDQuery;
+    fdqDeletePedido: TFDQuery;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
     procedure btnSalvarClick(Sender: TObject);
@@ -51,7 +52,20 @@ uses dmDados;
 
 procedure TfNovoPedido.btnCancelarClick(Sender: TObject);
 begin
-  ShowMessage('CLICOU NO CANCELAR CANCELA E DESFAZ A TRANSAÇÃO');
+  fdqDeletePedido.SQL.Clear;
+  fdqDeletePedido.SQL.Add('DELETE FROM pedidos_itens');
+  fdqDeletePedido.SQL.Add('WHERE pedido_id = :pedido');
+  fdqDeletePedido.ParamByName('pedido').Value := idPedido;
+  fdqDeletePedido.ExecSQL;
+
+  fdqDeletePedido.SQL.Clear;
+  fdqDeletePedido.SQL.Add('DELETE FROM pedidos');
+  fdqDeletePedido.SQL.Add('WHERE id = :pedido');
+  fdqDeletePedido.ParamByName('pedido').Value := idPedido;
+  fdqDeletePedido.ExecSQL;
+  fdqDeletePedido.Close;
+
+  fNovoPedido.Close;
 end;
 
 procedure TfNovoPedido.btnSalvarClick(Sender: TObject);
@@ -60,9 +74,6 @@ var
 begin
 
   if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
-    // COMMITA A TRANSAÇÃO
-    ShowMessage('CLICOU NO OK COMMITA A TRANSAÇÃO');
-
     fdqFichaDisponivel.SQL.Clear;
     fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
     fdqFichaDisponivel.SQL.Add('WHERE numero_ficha = :ficha');
