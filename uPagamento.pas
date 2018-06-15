@@ -37,7 +37,9 @@ type
     dsPedido: TDataSource;
     fdqItensByPedido: TFDQuery;
     fdqSomaItens: TFDQuery;
+    btnPagar: TButton;
     procedure edtNumeroFichaChange(Sender: TObject);
+    procedure btnPagarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,11 +56,19 @@ implementation
 uses dmDados, uCadastraProduto, uEditaProduto, uPrincipal, uVisualizaFichas,
   uVisualizaProduto;
 
+
+procedure TfPagamento.btnPagarClick(Sender: TObject);
+begin
+  fdqPagamento.Post;
+  fdqPagamento.Close;
+end;
+
 procedure TfPagamento.edtNumeroFichaChange(Sender: TObject);
 var
   item: TField;
   somaTotal: Double;
   ultimo_pedido: Integer;
+  //status: string;
 begin
   if edtNumeroFicha.Text <> '' then begin
     fdqPedidoByFicha.SQL.Clear;
@@ -69,8 +79,11 @@ begin
     fdqPedidoByFicha.ParamByName('ficha').Value := StrToInt(edtNumeroFicha.Text);
     fdqPedidoByFicha.Open();
     ultimo_pedido := fdqPedidoByFicha.FieldByName('ultimo_pedido').AsInteger;
+    //status := fdqPedidoByFicha.FieldByName('status').AsString;
 
-    ShowMessage(ultimo_pedido.ToString);
+    //ShowMessage(ultimo_pedido.ToString);
+    //ShowMessage(status);
+    //if True then
 
     fdqItensByPedido.SQL.Add('SELECT * from pedidos_itens AS itens');
     fdqItensByPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');

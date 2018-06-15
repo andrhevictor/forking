@@ -20,7 +20,6 @@ object fPagamento: TfPagamento
     Height = 411
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 119
     object lblNumeroPedido: TLabel
       Left = 16
       Top = 24
@@ -38,7 +37,7 @@ object fPagamento: TfPagamento
     end
     object lblValor: TLabel
       Left = 713
-      Top = 376
+      Top = 97
       Width = 51
       Height = 13
       Caption = 'Valor Total'
@@ -117,13 +116,22 @@ object fPagamento: TfPagamento
     end
     object edtValorTotal: TDBEdit
       Left = 770
-      Top = 376
+      Top = 94
       Width = 95
       Height = 21
       DataField = 'valor'
       DataSource = dsPagamento
       Enabled = False
       TabOrder = 3
+    end
+    object btnPagar: TButton
+      Left = 728
+      Top = 320
+      Width = 137
+      Height = 49
+      Caption = 'Pagar'
+      TabOrder = 4
+      OnClick = btnPagarClick
     end
   end
   object panelTop: TPanel
@@ -216,7 +224,7 @@ object fPagamento: TfPagamento
   end
   object fdqSomaItens: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 400
-    Top = 16
+    Left = 408
+    Top = 8
   end
 end
