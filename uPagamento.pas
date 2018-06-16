@@ -39,6 +39,7 @@ type
     lblValorTotal: TLabel;
     lblValor: TLabel;
     lblFicha: TLabel;
+    lblErro: TLabel;
     procedure edtNumeroFichaChange(Sender: TObject);
     procedure btnPagarClick(Sender: TObject);
   private
@@ -72,7 +73,7 @@ begin
     end;
     fdqPagamento.SQL.Clear;
     fdqPagamento.SQL.Add('INSERT INTO pagamentos');
-    fdqPagamento.SQL.Add('VALUES (DEFAULT, :pedido, :meio_pagamento, :valor)');
+    fdqPagamento.SQL.Add('VALUES (DEFAULT, :pedido, :meio_pagamento, :valor, date_trunc(''minute'', LOCALTIMESTAMP))');
     fdqPagamento.ParamByName('pedido').Value         := fdqItensByPedido.FieldByName('pedido_id').AsInteger;
     fdqPagamento.ParamByName('meio_pagamento').Value := id_meio_pagamento;
     fdqPagamento.ParamByName('valor').Value          := fdqSomaItens.FieldByName('soma').AsFloat;
@@ -84,6 +85,13 @@ begin
     fdqPedidoByFicha.ParamByName('status').Value := 'FECHADO';
     fdqPedidoByFicha.ParamByName('pedido').Value := fdqItensByPedido.FieldByName('pedido_id').AsInteger;
     fdqPedidoByFicha.ExecSQL;
+    fdqPedidoByFicha.SQL.Clear;
+
+    fdqPedidoByFicha.SQL.Add('UPDATE fichas SET disponivel = true');
+    fdqPedidoByFicha.SQL.Add('WHERE numero_ficha = :ficha');
+    fdqPedidoByFicha.ParamByName('ficha').Value  := StrToInt(edtNumeroFicha.Text);
+    fdqPedidoByFicha.ExecSQL;
+
     fdqPedidoByFicha.SQL.Clear;
 
     pedido := fdqItensByPedido.FieldByName('pedido_id').AsString;
@@ -113,11 +121,6 @@ begin
     fdqPedidoByFicha.ParamByName('status').Value := 'EM ABERTO';
     fdqPedidoByFicha.Open();
     ultimo_pedido := fdqPedidoByFicha.FieldByName('ultimo_pedido').AsInteger;
-    //status := fdqPedidoByFicha.FieldByName('status').AsString;
-
-    //ShowMessage(ultimo_pedido.ToString);
-    //ShowMessage(status);
-    //if True then
 
     fdqItensByPedido.SQL.Add('SELECT * from pedidos_itens AS itens');
     fdqItensByPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
@@ -133,10 +136,12 @@ begin
 
     lblPedido.Caption := fdqItensByPedido.FieldByName('pedido_id').AsString;
     lblValor.Caption  := somaTotal.ToString;
+    lblErro.Caption := '';
 
     if fdqItensByPedido.RecordCount = 0 then begin
-      ShowMessage('Não há pedido para essa ficha');
-      edtNumeroFicha.Text := '';
+      lblValor.Caption  := '0.00';
+      lblPedido.Caption := '--';
+      lblErro.Caption := 'PEDIDO NÃO ENCONTRADO';
     end;
   end
   else begin
@@ -144,6 +149,7 @@ begin
     fdqItensByPedido.SQL.Clear;
     lblPedido.Caption := '--';
     lblValor.Caption := '0.00';
+    lblErro.Caption := '';
   end;
 end;
 

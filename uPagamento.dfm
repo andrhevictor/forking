@@ -23,7 +23,7 @@ object fPagamento: TfPagamento
     ExplicitTop = 119
     object lblNumeroPedido: TLabel
       Left = 16
-      Top = 36
+      Top = 16
       Width = 144
       Height = 19
       Caption = 'Numero do Pedido: '
@@ -49,8 +49,8 @@ object fPagamento: TfPagamento
       Caption = 'Lista de Produtos'
     end
     object lblPedido: TLabel
-      Left = 160
-      Top = 38
+      Left = 166
+      Top = 18
       Width = 12
       Height = 19
       Caption = '--'
@@ -174,6 +174,18 @@ object fPagamento: TfPagamento
       Caption = 'Numero da Ficha'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblErro: TLabel
+      Left = 145
+      Top = 80
+      Width = 5
+      Height = 19
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
       Font.Height = -16
       Font.Name = 'Tahoma'
       Font.Style = []
