@@ -73,10 +73,11 @@ begin
   if edtNumeroFicha.Text <> '' then begin
     fdqPedidoByFicha.SQL.Clear;
     fdqItensByPedido.SQL.Clear;
-    fdqPedidoByFicha.SQL.Add('SELECT MAX(id) AS ultimo_pedido');
-    fdqPedidoByFicha.SQL.Add('FROM pedidos');
+    fdqPedidoByFicha.SQL.Add('SELECT MAX(id) AS ultimo_pedido FROM pedidos');
     fdqPedidoByFicha.SQL.Add('WHERE numero_ficha = :ficha');
+    fdqPedidoByFicha.SQL.Add('AND status = :status');
     fdqPedidoByFicha.ParamByName('ficha').Value := StrToInt(edtNumeroFicha.Text);
+    fdqPedidoByFicha.ParamByName('status').Value := 'EM ABERTO';
     fdqPedidoByFicha.Open();
     ultimo_pedido := fdqPedidoByFicha.FieldByName('ultimo_pedido').AsInteger;
     //status := fdqPedidoByFicha.FieldByName('status').AsString;
