@@ -61,6 +61,7 @@ uses dmDados, uCadastraProduto, uEditaProduto, uPrincipal, uVisualizaFichas,
 procedure TfPagamento.btnPagarClick(Sender: TObject);
 var
   id_meio_pagamento: Integer;
+  pedido: String;
 begin
   if rdbDinheiro.Checked or rdbCartao.Checked then begin
     if rdbDinheiro.Checked then begin
@@ -84,6 +85,10 @@ begin
     fdqPedidoByFicha.ParamByName('pedido').Value := fdqItensByPedido.FieldByName('pedido_id').AsInteger;
     fdqPedidoByFicha.ExecSQL;
     fdqPedidoByFicha.SQL.Clear;
+
+    pedido := fdqItensByPedido.FieldByName('pedido_id').AsString;
+    ShowMessage('Pedido ' + pedido + ' pago com sucesso!');
+    edtNumeroFicha.Text := '';
   end
   else begin
     ShowMessage('Selecione um método de pagamento!');
@@ -133,9 +138,12 @@ begin
       ShowMessage('Não há pedido para essa ficha');
       edtNumeroFicha.Text := '';
     end;
-
-
-
+  end
+  else begin
+    fdqPedidoByFicha.SQL.Clear;
+    fdqItensByPedido.SQL.Clear;
+    lblPedido.Caption := '--';
+    lblValor.Caption := '0.00';
   end;
 end;
 
