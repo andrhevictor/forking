@@ -17,20 +17,15 @@ type
     fdqPagamento: TFDQuery;
     dsPagamento: TDataSource;
     edtNumeroFicha: TEdit;
-    lblFicha: TLabel;
     fdqPagamentoid: TLargeintField;
     fdqPagamentopedido_id: TLargeintField;
     fdqPagamentomeios_pagamento_id: TLargeintField;
     lblNumeroPedido: TLabel;
-    edtNumeroPedido: TDBEdit;
     lblMeioPagament: TLabel;
-    lblValor: TLabel;
-    lcbMeioPagamento: TDBLookupComboBox;
     dsMeioPagamento: TDataSource;
     fdqMeioPagamento: TFDQuery;
     grdListaProdutos: TDBGrid;
     lblListaProdutos: TLabel;
-    edtValorTotal: TDBEdit;
     fdqPagamentovalor: TBCDField;
     fdqPedidoByFicha: TFDQuery;
     dsItensPedido: TDataSource;
@@ -38,6 +33,12 @@ type
     fdqItensByPedido: TFDQuery;
     fdqSomaItens: TFDQuery;
     btnPagar: TButton;
+    rdbDinheiro: TRadioButton;
+    rdbCartao: TRadioButton;
+    lblPedido: TLabel;
+    lblValorTotal: TLabel;
+    lblValor: TLabel;
+    lblFicha: TLabel;
     procedure edtNumeroFichaChange(Sender: TObject);
     procedure btnPagarClick(Sender: TObject);
   private
@@ -58,9 +59,36 @@ uses dmDados, uCadastraProduto, uEditaProduto, uPrincipal, uVisualizaFichas,
 
 
 procedure TfPagamento.btnPagarClick(Sender: TObject);
+var
+  id_meio_pagamento: Integer;
 begin
-  fdqPagamento.Post;
-  fdqPagamento.Close;
+  if rdbDinheiro.Checked or rdbCartao.Checked then begin
+    if rdbDinheiro.Checked then begin
+      id_meio_pagamento := 1;
+    end
+    else begin
+      id_meio_pagamento := 2;
+    end;
+    fdqPagamento.SQL.Clear;
+    fdqPagamento.SQL.Add('INSERT INTO pagamentos');
+    fdqPagamento.SQL.Add('VALUES (DEFAULT, :pedido, :meio_pagamento, :valor)');
+    fdqPagamento.ParamByName('pedido').Value         := fdqItensByPedido.FieldByName('pedido_id').AsInteger;
+    fdqPagamento.ParamByName('meio_pagamento').Value := id_meio_pagamento;
+    fdqPagamento.ParamByName('valor').Value          := fdqSomaItens.FieldByName('soma').AsFloat;
+    fdqPagamento.ExecSQL;
+
+    fdqPedidoByFicha.SQL.Clear;
+    fdqPedidoByFicha.SQL.Add('UPDATE pedidos SET status = :status');
+    fdqPedidoByFicha.SQL.Add('WHERE id = :pedido');
+    fdqPedidoByFicha.ParamByName('status').Value := 'FECHADO';
+    fdqPedidoByFicha.ParamByName('pedido').Value := fdqItensByPedido.FieldByName('pedido_id').AsInteger;
+    fdqPedidoByFicha.ExecSQL;
+    fdqPedidoByFicha.SQL.Clear;
+  end
+  else begin
+    ShowMessage('Selecione um método de pagamento!');
+  end;
+
 end;
 
 procedure TfPagamento.edtNumeroFichaChange(Sender: TObject);
@@ -98,8 +126,15 @@ begin
     fdqSomaItens.Open();
     somaTotal := fdqSomaItens.FieldByName('soma').AsFloat;
 
-    edtNumeroPedido.Text := fdqItensByPedido.FieldByName('pedido_id').AsString;
-    edtValorTotal.Text   := somaTotal.ToString;
+    lblPedido.Caption := fdqItensByPedido.FieldByName('pedido_id').AsString;
+    lblValor.Caption  := somaTotal.ToString;
+
+    if fdqItensByPedido.RecordCount = 0 then begin
+      ShowMessage('Não há pedido para essa ficha');
+      edtNumeroFicha.Text := '';
+    end;
+
+
 
   end;
 end;

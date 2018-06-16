@@ -20,13 +20,19 @@ object fPagamento: TfPagamento
     Height = 411
     Align = alClient
     TabOrder = 0
+    ExplicitTop = 119
     object lblNumeroPedido: TLabel
       Left = 16
-      Top = 24
-      Width = 87
-      Height = 13
-      Caption = 'Numero do Pedido'
-      FocusControl = edtNumeroPedido
+      Top = 36
+      Width = 144
+      Height = 19
+      Caption = 'Numero do Pedido: '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object lblMeioPagament: TLabel
       Left = 264
@@ -35,13 +41,6 @@ object fPagamento: TfPagamento
       Height = 13
       Caption = 'Meio de Pagamento'
     end
-    object lblValor: TLabel
-      Left = 713
-      Top = 97
-      Width = 51
-      Height = 13
-      Caption = 'Valor Total'
-    end
     object lblListaProdutos: TLabel
       Left = 16
       Top = 77
@@ -49,27 +48,44 @@ object fPagamento: TfPagamento
       Height = 13
       Caption = 'Lista de Produtos'
     end
-    object edtNumeroPedido: TDBEdit
-      Left = 16
-      Top = 40
-      Width = 199
-      Height = 21
-      DataField = 'pedido_id'
-      DataSource = dsPagamento
-      Enabled = False
-      TabOrder = 0
+    object lblPedido: TLabel
+      Left = 160
+      Top = 38
+      Width = 12
+      Height = 19
+      Caption = '--'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
-    object lcbMeioPagamento: TDBLookupComboBox
-      Left = 264
-      Top = 40
-      Width = 145
-      Height = 21
-      DataField = 'meios_pagamento_id'
-      DataSource = dsPagamento
-      KeyField = 'id'
-      ListField = 'tipo_pagamento'
-      ListSource = dsMeioPagamento
-      TabOrder = 1
+    object lblValorTotal: TLabel
+      Left = 650
+      Top = 94
+      Width = 108
+      Height = 19
+      Caption = 'Valor Total: R$'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblValor: TLabel
+      Left = 764
+      Top = 94
+      Width = 32
+      Height = 19
+      Caption = '0,00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object grdListaProdutos: TDBGrid
       Left = 16
@@ -78,7 +94,7 @@ object fPagamento: TfPagamento
       Height = 276
       DataSource = dsItensPedido
       Options = [dgTitles, dgColumnResize, dgRowLines, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 2
+      TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
@@ -114,24 +130,32 @@ object fPagamento: TfPagamento
           Visible = True
         end>
     end
-    object edtValorTotal: TDBEdit
-      Left = 770
-      Top = 94
-      Width = 95
-      Height = 21
-      DataField = 'valor'
-      DataSource = dsPagamento
-      Enabled = False
-      TabOrder = 3
-    end
     object btnPagar: TButton
       Left = 728
       Top = 320
       Width = 137
       Height = 49
       Caption = 'Pagar'
-      TabOrder = 4
+      TabOrder = 1
       OnClick = btnPagarClick
+    end
+    object rdbDinheiro: TRadioButton
+      Left = 264
+      Top = 40
+      Width = 113
+      Height = 17
+      Caption = 'Dinheiro'
+      Checked = True
+      TabOrder = 2
+      TabStop = True
+    end
+    object rdbCartao: TRadioButton
+      Left = 264
+      Top = 63
+      Width = 113
+      Height = 17
+      Caption = 'Cart'#227'o'
+      TabOrder = 3
     end
   end
   object panelTop: TPanel
@@ -141,15 +165,22 @@ object fPagamento: TfPagamento
     Height = 113
     Align = alTop
     TabOrder = 1
+    ExplicitTop = -6
     object lblFicha: TLabel
       Left = 16
       Top = 50
-      Width = 80
-      Height = 13
+      Width = 120
+      Height = 19
       Caption = 'Numero da Ficha'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object edtNumeroFicha: TEdit
-      Left = 102
+      Left = 142
       Top = 47
       Width = 91
       Height = 21

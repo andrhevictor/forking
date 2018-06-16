@@ -2,14 +2,12 @@
 Coordinates=10,10,68,58
 
 []
-Coordinates=496,166,108,36
+Coordinates=337,1,59,58
+Visible=True
 
 [panelMid]
 Coordinates=88,10,67,58
 Visible=True
-
-[lcbMeioPagamento]
-Coordinates=496,1,124,36
 
 [lblNumeroPedido]
 Coordinates=218,271,113,58
@@ -20,14 +18,8 @@ Coordinates=337,232,107,58
 [dsMeioPagamento]
 Coordinates=337,78,121,36
 
-[lblFicha]
-Coordinates=337,1,59,58
-
 [dsPagamento]
 Coordinates=174,1,93,36
-
-[edtNumeroPedido]
-Coordinates=496,56,118,36
 
 [edtNumeroFicha]
 Coordinates=99,271,109,58
@@ -41,13 +33,6 @@ Coordinates=496,111,112,36
 [fdqMeioPagamento]
 Coordinates=0,0,126,58
 
-[lblValor]
-Coordinates=40,271,58,58
-
 [fdqPagamento]
 Coordinates=45,87,125,146
-
-[edtValorTotal]
-Coordinates=427,367,62,36
-Visible=True
 
