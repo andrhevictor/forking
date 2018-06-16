@@ -72,7 +72,7 @@ begin
 
 
   pedidoId := fdqInserePedido.FieldByName('id').AsString;
-  ShowMessage(pedidoId);
+//  ShowMessage(pedidoId);
 
   With TfNovoPedido.Create(self, pedidoId) do
     Begin

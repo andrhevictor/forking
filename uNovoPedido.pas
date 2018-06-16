@@ -73,7 +73,11 @@ var
   ficha: String;
 begin
 
-  if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
+  if fdqItensPedido.RecordCount = 0 then begin
+    ShowMessage('O pedido precisa ter ao menos um item para ser salvo!');
+  end
+  else begin
+    if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
     fdqFichaDisponivel.SQL.Clear;
     fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
     fdqFichaDisponivel.SQL.Add('WHERE numero_ficha = :ficha');
@@ -99,12 +103,12 @@ begin
     else begin
       ShowMessage('Essa ficha não está dísponivel!');
     end;
-
-
   end
   else begin
     ShowMessage('FAZ ALGO(OU NÃO)');
   end;
+  end;
+
 end;
 
 Constructor TfNovoPedido.Create(AOwner: TComponent; pedidoId: String);
