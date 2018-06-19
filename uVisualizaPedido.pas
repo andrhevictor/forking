@@ -57,7 +57,7 @@ type
     procedure btnLimpaFiltroClick(Sender: TObject);
     procedure dsItensPedidoDataChange(Sender: TObject; Field: TField);
   private
-    Function ConverteData(Data:TDate) : String;
+//    Function ConverteData(Data:TDate) : String;
   public
     { Public declarations }
   end;
@@ -71,24 +71,21 @@ implementation
 
 uses dmDados, uEditaPedido;
 
-Function TfVisualizaPedidos.ConverteData(Data:TDate) : String;
-begin
- Result := IntToStr(YearOf(Data)) + '-' + IntToStr(MonthOf(Data)) + '-' + IntToStr(DayOf(data));
-end;
+//Function TfVisualizaPedidos.ConverteData(Data:TDate) : String;
+//begin
+// Result := IntToStr(YearOf(Data)) + '-' + IntToStr(MonthOf(Data)) + '-' + IntToStr(DayOf(data));
+//end;
 
 
 procedure TfVisualizaPedidos.btnBuscarClick(Sender: TObject);
 var
-  dataInicial: String;
-  dataFinal: String;
+  dataInicial: TDate;
+  dataFinal: TDate;
   numeroFicha: Integer;
   status: String;
 begin
-  dataInicial := ConverteData(dtpickInicial.Date);
-  dataFinal   := ConverteData(dtpickFinal.Date);
-  ShowMessage(dataInicial);
-  ShowMessage(dataFinal);
-
+  dataInicial := dtpickInicial.Date;
+  dataFinal   := dtpickFinal.Date;
 
   if edtNumeroFicha.Text <> '' then begin
     numeroFicha := StrToInt(edtNumeroFicha.Text);
@@ -100,7 +97,7 @@ begin
 
   fdqItensPedido.SQL.Clear;
   fdqItensPedido.SQL.Add('SELECT * FROM pedidos');
-  fdqItensPedido.SQL.Add('WHERE criado_em BETWEEN TO_TIMESTAMP(:datainicial, ''YYYY-MM-DD HH24:MI:SS'') AND TO_TIMESTAMP(:dataFinal, ''YYYY-MM-DD HH24:MI:SS'')');
+  fdqItensPedido.SQL.Add('WHERE criado_em::date BETWEEN :datainicial AND :dataFinal');
   fdqItensPedido.ParamByName('dataInicial').Value := dataInicial;
   fdqItensPedido.ParamByName('dataFinal').Value   := dataFinal;
   fdqItensPedido.SQL.Add('ORDER BY id');

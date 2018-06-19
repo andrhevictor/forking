@@ -13,7 +13,8 @@ uses
   uNovoPedido in 'uNovoPedido.pas' {fNovoPedido},
   uRelatorio in 'uRelatorio.pas' {fRelatorios},
   uOpcaoRelatorioProdutos in 'uOpcaoRelatorioProdutos.pas' {fOpcaoRelatorioProduto},
-  uEditaPedido in 'uEditaPedido.pas' {fEditaPedido};
+  uEditaPedido in 'uEditaPedido.pas' {fEditaPedido},
+  uVisualizaPedido in 'uVisualizaPedido.pas' {fVisualizaPedidos};
 
 {$R *.res}
 
@@ -32,5 +33,6 @@ begin
   Application.CreateForm(TfRelatorios, fRelatorios);
   Application.CreateForm(TfOpcaoRelatorioProduto, fOpcaoRelatorioProduto);
   Application.CreateForm(TfEditaPedido, fEditaPedido);
+  Application.CreateForm(TfVisualizaPedidos, fVisualizaPedidos);
   Application.Run;
 end.

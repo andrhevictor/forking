@@ -150,6 +150,10 @@
             <Form>fEditaPedido</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uVisualizaPedido.pas">
+            <Form>fVisualizaPedidos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
