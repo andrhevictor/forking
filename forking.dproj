@@ -146,6 +146,10 @@
             <Form>fOpcaoRelatorioProduto</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uEditaPedido.pas">
+            <Form>fEditaPedido</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

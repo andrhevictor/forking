@@ -20,7 +20,6 @@ object fPagamento: TfPagamento
     Height = 411
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 119
     object lblNumeroPedido: TLabel
       Left = 16
       Top = 16
@@ -165,7 +164,6 @@ object fPagamento: TfPagamento
     Height = 113
     Align = alTop
     TabOrder = 1
-    ExplicitTop = -6
     object lblFicha: TLabel
       Left = 16
       Top = 50

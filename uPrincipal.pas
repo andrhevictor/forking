@@ -32,6 +32,7 @@ type
     SobreoSistema1: TMenuItem;
     Ajuda1: TMenuItem;
     Produtos2: TMenuItem;
+    Pedidos1: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
@@ -40,6 +41,7 @@ type
     procedure btnNovoPedidoClick(Sender: TObject);
     procedure Produtos2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
+    procedure Pedidos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +57,7 @@ implementation
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
   uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio,
-  uOpcaoRelatorioProdutos;
+  uOpcaoRelatorioProdutos, uVisualizaPedido, uEditaPedido;
 
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
@@ -64,7 +66,7 @@ var
 begin
   usuarioId := 1;                     // MUDAR AQUI ASDOAHSDUIAHSIDA
   fdqInserePedido.SQL.Clear;
-  fdqInserePedido.SQL.Add('INSERT INTO pedidos VALUES (DEFAULT, NULL, :status, :idUsuario)');
+  fdqInserePedido.SQL.Add('INSERT INTO pedidos VALUES (DEFAULT, NULL, :status, :idUsuario, date_trunc(''minute'', LOCALTIMESTAMP))');
   fdqInserePedido.ParamByName('status').Value := 'EM ABERTO';
   fdqInserePedido.ParamByName('idUsuario').Value := usuarioId;
   fdqInserePedido.SQL.Add('RETURNING id');
@@ -94,6 +96,11 @@ end;
 procedure TfPrincipal.Editar1Click(Sender: TObject);
 begin
   fEditaProduto.Show;
+end;
+
+procedure TfPrincipal.Pedidos1Click(Sender: TObject);
+begin
+  fVisualizaPedidos.Show;
 end;
 
 procedure TfPrincipal.Produtos2Click(Sender: TObject);

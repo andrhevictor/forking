@@ -141,7 +141,7 @@ begin
     if fdqItensByPedido.RecordCount = 0 then begin
       lblValor.Caption  := '0.00';
       lblPedido.Caption := '--';
-      lblErro.Caption := 'PEDIDO NÃO ENCONTRADO';
+      lblErro.Caption := 'Não há pedido em aberto para essa ficha!';
     end;
   end
   else begin

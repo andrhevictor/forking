@@ -50,7 +50,7 @@ object fPrincipal: TfPrincipal
     TabOrder = 1
   end
   object mmMenu: TMainMenu
-    Left = 1056
+    Left = 904
     Top = 8
     object Arquivo1: TMenuItem
       Caption = 'Arquivo   '
@@ -90,6 +90,10 @@ object fPrincipal: TfPrincipal
         Caption = 'Produtos'
         OnClick = Produtos2Click
       end
+      object Pedidos1: TMenuItem
+        Caption = 'Pedidos'
+        OnClick = Pedidos1Click
+      end
     end
     object Sobre1: TMenuItem
       Caption = 'Sobre   '
@@ -103,6 +107,6 @@ object fPrincipal: TfPrincipal
   end
   object fdqInserePedido: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 360
+    Left = 592
   end
 end
