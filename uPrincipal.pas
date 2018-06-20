@@ -43,9 +43,9 @@ type
     procedure Sair1Click(Sender: TObject);
     procedure Pedidos1Click(Sender: TObject);
   private
-    { Private declarations }
+    id_pedido: Integer;
   public
-    { Public declarations }
+    Function GetPedidoId: Integer;
   end;
 
 var
@@ -59,12 +59,16 @@ uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
   uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio,
   uOpcaoRelatorioProdutos, uVisualizaPedido, uEditaPedido;
 
+function TfPrincipal.GetPedidoId: Integer;
+begin
+  Result := fPrincipal.id_pedido;
+end;
+
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
-  pedidoId: String;
   usuarioId: Integer;
 begin
-  usuarioId := 1;                     // MUDAR AQUI ASDOAHSDUIAHSIDA
+  usuarioId := 1;               // MUDAR AQUI ASDOAHSDUIAHSIDA
   fdqInserePedido.SQL.Clear;
   fdqInserePedido.SQL.Add('INSERT INTO pedidos VALUES (DEFAULT, NULL, :status, :idUsuario, date_trunc(''minute'', LOCALTIMESTAMP))');
   fdqInserePedido.ParamByName('status').Value := 'EM ABERTO';
@@ -72,15 +76,9 @@ begin
   fdqInserePedido.SQL.Add('RETURNING id');
   fdqInserePedido.Open();
 
+  id_pedido := fdqInserePedido.FieldByName('id').AsInteger;
 
-  pedidoId := fdqInserePedido.FieldByName('id').AsString;
-//  ShowMessage(pedidoId);
-
-  With TfNovoPedido.Create(self, pedidoId) do
-    Begin
-      ShowModal;
-      Free;
-    End;
+  fNovoPedido.Show();
 end;
 
 procedure TfPrincipal.btnPagamentoClick(Sender: TObject);

@@ -161,6 +161,15 @@ object fNovoPedido: TfNovoPedido
       TabOrder = 4
       OnClick = btnCancelarClick
     end
+    object btnTeste: TButton
+      Left = 565
+      Top = 445
+      Width = 91
+      Height = 41
+      Caption = 'Teste'
+      TabOrder = 5
+      OnClick = btnTesteClick
+    end
   end
   object panelTop: TPanel
     Left = 0
@@ -197,12 +206,7 @@ object fNovoPedido: TfNovoPedido
     Top = 8
   end
   object fdqItensPedido: TFDQuery
-    Active = True
     Connection = dmConnection.fdcDatabase
-    SQL.Strings = (
-      'SELECT * FROM pedidos_itens AS itens'
-      'INNER JOIN produtos ON produtos.id = itens.produto_id'
-      'INNER JOIN categorias ON produtos.categoria_id = categorias.id')
     Left = 424
     Top = 8
   end

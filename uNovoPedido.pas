@@ -31,14 +31,15 @@ type
     fdqAtualizaPedido: TFDQuery;
     fdqFichaDisponivel: TFDQuery;
     fdqDeletePedido: TFDQuery;
+    btnTeste: TButton;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure btnTesteClick(Sender: TObject);
   private
-    idPedido: Integer;
   public
-    constructor Create(AOwner: TComponent; pedidoId: String);
+//    constructor Create(AOwner: TComponent; pedidoId: String);
   end;
 
 var
@@ -48,30 +49,43 @@ implementation
 
 {$R *.dfm}
 
-uses dmDados;
+uses dmDados, uPrincipal;
 
 procedure TfNovoPedido.btnCancelarClick(Sender: TObject);
+var
+  idPedido: Integer;
 begin
-  fdqDeletePedido.SQL.Clear;
-  fdqDeletePedido.SQL.Add('DELETE FROM pedidos_itens');
-  fdqDeletePedido.SQL.Add('WHERE pedido_id = :pedido');
-  fdqDeletePedido.ParamByName('pedido').Value := idPedido;
-  fdqDeletePedido.ExecSQL;
+  idPedido := fPrincipal.GetPedidoId;
 
-  fdqDeletePedido.SQL.Clear;
-  fdqDeletePedido.SQL.Add('DELETE FROM pedidos');
-  fdqDeletePedido.SQL.Add('WHERE id = :pedido');
-  fdqDeletePedido.ParamByName('pedido').Value := idPedido;
-  fdqDeletePedido.ExecSQL;
-  fdqDeletePedido.Close;
+  if Application.MessageBox('Você deseja realmente cancelar o pedido?','Cancelar o pedido',mb_yesno + mb_iconquestion) = id_yes then
+    Begin
+      fdqDeletePedido.SQL.Clear;
+      fdqDeletePedido.SQL.Add('DELETE FROM pedidos_itens');
+      fdqDeletePedido.SQL.Add('WHERE pedido_id = :pedido');
+      fdqDeletePedido.ParamByName('pedido').Value := idPedido;
+      fdqDeletePedido.ExecSQL;
 
-  fNovoPedido.Close;
+      fdqDeletePedido.SQL.Clear;
+      fdqDeletePedido.SQL.Add('DELETE FROM pedidos');
+      fdqDeletePedido.SQL.Add('WHERE id = :pedido');
+      fdqDeletePedido.ParamByName('pedido').Value := idPedido;
+      fdqDeletePedido.ExecSQL;
+      fdqDeletePedido.Close;
+
+      fNovoPedido.Close;
+    End
+  else
+    Begin
+
+    End;
 end;
 
 procedure TfNovoPedido.btnSalvarClick(Sender: TObject);
 var
   ficha: String;
+  idPedido: Integer;
 begin
+  idPedido := fPrincipal.GetPedidoId;
 
   if fdqItensPedido.RecordCount = 0 then begin
     ShowMessage('O pedido precisa ter ao menos um item para ser salvo!');
@@ -111,22 +125,23 @@ begin
 
 end;
 
-Constructor TfNovoPedido.Create(AOwner: TComponent; pedidoId: String);
+procedure TfNovoPedido.btnTesteClick(Sender: TObject);
 begin
-  inherited Create(AOwner);
-  idPedido := pedidoId.ToInteger();
-  fdqItensPedido.SQL.Clear;
+  ShowMessage(IntToStr(fPrincipal.GetPedidoId()));
 end;
 
 procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
 var
+  idPedido: Integer;
   produto_id: Integer;
   preco_unitario: Currency;
   valor_total: Double;
   quantidade: String;
   soma: Double;
 begin
+  idPedido := fPrincipal.GetPedidoId;
   quantidade := '1';
+
   if InputQuery('Quantidade', 'Insira a quantidade', quantidade) then
   begin
     produto_id     := dbgProdutos.DataSource.DataSet.FieldByName('id').AsInteger;
