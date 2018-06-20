@@ -36,7 +36,7 @@ implementation
 
 {$R *.dfm}
 
-uses dmDados, uPrincipal;
+uses dmDados, uPrincipal, uMd5;
 
 function TfLogin.GetUsuarioId: Integer;
   begin
@@ -46,11 +46,15 @@ function TfLogin.GetUsuarioId: Integer;
 procedure TfLogin.btnEntrarClick(Sender: TObject);
   var
     n: Integer;
+    senha: String;
+    usuario: String;
 begin
+    senha   := uMd5.MD5String(edtSenha.Text);
+    usuario := edtUsuario.Text;
 
-    fdqUsuario.SQL.Text := 'SELECT * FROM usuarios WHERE login = :u AND senha = :s';
-    fdqUsuario.Params.ParamByName('u').Value := edtUsuario.Text;
-    fdqUsuario.Params.ParamByName('s').Value := edtSenha.Text;
+    fdqUsuario.SQL.Text := 'SELECT * FROM usuarios WHERE login = :usuario AND senha = :senha';
+    fdqUsuario.Params.ParamByName('usuario').Value := usuario;
+    fdqUsuario.Params.ParamByName('senha').Value   := senha;
 
     fdqUsuario.Open;
 
@@ -58,12 +62,12 @@ begin
 
     if(n > 0) then begin
       usuario_id := fdqUsuario.FieldByName('id').AsInteger;
-      fPrincipal.Create(self);
-      fLogin.Destroy;
 
+      fPrincipal.Show();
+//      fLogin.Close;
     end
     else begin
-    ShowMessage('Usuario ou senha invalido!');
+      ShowMessage('Usuario ou senha invalido!');
     end
 
 

@@ -33,6 +33,8 @@ type
     Ajuda1: TMenuItem;
     Produtos2: TMenuItem;
     Pedidos1: TMenuItem;
+    Usurios1: TMenuItem;
+    AdicionarUsuario1: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
@@ -42,6 +44,7 @@ type
     procedure Produtos2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Pedidos1Click(Sender: TObject);
+    procedure AdicionarUsuario1Click(Sender: TObject);
   private
     id_pedido: Integer;
   public
@@ -57,11 +60,16 @@ implementation
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
   uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio,
-  uOpcaoRelatorioProdutos, uVisualizaPedido, uEditaPedido;
+  uOpcaoRelatorioProdutos, uVisualizaPedido, uEditaPedido, uCriaUsuario;
 
 function TfPrincipal.GetPedidoId: Integer;
 begin
   Result := fPrincipal.id_pedido;
+end;
+
+procedure TfPrincipal.AdicionarUsuario1Click(Sender: TObject);
+begin
+  fAdicionaUsuario.Show();
 end;
 
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);

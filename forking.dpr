@@ -14,15 +14,17 @@ uses
   uRelatorio in 'uRelatorio.pas' {fRelatorios},
   uOpcaoRelatorioProdutos in 'uOpcaoRelatorioProdutos.pas' {fOpcaoRelatorioProduto},
   uEditaPedido in 'uEditaPedido.pas' {fEditaPedido},
-  uVisualizaPedido in 'uVisualizaPedido.pas' {fVisualizaPedidos};
+  uVisualizaPedido in 'uVisualizaPedido.pas' {fVisualizaPedidos},
+  uMd5 in 'uMd5.pas',
+  uCriaUsuario in 'uCriaUsuario.pas' {fAdicionaUsuario};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfPrincipal, fPrincipal);
   Application.CreateForm(TfLogin, fLogin);
+  Application.CreateForm(TfPrincipal, fPrincipal);
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TfVisualizarProduto, fVisualizarProduto);
   Application.CreateForm(TfCadastraProduto, fCadastraProduto);
@@ -34,5 +36,6 @@ begin
   Application.CreateForm(TfOpcaoRelatorioProduto, fOpcaoRelatorioProduto);
   Application.CreateForm(TfEditaPedido, fEditaPedido);
   Application.CreateForm(TfVisualizaPedidos, fVisualizaPedidos);
+  Application.CreateForm(TfAdicionaUsuario, fAdicionaUsuario);
   Application.Run;
 end.

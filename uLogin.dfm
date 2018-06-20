@@ -76,7 +76,10 @@ object fLogin: TfLogin
       Top = 101
       Width = 121
       Height = 21
+      HelpType = htKeyword
+      PasswordChar = '*'
       TabOrder = 1
+      TextHint = 'Digite sua senha'
     end
     object btnEntrar: TButton
       Left = 216

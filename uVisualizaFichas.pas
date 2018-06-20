@@ -24,7 +24,7 @@ type
     dsPedidoByFicha: TDataSource;
     lblStatusPedido: TLabel;
     fdqSomaValorPedido: TFDQuery;
-    procedure dbgFichasCellClick(Column: TColumn);
+    procedure dsFichasDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
   public
@@ -40,7 +40,7 @@ implementation
 
 uses dmDados;
 
-procedure TfVisualizaFichas.dbgFichasCellClick(Column: TColumn);
+procedure TfVisualizaFichas.dsFichasDataChange(Sender: TObject; Field: TField);
 var
   valor_total: Double;
   pedido_id: Integer;

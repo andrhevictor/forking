@@ -50,8 +50,8 @@ object fPrincipal: TfPrincipal
     TabOrder = 1
   end
   object mmMenu: TMainMenu
-    Left = 904
-    Top = 8
+    Left = 440
+    Top = 65528
     object Arquivo1: TMenuItem
       Caption = 'Arquivo   '
       object Sair1: TMenuItem
@@ -93,6 +93,13 @@ object fPrincipal: TfPrincipal
       object Pedidos1: TMenuItem
         Caption = 'Pedidos'
         OnClick = Pedidos1Click
+      end
+    end
+    object Usurios1: TMenuItem
+      Caption = 'Usu'#225'rios'
+      object AdicionarUsuario1: TMenuItem
+        Caption = 'Adicionar Usuario'
+        OnClick = AdicionarUsuario1Click
       end
     end
     object Sobre1: TMenuItem

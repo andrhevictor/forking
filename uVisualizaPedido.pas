@@ -58,7 +58,6 @@ type
     procedure dsItensPedidoDataChange(Sender: TObject; Field: TField);
     procedure FormActivate(Sender: TObject);
   private
-//    Function ConverteData(Data:TDate) : String;
   public
     { Public declarations }
   end;
@@ -71,12 +70,6 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uEditaPedido;
-
-//Function TfVisualizaPedidos.ConverteData(Data:TDate) : String;
-//begin
-// Result := IntToStr(YearOf(Data)) + '-' + IntToStr(MonthOf(Data)) + '-' + IntToStr(DayOf(data));
-//end;
-
 
 procedure TfVisualizaPedidos.btnBuscarClick(Sender: TObject);
 var

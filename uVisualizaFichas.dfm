@@ -28,8 +28,6 @@ object fVisualizaFichas: TfVisualizaFichas
     Height = 518
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 65
     object lblValorTotal: TLabel
       Left = 752
       Top = 431
@@ -82,7 +80,6 @@ object fVisualizaFichas: TfVisualizaFichas
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
-      OnCellClick = dbgFichasCellClick
       Columns = <
         item
           Alignment = taCenter
@@ -158,6 +155,7 @@ object fVisualizaFichas: TfVisualizaFichas
   end
   object dsFichas: TDataSource
     DataSet = fdqFichas
+    OnDataChange = dsFichasDataChange
     Left = 848
     Top = 16
   end
