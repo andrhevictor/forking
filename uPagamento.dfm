@@ -194,6 +194,7 @@ object fPagamento: TfPagamento
       Top = 47
       Width = 91
       Height = 21
+      NumbersOnly = True
       TabOrder = 0
       OnChange = edtNumeroFichaChange
     end

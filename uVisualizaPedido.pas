@@ -56,6 +56,7 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure btnLimpaFiltroClick(Sender: TObject);
     procedure dsItensPedidoDataChange(Sender: TObject; Field: TField);
+    procedure FormActivate(Sender: TObject);
   private
 //    Function ConverteData(Data:TDate) : String;
   public
@@ -79,13 +80,13 @@ uses dmDados, uEditaPedido;
 
 procedure TfVisualizaPedidos.btnBuscarClick(Sender: TObject);
 var
-  dataInicial: TDate;
-  dataFinal: TDate;
+  dataInicial: String;
+  dataFinal: String;
   numeroFicha: Integer;
   status: String;
 begin
-  dataInicial := dtpickInicial.Date;
-  dataFinal   := dtpickFinal.Date;
+  dataInicial := FormatDateTime('yyyy-mm-dd', dtpickInicial.Date);
+  dataFinal   := FormatDateTime('yyyy-mm-dd', dtpickFinal.Date);
 
   if edtNumeroFicha.Text <> '' then begin
     numeroFicha := StrToInt(edtNumeroFicha.Text);
@@ -97,7 +98,7 @@ begin
 
   fdqItensPedido.SQL.Clear;
   fdqItensPedido.SQL.Add('SELECT * FROM pedidos');
-  fdqItensPedido.SQL.Add('WHERE criado_em::date BETWEEN :datainicial AND :dataFinal');
+  fdqItensPedido.SQL.Add('WHERE criado_em::date BETWEEN DATE(:datainicial) AND DATE(:dataFinal)');
   fdqItensPedido.ParamByName('dataInicial').Value := dataInicial;
   fdqItensPedido.ParamByName('dataFinal').Value   := dataFinal;
   fdqItensPedido.SQL.Add('ORDER BY id');
@@ -159,6 +160,14 @@ begin
   lblPagamentoMetodo.Caption := fdqPagamentoByPedido.FieldByName('tipo_pagamento').AsString;
   lblPagamentoData.Caption := fdqPagamentoByPedido.FieldByName('pago_em').AsString;
 
+end;
+
+procedure TfVisualizaPedidos.FormActivate(Sender: TObject);
+begin
+  fdqItensPedido.SQL.Clear;
+  fdqItensPedido.SQL.Add('SELECT * FROM pedidos');
+  fdqItensPedido.SQL.Add('ORDER BY id');
+  fdqItensPedido.Open();
 end;
 
 end.

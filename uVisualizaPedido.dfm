@@ -11,6 +11,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object panelMid: TPanel
@@ -20,7 +21,6 @@ object fVisualizaPedidos: TfVisualizaPedidos
     Height = 605
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 71
     object lblItens: TLabel
       Left = 16
       Top = 145
@@ -37,7 +37,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblInfo: TLabel
       Left = 782
       Top = 169
-      Width = 210
+      Width = 88
       Height = 19
       Caption = 'Informa'#231#245'es'
       Font.Charset = DEFAULT_CHARSET
@@ -50,7 +50,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblStatus: TLabel
       Left = 782
       Top = 202
-      Width = 42
+      Width = 43
       Height = 19
       Caption = 'Status'
       Font.Charset = DEFAULT_CHARSET
@@ -154,7 +154,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPedidoStatus: TLabel
       Left = 951
       Top = 202
-      Width = 28
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -166,7 +166,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPedidoDataCriacao: TLabel
       Left = 951
       Top = 227
-      Width = 35
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -178,7 +178,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPedidoQtdItens: TLabel
       Left = 951
       Top = 252
-      Width = 50
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -190,7 +190,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPedidoValorTotal: TLabel
       Left = 951
       Top = 277
-      Width = 58
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -202,7 +202,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPagamentoValor: TLabel
       Left = 975
       Top = 407
-      Width = 34
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -214,7 +214,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPagamentoMetodo: TLabel
       Left = 975
       Top = 432
-      Width = 42
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -226,7 +226,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblPagamentoData: TLabel
       Left = 975
       Top = 457
-      Width = 42
+      Width = 5
       Height = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -238,7 +238,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblFiltro: TLabel
       Left = 16
       Top = 6
-      Width = 57
+      Width = 41
       Height = 19
       Caption = 'Filtrar'
       Font.Charset = DEFAULT_CHARSET
@@ -303,7 +303,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblE: TLabel
       Left = 455
       Top = 65
-      Width = 19
+      Width = 7
       Height = 16
       Caption = 'e'
       Font.Charset = DEFAULT_CHARSET
@@ -316,7 +316,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     object lblOpcoes: TLabel
       Left = 782
       Top = 527
-      Width = 91
+      Width = 52
       Height = 19
       Caption = 'Op'#231#245'es'
       Font.Charset = DEFAULT_CHARSET
@@ -454,7 +454,6 @@ object fVisualizaPedidos: TfVisualizaPedidos
     Height = 65
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 998
   end
   object fdqItensPedido: TFDQuery
     Active = True
