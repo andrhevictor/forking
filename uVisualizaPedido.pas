@@ -88,22 +88,26 @@ begin
   dataInicial := FormatDateTime('yyyy-mm-dd', dtpickInicial.Date);
   dataFinal   := FormatDateTime('yyyy-mm-dd', dtpickFinal.Date);
 
-  if edtNumeroFicha.Text <> '' then begin
-    numeroFicha := StrToInt(edtNumeroFicha.Text);
-  end;
-
-  if (cmbFiltroStatus.ItemIndex >= 0) then begin
-    status := cmbFiltroStatus.Items[cmbFiltroStatus.ItemIndex];
-  end;
-
   fdqItensPedido.SQL.Clear;
   fdqItensPedido.SQL.Add('SELECT * FROM pedidos');
   fdqItensPedido.SQL.Add('WHERE criado_em::date BETWEEN DATE(:datainicial) AND DATE(:dataFinal)');
   fdqItensPedido.ParamByName('dataInicial').Value := dataInicial;
   fdqItensPedido.ParamByName('dataFinal').Value   := dataFinal;
+
+  if edtNumeroFicha.Text <> '' then begin
+    numeroFicha := StrToInt(edtNumeroFicha.Text);
+    fdqItensPedido.SQL.Add('AND numero_ficha = :ficha');
+    fdqItensPedido.ParamByName('ficha').Value := numeroFicha;
+  end;
+
+  if (cmbFiltroStatus.ItemIndex >= 0) then begin
+    status := cmbFiltroStatus.Items[cmbFiltroStatus.ItemIndex];
+    fdqItensPedido.SQL.Add('AND status = :status');
+    fdqItensPedido.ParamByName('status').Value := status;
+  end;
+
   fdqItensPedido.SQL.Add('ORDER BY id');
   fdqItensPedido.Open();
-
 end;
 
 procedure TfVisualizaPedidos.btnEditaPedidoClick(Sender: TObject);
