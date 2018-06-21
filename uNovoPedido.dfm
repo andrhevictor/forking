@@ -2,7 +2,7 @@ object fNovoPedido: TfNovoPedido
   Left = 0
   Top = 0
   Caption = 'Novo Pedido'
-  ClientHeight = 550
+  ClientHeight = 564
   ClientWidth = 875
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,12 +17,12 @@ object fNovoPedido: TfNovoPedido
     Left = 0
     Top = 57
     Width = 875
-    Height = 493
+    Height = 507
     Align = alClient
     TabOrder = 0
     DesignSize = (
       875
-      493)
+      507)
     object lblValor: TLabel
       Left = 13
       Top = 451
@@ -91,7 +91,7 @@ object fNovoPedido: TfNovoPedido
           Visible = True
         end>
     end
-    object DBGrid1: TDBGrid
+    object dbgItensPedido: TDBGrid
       Left = 13
       Top = 213
       Width = 855
@@ -110,6 +110,7 @@ object fNovoPedido: TfNovoPedido
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnDblClick = dbgItensPedidoDblClick
       Columns = <
         item
           Expanded = False
@@ -161,14 +162,14 @@ object fNovoPedido: TfNovoPedido
       TabOrder = 4
       OnClick = btnCancelarClick
     end
-    object btnTeste: TButton
-      Left = 565
+    object btnDeletaItem: TButton
+      Left = 357
       Top = 445
-      Width = 91
-      Height = 41
-      Caption = 'Teste'
+      Width = 140
+      Height = 44
+      Caption = 'Deletar Item Selecionado'
       TabOrder = 5
-      OnClick = btnTesteClick
+      OnClick = btnDeletaItemClick
     end
   end
   object panelTop: TPanel
@@ -232,8 +233,8 @@ object fNovoPedido: TfNovoPedido
   end
   object fdqFichaDisponivel: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 792
-    Top = 201
+    Left = 72
+    Top = 9
   end
   object fdqDeletePedido: TFDQuery
     Connection = dmConnection.fdcDatabase

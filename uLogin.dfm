@@ -70,6 +70,7 @@ object fLogin: TfLogin
       Width = 121
       Height = 21
       TabOrder = 0
+      Text = 'andrhev'
     end
     object edtSenha: TEdit
       Left = 194
@@ -79,6 +80,7 @@ object fLogin: TfLogin
       HelpType = htKeyword
       PasswordChar = '*'
       TabOrder = 1
+      Text = '12345678'
       TextHint = 'Digite sua senha'
     end
     object btnEntrar: TButton

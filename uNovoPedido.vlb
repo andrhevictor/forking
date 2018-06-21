@@ -19,10 +19,6 @@ Coordinates=346,342,69,58
 [dsItensPedido]
 Coordinates=103,122,96,36
 
-[DBGrid1]
-Coordinates=209,410,64,36
-Visible=True
-
 [fdqFichaDisponivel]
 Coordinates=494,10,124,58
 
@@ -55,4 +51,8 @@ Coordinates=224,10,84,168
 
 []
 Coordinates=375,595,91,36
+
+[dbgItensPedido]
+Coordinates=209,410,64,36
+Visible=True
 

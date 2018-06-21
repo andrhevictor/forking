@@ -21,7 +21,7 @@ type
     dbgCategoria: TDBGrid;
     fdqCategoria: TFDQuery;
     dsCategoria: TDataSource;
-    DBGrid1: TDBGrid;
+    dbgItensPedido: TDBGrid;
     fdqItensPedido: TFDQuery;
     dsItensPedido: TDataSource;
     lblValor: TLabel;
@@ -31,12 +31,13 @@ type
     fdqAtualizaPedido: TFDQuery;
     fdqFichaDisponivel: TFDQuery;
     fdqDeletePedido: TFDQuery;
-    btnTeste: TButton;
+    btnDeletaItem: TButton;
     procedure dbgProdutosDblClick(Sender: TObject);
     procedure dbgCategoriaCellClick(Column: TColumn);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure btnTesteClick(Sender: TObject);
+    procedure btnDeletaItemClick(Sender: TObject);
+    procedure dbgItensPedidoDblClick(Sender: TObject);
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
@@ -125,9 +126,13 @@ begin
 
 end;
 
-procedure TfNovoPedido.btnTesteClick(Sender: TObject);
+procedure TfNovoPedido.btnDeletaItemClick(Sender: TObject);
+var
+  itemId: Integer;
 begin
-  ShowMessage(IntToStr(fPrincipal.GetPedidoId()));
+  itemId := dbgItensPedido.DataSource.DataSet.FieldByName('id').AsInteger;
+//  ShowMessage(IntToStr(itemId));
+    ShowMessage(dbgItensPedido.SelectedRows.Count.ToString);
 end;
 
 procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
@@ -161,6 +166,7 @@ begin
   fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens AS itens');
   fdqItensPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
   fdqItensPedido.SQL.Add('WHERE pedido_id = :idPedido');
+  fdqItensPedido.SQL.Add('ORDER BY itens.id');
   fdqItensPedido.ParamByName('idPedido').Value := idPedido;
   fdqItensPedido.Open();
 
@@ -184,6 +190,61 @@ begin
   fdqProdutos.SQL.Add('WHERE categoria_id = :id');
   fdqProdutos.ParamByName('id').Value := categoria_id;
   fdqProdutos.Open();
+end;
+
+procedure TfNovoPedido.dbgItensPedidoDblClick(Sender: TObject);
+var
+  idPedido:       Integer;
+  item_id:        Integer;
+  produto_id:     Integer;
+  preco_unitario: Currency;
+  valor_total:    Double;
+  quantidade:     String;
+  soma:           Double;
+begin
+  idPedido := fPrincipal.GetPedidoId;
+  item_id  := dbgItensPedido.DataSource.DataSet.FieldByName('id').AsInteger;
+
+  ShowMessage(item_id.ToString);
+
+  quantidade := dbgItensPedido.DataSource.DataSet.FieldByName('quantidade').AsString;
+  if InputQuery('Quantidade', 'Insira a quantidade', quantidade) then begin
+    produto_id  := dbgItensPedido.DataSource.DataSet.FieldByName('produto_id').AsInteger;
+    fdqAtualizaPedido.SQL.Clear;
+    fdqAtualizaPedido.SQL.Add('SELECT * FROM produtos WHERE id = :produto');
+    fdqAtualizaPedido.ParamByName('produto').Value := produto_id;
+    fdqAtualizaPedido.Open();
+
+    preco_unitario := fdqAtualizaPedido.FieldByName('preco').AsCurrency;
+    valor_total := preco_unitario * quantidade.ToDouble;
+
+    fdqAtualizaPedido.SQL.Clear;
+    fdqAtualizaPedido.SQL.Add('UPDATE pedidos_itens SET valor_total = :valorTotal, quantidade = :quantidade');
+    fdqAtualizaPedido.SQL.Add('WHERE pedido_id = :pedido');
+    fdqAtualizaPedido.SQL.Add('AND id = :item_id');
+    fdqAtualizaPedido.ParamByName('valorTotal').Value := valor_total;
+    fdqAtualizaPedido.ParamByName('quantidade').Value := quantidade.ToDouble;
+    fdqAtualizaPedido.ParamByName('pedido').Value     := idPedido;
+    fdqAtualizaPedido.ParamByName('item_id').Value    := item_id;
+    fdqAtualizaPedido.ExecSQL;
+    fdqAtualizaPedido.SQL.Clear;
+
+    fdqItensPedido.SQL.Clear;
+    fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens AS itens');
+    fdqItensPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
+    fdqItensPedido.SQL.Add('WHERE pedido_id = :idPedido');
+    fdqItensPedido.SQL.Add('ORDER BY itens.id');
+    fdqItensPedido.ParamByName('idPedido').Value := idPedido;
+    fdqItensPedido.Open();
+
+
+   fdqSomaItens.SQL.Clear;
+   fdqSomaItens.SQL.Add('SELECT SUM(valor_total) AS soma FROM pedidos_itens WHERE pedido_id = :idPedido');
+   fdqSomaItens.ParamByName('idPedido').Value := idPedido;
+   fdqSomaItens.Open();
+   soma := fdqSomaItens.FieldByName('soma').AsFloat;
+   lblValor.Caption := 'Valor Total: R$ ' + soma.ToString;
+  end;
 end;
 
 end.
