@@ -13,7 +13,6 @@ type
   TfRelatorios = class(TForm)
     frxProdutos: TfrxReport;
     frxDBProdutos: TfrxDBDataset;
-    fdqTodosProdutos: TFDQuery;
   private
     { Private declarations }
   public

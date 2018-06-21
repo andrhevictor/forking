@@ -11,7 +11,6 @@ uses
   uPagamento in 'uPagamento.pas' {fPagamento},
   uLogin in 'uLogin.pas' {fLogin},
   uNovoPedido in 'uNovoPedido.pas' {fNovoPedido},
-  uRelatorio in 'uRelatorio.pas' {fRelatorios},
   uOpcaoRelatorioProdutos in 'uOpcaoRelatorioProdutos.pas' {fOpcaoRelatorioProduto},
   uEditaPedido in 'uEditaPedido.pas' {fEditaPedido},
   uVisualizaPedido in 'uVisualizaPedido.pas' {fVisualizaPedidos},
@@ -32,7 +31,6 @@ begin
   Application.CreateForm(TfVisualizaFichas, fVisualizaFichas);
   Application.CreateForm(TfPagamento, fPagamento);
   Application.CreateForm(TfNovoPedido, fNovoPedido);
-  Application.CreateForm(TfRelatorios, fRelatorios);
   Application.CreateForm(TfOpcaoRelatorioProduto, fOpcaoRelatorioProduto);
   Application.CreateForm(TfEditaPedido, fEditaPedido);
   Application.CreateForm(TfVisualizaPedidos, fVisualizaPedidos);

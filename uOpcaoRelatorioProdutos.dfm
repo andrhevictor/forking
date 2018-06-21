@@ -55,57 +55,12 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     Height = 236
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 44
-    object lblAte: TLabel
-      Left = 447
-      Top = 46
-      Width = 18
-      Height = 16
-      Caption = 'at'#233
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label1: TLabel
-      Left = 48
-      Top = -1
-      Width = 490
-      Height = 24
-      Caption = 'Bot'#227'o gerar esta fixo, os filtros est'#227'o em constru'#231#227'o :P'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
-      Font.Height = -20
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
     object lblAgrupar: TLabel
       Left = 10
       Top = 29
-      Width = 62
+      Width = 63
       Height = 13
-      Caption = 'Agrupar por:'
-    end
-    object dtmInicial: TDateTimePicker
-      Left = 357
-      Top = 41
-      Width = 81
-      Height = 21
-      Date = 43261.723393333330000000
-      Time = 43261.723393333330000000
-      TabOrder = 0
-    end
-    object dtmFinal: TDateTimePicker
-      Left = 474
-      Top = 41
-      Width = 81
-      Height = 21
-      Date = 43261.723393333330000000
-      Time = 43261.723393333330000000
-      TabOrder = 1
+      Caption = 'Ordenar por:'
     end
     object DBGrid1: TDBGrid
       Left = 0
@@ -113,7 +68,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       Width = 566
       Height = 165
       DataSource = dsTodoProdutos
-      TabOrder = 2
+      TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
@@ -122,49 +77,56 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       Columns = <
         item
           Expanded = False
-          FieldName = 'id'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'categoria_id'
+          FieldName = 'nome_1'
+          Title.Caption = 'Categoria'
+          Width = 104
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
+          Title.Caption = 'Produto'
+          Width = 380
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'preco'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'descricao'
+          Title.Caption = 'Pre'#231'o'
           Visible = True
         end>
     end
   end
-  object rbAgrupaCategoria: TRadioButton
+  object rbOrdenaCategoria: TRadioButton
     Left = 57
     Top = 88
     Width = 64
     Height = 17
     Caption = 'Categoria'
+    Checked = True
     TabOrder = 2
+    TabStop = True
+    OnClick = rbOrdenaCategoriaClick
   end
-  object rbAgrupaSemAgrupamento: TRadioButton
+  object rbOrdenaPreco: TRadioButton
     Left = 10
     Top = 88
     Width = 41
     Height = 17
-    Caption = 'Nada'
+    Caption = 'Pre'#231'o'
     TabOrder = 3
+    OnClick = rbOrdenaPrecoClick
+  end
+  object cbxAgurpar: TCheckBox
+    Left = 160
+    Top = 88
+    Width = 225
+    Height = 17
+    Caption = 'Agrupa por Categoria (Apenas Impress'#227'o)'
+    TabOrder = 4
   end
   object dsTodoProdutos: TDataSource
-    DataSet = fRelatorios.fdqTodosProdutos
+    DataSet = fdqTodosProdutos
     Left = 64
     Top = 8
   end
@@ -172,8 +134,529 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
-      'SELECT * FROM produtos')
+      'SELECT * FROM produtos'
+      'INNER JOIN categorias'
+      'ON produtos.categoria_id = categorias.id')
     Left = 16
     Top = 8
+  end
+  object frxDBProdutos: TfrxDBDataset
+    UserName = 'Produtos'
+    CloseDataSource = False
+    DataSet = fdqTodosProdutos
+    BCDToCurrency = False
+    Left = 400
+    Top = 8
+  end
+  object frxProdutos: TfrxReport
+    Version = '6.0.10'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43260.752307731500000000
+    ReportOptions.LastChange = 43261.715770960600000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 448
+    Top = 8
+    Datasets = <
+      item
+        DataSet = frxDBProdutos
+        DataSetName = 'Produtos'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Style = fsDot
+      Frame.Typ = []
+      Frame.BottomLine.Width = 2.000000000000000000
+      HGuides.Strings = (
+        '-20')
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 30.236240000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Align = baCenter
+          Width = 718.110700000000000000
+          Height = 30.236240000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Relat'#243'rio de Produtos')
+          ParentFont = False
+        end
+        object Date: TfrxMemoView
+          IndexTag = 1
+          Left = 616.063390000000000000
+          Top = 7.559060000000000000
+          Width = 98.267780000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+      end
+      object asasasasa: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 26.456710000000000000
+        Top = 154.960730000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBProdutos
+        DataSetName = 'Produtos'
+        RowCount = 0
+        object Produtosid: TfrxMemoView
+          IndexTag = 1
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
+          Width = 56.692950000000000000
+          Height = 18.897650000000000000
+          DataField = 'id'
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Produtos."id"]')
+          ParentFont = False
+        end
+        object Produtosnome: TfrxMemoView
+          IndexTag = 1
+          Left = 64.252010000000000000
+          Top = 3.779530000000000000
+          Width = 559.370440000000000000
+          Height = 18.897650000000000000
+          DataField = 'nome'
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Produtos."nome"]')
+          ParentFont = False
+        end
+        object Produtospreco: TfrxMemoView
+          IndexTag = 1
+          Left = 623.622450000000000000
+          Top = 3.779530000000000000
+          Width = 86.929190000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'R$ [Produtos."preco"]')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 109.606370000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          IndexTag = 1
+          Top = 3.779530000000000000
+          Width = 64.252010000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clGray
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          IndexTag = 1
+          Left = 64.252010000000000000
+          Top = 3.779530000000000000
+          Width = 559.370440000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clGray
+          Memo.UTF8W = (
+            'Nome')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          IndexTag = 1
+          Left = 623.622450000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clGray
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Pre'#231'o')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 287.244280000000000000
+        Width = 718.110700000000000000
+        object Page: TfrxMemoView
+          IndexTag = 1
+          Left = 680.315400000000000000
+          Width = 34.015770000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Page#]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 204.094620000000000000
+        Width = 718.110700000000000000
+      end
+    end
+  end
+  object frxProdutosPorCategoria: TfrxReport
+    Version = '6.0.10'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43260.752307731500000000
+    ReportOptions.LastChange = 43271.969628842600000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 448
+    Top = 64
+    Datasets = <
+      item
+        DataSet = frxDBProdutos
+        DataSetName = 'Produtos'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Style = fsDot
+      Frame.Typ = []
+      Frame.BottomLine.Width = 2.000000000000000000
+      HGuides.Strings = (
+        '-20')
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 71.811070000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Align = baCenter
+          Width = 718.110700000000000000
+          Height = 30.236240000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Relat'#243'rio de Produtos')
+          ParentFont = False
+        end
+        object Date: TfrxMemoView
+          IndexTag = 1
+          Left = 616.063390000000000000
+          Top = 7.559060000000000000
+          Width = 98.267780000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 34.015770000000000000
+          Width = 147.401670000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Agrupado por Categoria')
+        end
+      end
+      object asasasasa: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 26.456710000000000000
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBProdutos
+        DataSetName = 'Produtos'
+        RowCount = 0
+        object Produtosid: TfrxMemoView
+          IndexTag = 1
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
+          Width = 56.692950000000000000
+          Height = 18.897650000000000000
+          DataField = 'id'
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Produtos."id"]')
+          ParentFont = False
+        end
+        object Produtosnome: TfrxMemoView
+          IndexTag = 1
+          Left = 64.252010000000000000
+          Top = 3.779530000000000000
+          Width = 559.370440000000000000
+          Height = 18.897650000000000000
+          DataField = 'nome'
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Produtos."nome"]')
+          ParentFont = False
+        end
+        object Produtospreco: TfrxMemoView
+          IndexTag = 1
+          Left = 623.622450000000000000
+          Top = 3.779530000000000000
+          Width = 86.929190000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'R$ [Produtos."preco"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 328.819110000000000000
+        Width = 718.110700000000000000
+        object Page: TfrxMemoView
+          IndexTag = 1
+          Left = 680.315400000000000000
+          Width = 34.015770000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Page#]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 151.181200000000000000
+        Width = 718.110700000000000000
+        Child = frxProdutosPorCategoria.Child1
+        Condition = 'Produtos."id_1"'
+        object Produtosnome_1: TfrxMemoView
+          IndexTag = 1
+          Top = 3.779530000000000000
+          Width = 321.260050000000000000
+          Height = 18.897650000000000000
+          DataField = 'nome_1'
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Produtos."nome_1"]')
+        end
+      end
+      object Child1: TfrxChild
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 196.535560000000000000
+        Width = 718.110700000000000000
+        ToNRows = 0
+        ToNRowsMode = rmCount
+        object Memo2: TfrxMemoView
+          IndexTag = 1
+          Top = 3.779530000000000000
+          Width = 64.252010000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clGray
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          IndexTag = 1
+          Left = 623.622450000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clGray
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Pre'#231'o')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          IndexTag = 1
+          Left = 64.252010000000000000
+          Top = 3.779530000000000000
+          Width = 559.370440000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clGray
+          Memo.UTF8W = (
+            'Nome')
+          ParentFont = False
+        end
+      end
+    end
   end
 end

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.0.10" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43260,7523077315" ReportOptions.Description.Text="" ReportOptions.LastChange="43272,4013616551" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBProdutos" DataSetName="Produtos"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" Frame.Style="fsDot" Frame.Typ="0" Frame.BottomLine.Width="2" HGuides.Text="-20" VGuides.Text="">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="71,81107" Left="0" Top="18,89765" Width="718,1107">
+      <TfrxMemoView Name="Memo1" Align="baCenter" Left="0" Top="0" Width="718,1107" Height="30,23624" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="Relatório de Produtos"/>
+      <TfrxMemoView Name="Date" IndexTag="1" Left="616,06339" Top="7,55906" Width="98,26778" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="[Date]"/>
+      <TfrxMemoView Name="Memo5" Left="279,68522" Top="34,01577" Width="147,40167" Height="18,89765" Frame.Typ="0" Text="Agrupado por Categoria"/>
+    </TfrxReportTitle>
+    <TfrxMasterData Name="asasasasa" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="26,45671" Left="0" Top="241,88992" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBProdutos" DataSetName="Produtos" RowCount="0">
+      <TfrxMemoView Name="Produtosid" IndexTag="1" Left="7,55906" Top="3,77953" Width="56,69295" Height="18,89765" DataField="id" DataSet="frxDBProdutos" DataSetName="Produtos" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[Produtos.&#34;id&#34;]"/>
+      <TfrxMemoView Name="Produtosnome" IndexTag="1" Left="64,25201" Top="3,77953" Width="559,37044" Height="18,89765" DataField="nome" DataSet="frxDBProdutos" DataSetName="Produtos" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Text="[Produtos.&#34;nome&#34;]"/>
+      <TfrxMemoView Name="Produtospreco" IndexTag="1" Left="623,62245" Top="3,77953" Width="86,92919" Height="18,89765" DataSet="frxDBProdutos" DataSetName="Produtos" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="R$ [Produtos.&#34;preco&#34;]"/>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="18,89765" Left="0" Top="374,17347" Width="718,1107">
+      <TfrxMemoView Name="Page" IndexTag="1" Left="680,3154" Top="0" Width="34,01577" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haRight" ParentFont="False" Text="[Page#]"/>
+    </TfrxPageFooter>
+    <TfrxGroupHeader Name="GroupHeader1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="151,1812" Width="718,1107" Child="Child1" Condition="Produtos.&#34;id_1&#34;">
+      <TfrxMemoView Name="Produtosnome_1" IndexTag="1" Left="0" Top="3,77953" Width="321,26005" Height="18,89765" DataField="nome_1" DataSet="frxDBProdutos" DataSetName="Produtos" Frame.Typ="0" Text="[Produtos.&#34;nome_1&#34;]"/>
+    </TfrxGroupHeader>
+    <TfrxChild Name="Child1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="196,53556" Width="718,1107" ToNRows="0" ToNRowsMode="rmCount">
+      <TfrxMemoView Name="Memo2" IndexTag="1" Left="0" Top="3,77953" Width="64,25201" Height="18,89765" DataSet="frxDBProdutos" DataSetName="Produtos" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="8421504" ParentFont="False" Text="Código"/>
+      <TfrxMemoView Name="Memo4" IndexTag="1" Left="623,62245" Top="3,77953" Width="94,48825" Height="18,89765" DataSet="frxDBProdutos" DataSetName="Produtos" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="8421504" HAlign="haRight" ParentFont="False" Text="Preço"/>
+      <TfrxMemoView Name="Memo3" IndexTag="1" Left="64,25201" Top="3,77953" Width="559,37044" Height="18,89765" DataSet="frxDBProdutos" DataSetName="Produtos" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="8421504" ParentFont="False" Text="Nome"/>
+    </TfrxChild>
+    <TfrxGroupFooter Name="GroupFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="291,02381" Width="718,1107">
+      <TfrxMemoView Name="Memo6" Left="650,07916" Top="3,77953" Width="68,03154" Height="18,89765" Frame.Typ="0" Highlight.Font.Charset="1" Highlight.Font.Color="255" Highlight.Font.Height="-13" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Condition="SUN &#60;Produtos.&#34;preco&#34;&#62;" Highlight.FillType="ftBrush" Highlight.Frame.Typ="0" Text="Total:"/>
+      <TfrxLineView Name="Line1" Left="15,11812" Top="3,77953" Width="691,65399" Height="0" Color="0" Frame.Typ="0" Diagonal="True"/>
+    </TfrxGroupFooter>
+  </TfrxReportPage>
+</TfrxReport>

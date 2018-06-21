@@ -138,10 +138,6 @@
             <Form>fNovoPedido</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uRelatorio.pas">
-            <Form>fRelatorios</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="uOpcaoRelatorioProdutos.pas">
             <Form>fOpcaoRelatorioProduto</Form>
             <FormType>dfm</FormType>

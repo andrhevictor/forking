@@ -4,26 +4,11 @@ Coordinates=211,188,68,58
 [DBGrid1]
 Coordinates=87,256,64,36
 
-[lblAte]
-Coordinates=410,188,49,58
-
-[dtmFinal]
-Coordinates=137,188,64,58
-
 [panelMid]
 Coordinates=10,256,67,58
 
-[dtmInicial]
-Coordinates=369,10,69,58
-
 [btnGerarRelatorio]
 Coordinates=10,188,117,58
-
-[fRelatorios.fdqTodosProdutos]
-Coordinates=10,10,185,168
-
-[Label1]
-Coordinates=306,10,53,58
 
 [fPrincipal.fdqInserePedido]
 Coordinates=448,10,165,58
@@ -32,6 +17,9 @@ Coordinates=448,10,165,58
 Coordinates=289,188,111,58
 
 []
-Coordinates=205,10,91,58
+Coordinates=410,188,49,58
 Visible=True
+
+[fRelatorios.]
+Coordinates=10,10,185,168
 
