@@ -24,6 +24,7 @@ type
     procedure btnEntrarClick(Sender: TObject);
     function GetUsuarioId: Integer;
     function GetNivelAcesso: Integer;
+    function usuarioBloqueado() : Boolean;
   private
     usuario_id:   Integer;
     nivel_acesso: Integer;
@@ -50,6 +51,16 @@ begin
   Result := fLogin.usuario_id;
 end;
 
+function TfLogin.usuarioBloqueado: Boolean;
+begin
+  fdqUsuario.SQL.Clear;
+  fdqUsuario.SQL.Add('SELECT bloqueado FROM usuarios WHERE id = :id');
+  fdqUsuario.ParamByName('id').Value := fLogin.GetUsuarioId;
+  fdqUsuario.Open();
+
+  Result := fdqUsuario.FieldByName('bloqueado').AsBoolean;
+end;
+
 procedure TfLogin.btnEntrarClick(Sender: TObject);
   var
     n: Integer;
@@ -59,6 +70,7 @@ begin
     senha   := uMd5.MD5String(edtSenha.Text);
     usuario := edtUsuario.Text;
 
+    fdqUsuario.SQL.Clear;
     fdqUsuario.SQL.Text := 'SELECT * FROM usuarios WHERE login = :usuario AND senha = :senha';
     fdqUsuario.Params.ParamByName('usuario').Value := usuario;
     fdqUsuario.Params.ParamByName('senha').Value   := senha;
@@ -71,7 +83,14 @@ begin
       usuario_id   := fdqUsuario.FieldByName('id').AsInteger;
       nivel_acesso := fdqUsuario.FieldByName('nivel_acesso').AsInteger;
 
-      fPrincipal.Show();
+      if fLogin.usuarioBloqueado then begin
+        ShowMessage('Usuário bloqueado! Entre em contato com o administrador.');
+      end
+      else begin
+        fPrincipal.Show();
+      end;
+
+
     end
     else begin
       ShowMessage('Usuario ou senha invalido!');
