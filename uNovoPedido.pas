@@ -126,10 +126,7 @@ if Application.MessageBox(PChar(textoMsg),'Excluir item',mb_yesno + mb_iconquest
       fNovoPedido.deletaItemPedido(itemId);
       fNovoPedido.atualizaGridItens();
       fNovoPedido.recalculaValorPedido();
-    End
-    else begin
-      ShowMessage('nao');
-    end;
+    End;
 end;
 
 procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
