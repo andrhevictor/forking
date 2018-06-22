@@ -44,6 +44,8 @@ type
     procedure deletaTodosItemsByPedido(idPedido: Integer);
     procedure deletaPedido(idPedido: Integer);
     procedure atualizaFichaDisponivel(ficha: Integer);
+    procedure atualizaPedidoWithFicha(ficha, pedido: Integer);
+    procedure atualizaQuantidadeValorItem(quantidade: Double);
     Function getFichaDisponivel(ficha: Integer) : Boolean;
   private
   public
@@ -89,16 +91,11 @@ begin
 
     ficha := fichaInput.ToInteger();
       if (fNovoPedido.getFichaDisponivel(ficha)) then begin
-        fdqAtualizaPedido.SQL.Clear;
-        fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
-        fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
-        fdqAtualizaPedido.ParamByName('ficha').Value := ficha;
-        fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
-        fdqAtualizaPedido.ExecSQL;
 
+        fNovoPedido.atualizaPedidoWithFicha(ficha, idPedido);
         fNovoPedido.atualizaFichaDisponivel(ficha);
 
-        ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + ficha);
+        ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + fichaInput);
         fNovoPedido.Close;
       end
       else begin
@@ -106,7 +103,7 @@ begin
       end;
   end
   else begin
-    ShowMessage('FAZ ALGO(OU NÃO)');
+    ShowMessage('Para salvar o pedido, é necessário informar a ficha!');
   end;
   end;
 
@@ -163,14 +160,7 @@ begin
 
   end;
   fNovoPedido.atualizaGridItens();
-
- fdqSomaItens.SQL.Clear;
- fdqSomaItens.SQL.Add('SELECT SUM(valor_total) AS soma FROM pedidos_itens WHERE pedido_id = :idPedido');
- fdqSomaItens.ParamByName('idPedido').Value := idPedido;
- fdqSomaItens.Open();
- soma := fdqSomaItens.FieldByName('soma').AsFloat;
- lblValor.Caption := 'Valor Total: R$ ' + soma.ToString;
-
+  fNovoPedido.recalculaValorPedido();
 end;
 
 procedure TfNovoPedido.dbgCategoriaCellClick(Column: TColumn);
@@ -187,41 +177,14 @@ end;
 
 procedure TfNovoPedido.dbgItensPedidoDblClick(Sender: TObject);
 var
-  idPedido:       Integer;
-  item_id:        Integer;
-  produto_id:     Integer;
-  preco_unitario: Currency;
-  valor_total:    Double;
-  quantidade:     String;
-  soma:           Double;
+  quantidadeInput: String;
+  quantidade:      Double;
 begin
-  idPedido := fPrincipal.GetPedidoId;
-  item_id  := dbgItensPedido.DataSource.DataSet.FieldByName('id').AsInteger;
+  quantidadeInput := dbgItensPedido.DataSource.DataSet.FieldByName('quantidade').AsString;
 
-  ShowMessage(item_id.ToString);
-
-  quantidade := dbgItensPedido.DataSource.DataSet.FieldByName('quantidade').AsString;
-  if InputQuery('Quantidade', 'Insira a quantidade', quantidade) then begin
-    produto_id  := dbgItensPedido.DataSource.DataSet.FieldByName('produto_id').AsInteger;
-    fdqAtualizaPedido.SQL.Clear;
-    fdqAtualizaPedido.SQL.Add('SELECT * FROM produtos WHERE id = :produto');
-    fdqAtualizaPedido.ParamByName('produto').Value := produto_id;
-    fdqAtualizaPedido.Open();
-
-    preco_unitario := fdqAtualizaPedido.FieldByName('preco').AsCurrency;
-    valor_total := preco_unitario * quantidade.ToDouble;
-
-    fdqAtualizaPedido.SQL.Clear;
-    fdqAtualizaPedido.SQL.Add('UPDATE pedidos_itens SET valor_total = :valorTotal, quantidade = :quantidade');
-    fdqAtualizaPedido.SQL.Add('WHERE pedido_id = :pedido');
-    fdqAtualizaPedido.SQL.Add('AND id = :item_id');
-    fdqAtualizaPedido.ParamByName('valorTotal').Value := valor_total;
-    fdqAtualizaPedido.ParamByName('quantidade').Value := quantidade.ToDouble;
-    fdqAtualizaPedido.ParamByName('pedido').Value     := idPedido;
-    fdqAtualizaPedido.ParamByName('item_id').Value    := item_id;
-    fdqAtualizaPedido.ExecSQL;
-    fdqAtualizaPedido.SQL.Clear;
-
+  if InputQuery('Quantidade', 'Insira a quantidade', quantidadeInput) then begin
+    quantidade := quantidadeInput.ToDouble();
+    fNovoPedido.atualizaQuantidadeValorItem(quantidade);
     fNovoPedido.atualizaGridItens();
     fNovoPedido.recalculaValorPedido();
   end;
@@ -248,6 +211,48 @@ begin
   fdqItensPedido.SQL.Add('ORDER BY itens.id');
   fdqItensPedido.ParamByName('idPedido').Value := idPedido;
   fdqItensPedido.Open();
+end;
+
+procedure TfNovoPedido.atualizaPedidoWithFicha(ficha, pedido: Integer);
+begin
+  fdqAtualizaPedido.SQL.Clear;
+  fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
+  fdqAtualizaPedido.ParamByName('ficha').Value := ficha;
+  fdqAtualizaPedido.ParamByName('pedido').Value := pedido;
+  fdqAtualizaPedido.ExecSQL;
+end;
+
+procedure TfNovoPedido.atualizaQuantidadeValorItem(quantidade: Double);
+var
+  idPedido:       Integer;
+  item_id:        Integer;
+  produto_id:     Integer;
+  preco_unitario: Currency;
+  valor_total:    Double;
+  soma:           Double;
+begin
+    idPedido := fPrincipal.GetPedidoId;
+    item_id  := dbgItensPedido.DataSource.DataSet.FieldByName('id').AsInteger;
+
+    produto_id  := dbgItensPedido.DataSource.DataSet.FieldByName('produto_id').AsInteger;
+    fdqAtualizaPedido.SQL.Clear;
+    fdqAtualizaPedido.SQL.Add('SELECT * FROM produtos WHERE id = :produto');
+    fdqAtualizaPedido.ParamByName('produto').Value := produto_id;
+    fdqAtualizaPedido.Open();
+
+    preco_unitario := fdqAtualizaPedido.FieldByName('preco').AsCurrency;
+    valor_total := preco_unitario * quantidade;
+
+    fdqAtualizaPedido.SQL.Clear;
+    fdqAtualizaPedido.SQL.Add('UPDATE pedidos_itens SET valor_total = :valorTotal, quantidade = :quantidade');
+    fdqAtualizaPedido.SQL.Add('WHERE pedido_id = :pedido');
+    fdqAtualizaPedido.SQL.Add('AND id = :item_id');
+    fdqAtualizaPedido.ParamByName('valorTotal').Value := valor_total;
+    fdqAtualizaPedido.ParamByName('quantidade').Value := quantidade;
+    fdqAtualizaPedido.ParamByName('pedido').Value     := idPedido;
+    fdqAtualizaPedido.ParamByName('item_id').Value    := item_id;
+    fdqAtualizaPedido.ExecSQL;
+    fdqAtualizaPedido.SQL.Clear;
 end;
 
 procedure TfNovoPedido.deletaItemPedido(idItem: Integer);
