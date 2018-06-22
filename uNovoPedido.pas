@@ -38,6 +38,13 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnDeletaItemClick(Sender: TObject);
     procedure dbgItensPedidoDblClick(Sender: TObject);
+    procedure recalculaValorPedido();
+    procedure atualizaGridItens();
+    procedure deletaItemPedido(idItem: Integer);
+    procedure deletaTodosItemsByPedido(idPedido: Integer);
+    procedure deletaPedido(idPedido: Integer);
+    procedure atualizaFichaDisponivel(ficha: Integer);
+    Function getFichaDisponivel(ficha: Integer) : Boolean;
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
@@ -60,31 +67,17 @@ begin
 
   if Application.MessageBox('Você deseja realmente cancelar o pedido?','Cancelar o pedido',mb_yesno + mb_iconquestion) = id_yes then
     Begin
-      fdqDeletePedido.SQL.Clear;
-      fdqDeletePedido.SQL.Add('DELETE FROM pedidos_itens');
-      fdqDeletePedido.SQL.Add('WHERE pedido_id = :pedido');
-      fdqDeletePedido.ParamByName('pedido').Value := idPedido;
-      fdqDeletePedido.ExecSQL;
-
-      fdqDeletePedido.SQL.Clear;
-      fdqDeletePedido.SQL.Add('DELETE FROM pedidos');
-      fdqDeletePedido.SQL.Add('WHERE id = :pedido');
-      fdqDeletePedido.ParamByName('pedido').Value := idPedido;
-      fdqDeletePedido.ExecSQL;
-      fdqDeletePedido.Close;
-
+      fNovoPedido.deletaTodosItemsByPedido(idPedido);
+      fNovoPedido.deletaPedido(idPedido);
       fNovoPedido.Close;
-    End
-  else
-    Begin
-
     End;
 end;
 
 procedure TfNovoPedido.btnSalvarClick(Sender: TObject);
 var
-  ficha: String;
-  idPedido: Integer;
+  fichaInput: String;
+  ficha:      Integer;
+  idPedido:   Integer;
 begin
   idPedido := fPrincipal.GetPedidoId;
 
@@ -92,32 +85,25 @@ begin
     ShowMessage('O pedido precisa ter ao menos um item para ser salvo!');
   end
   else begin
-    if InputQuery('Ficha', 'Insira o número da ficha', ficha) then begin
-    fdqFichaDisponivel.SQL.Clear;
-    fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
-    fdqFichaDisponivel.SQL.Add('WHERE numero_ficha = :ficha');
-    fdqFichaDisponivel.SQL.Add('AND disponivel = true');
-    fdqFichaDisponivel.ParamByName('ficha').Value := ficha.ToInteger();
-    fdqFichaDisponivel.Open();
-    if (fdqFichaDisponivel.RecordCount > 0) then begin
-      fdqAtualizaPedido.SQL.Clear;
-      fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
-      fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
-      fdqAtualizaPedido.ParamByName('ficha').Value := ficha.ToInteger();
-      fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
-      fdqAtualizaPedido.ExecSQL;
+    if InputQuery('Ficha', 'Insira o número da ficha', fichaInput) then begin
 
-      fdqFichaDisponivel.SQL.Clear;
-      fdqFichaDisponivel.SQL.Add('UPDATE fichas SET disponivel = false WHERE id = :ficha');
-      fdqFichaDisponivel.ParamByName('ficha').Value := ficha.ToInteger();
-      fdqFichaDisponivel.ExecSQL;
+    ficha := fichaInput.ToInteger();
+      if (fNovoPedido.getFichaDisponivel(ficha)) then begin
+        fdqAtualizaPedido.SQL.Clear;
+        fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
+        fdqAtualizaPedido.SQL.Add('UPDATE pedidos SET numero_ficha = :ficha WHERE id = :pedido');
+        fdqAtualizaPedido.ParamByName('ficha').Value := ficha;
+        fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
+        fdqAtualizaPedido.ExecSQL;
 
-      ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + ficha);
-      fNovoPedido.Close;
-    end
-    else begin
-      ShowMessage('Essa ficha não está dísponivel!');
-    end;
+        fNovoPedido.atualizaFichaDisponivel(ficha);
+
+        ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + ficha);
+        fNovoPedido.Close;
+      end
+      else begin
+        ShowMessage('Essa ficha não está dísponivel!');
+      end;
   end
   else begin
     ShowMessage('FAZ ALGO(OU NÃO)');
@@ -128,11 +114,25 @@ end;
 
 procedure TfNovoPedido.btnDeletaItemClick(Sender: TObject);
 var
-  itemId: Integer;
+  itemNome: String;
+  textoMsg: String;
+  quantidade: String;
+  itemId:   Integer;
 begin
-  itemId := dbgItensPedido.DataSource.DataSet.FieldByName('id').AsInteger;
-//  ShowMessage(IntToStr(itemId));
-    ShowMessage(dbgItensPedido.SelectedRows.Count.ToString);
+  itemId     := dbgItensPedido.DataSource.DataSet.FieldByName('id').AsInteger;
+  quantidade := dbgItensPedido.DataSource.DataSet.FieldByName('quantidade').AsString;
+  itemNome   := dbgItensPedido.DataSource.DataSet.FieldByName('nome').AsString;
+  textoMsg   := 'Deseja realmente deletar ' + quantidade + ' ' + itemNome + '(s) do pedido?';
+
+if Application.MessageBox(PChar(textoMsg),'Excluir item',mb_yesno + mb_iconquestion) = id_yes then
+    Begin
+      fNovoPedido.deletaItemPedido(itemId);
+      fNovoPedido.atualizaGridItens();
+      fNovoPedido.recalculaValorPedido();
+    End
+    else begin
+      ShowMessage('nao');
+    end;
 end;
 
 procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
@@ -162,14 +162,7 @@ begin
     fdqItensPedido.ExecSQL;
 
   end;
-  fdqItensPedido.SQL.Clear;
-  fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens AS itens');
-  fdqItensPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
-  fdqItensPedido.SQL.Add('WHERE pedido_id = :idPedido');
-  fdqItensPedido.SQL.Add('ORDER BY itens.id');
-  fdqItensPedido.ParamByName('idPedido').Value := idPedido;
-  fdqItensPedido.Open();
-
+  fNovoPedido.atualizaGridItens();
 
  fdqSomaItens.SQL.Clear;
  fdqSomaItens.SQL.Add('SELECT SUM(valor_total) AS soma FROM pedidos_itens WHERE pedido_id = :idPedido');
@@ -229,22 +222,86 @@ begin
     fdqAtualizaPedido.ExecSQL;
     fdqAtualizaPedido.SQL.Clear;
 
-    fdqItensPedido.SQL.Clear;
-    fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens AS itens');
-    fdqItensPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
-    fdqItensPedido.SQL.Add('WHERE pedido_id = :idPedido');
-    fdqItensPedido.SQL.Add('ORDER BY itens.id');
-    fdqItensPedido.ParamByName('idPedido').Value := idPedido;
-    fdqItensPedido.Open();
-
-
-   fdqSomaItens.SQL.Clear;
-   fdqSomaItens.SQL.Add('SELECT SUM(valor_total) AS soma FROM pedidos_itens WHERE pedido_id = :idPedido');
-   fdqSomaItens.ParamByName('idPedido').Value := idPedido;
-   fdqSomaItens.Open();
-   soma := fdqSomaItens.FieldByName('soma').AsFloat;
-   lblValor.Caption := 'Valor Total: R$ ' + soma.ToString;
+    fNovoPedido.atualizaGridItens();
+    fNovoPedido.recalculaValorPedido();
   end;
+end;
+
+procedure TfNovoPedido.atualizaFichaDisponivel(ficha: Integer);
+begin
+  fdqFichaDisponivel.SQL.Clear;
+  fdqFichaDisponivel.SQL.Add('UPDATE fichas SET disponivel = false WHERE id = :ficha');
+  fdqFichaDisponivel.ParamByName('ficha').Value := ficha;
+  fdqFichaDisponivel.ExecSQL;
+end;
+
+procedure TfNovoPedido.atualizaGridItens();
+var
+  idPedido: Integer;
+begin
+  idPedido := fPrincipal.GetPedidoId;
+
+  fdqItensPedido.SQL.Clear;
+  fdqItensPedido.SQL.Add('SELECT * FROM pedidos_itens AS itens');
+  fdqItensPedido.SQL.Add('INNER JOIN produtos ON produtos.id = itens.produto_id');
+  fdqItensPedido.SQL.Add('WHERE pedido_id = :idPedido');
+  fdqItensPedido.SQL.Add('ORDER BY itens.id');
+  fdqItensPedido.ParamByName('idPedido').Value := idPedido;
+  fdqItensPedido.Open();
+end;
+
+procedure TfNovoPedido.deletaItemPedido(idItem: Integer);
+begin
+  fdqAtualizaPedido.SQL.Clear;
+  fdqAtualizaPedido.SQL.Add('DELETE FROM pedidos_itens WHERE id = :item');
+  fdqAtualizaPedido.ParamByName('item').Value := idItem;
+  fdqAtualizaPedido.ExecSQL();
+end;
+
+procedure TfNovoPedido.deletaPedido(idPedido: Integer);
+begin
+  fdqDeletePedido.SQL.Clear;
+  fdqDeletePedido.SQL.Add('DELETE FROM pedidos');
+  fdqDeletePedido.SQL.Add('WHERE id = :pedido');
+  fdqDeletePedido.ParamByName('pedido').Value := idPedido;
+  fdqDeletePedido.ExecSQL;
+  fdqDeletePedido.Close;
+end;
+
+procedure TfNovoPedido.deletaTodosItemsByPedido(idPedido: Integer);
+begin
+  fdqDeletePedido.SQL.Clear;
+  fdqDeletePedido.SQL.Add('DELETE FROM pedidos_itens');
+  fdqDeletePedido.SQL.Add('WHERE pedido_id = :pedido');
+  fdqDeletePedido.ParamByName('pedido').Value := idPedido;
+  fdqDeletePedido.ExecSQL;
+end;
+
+Function TfNovoPedido.getFichaDisponivel(ficha: Integer) : Boolean;
+begin
+  fdqFichaDisponivel.SQL.Clear;
+  fdqFichaDisponivel.SQL.Add('SELECT * FROM fichas');
+  fdqFichaDisponivel.SQL.Add('WHERE numero_ficha = :ficha');
+  fdqFichaDisponivel.SQL.Add('AND disponivel = true');
+  fdqFichaDisponivel.ParamByName('ficha').Value := ficha;
+  fdqFichaDisponivel.Open();
+
+  Result := fdqFichaDisponivel.RecordCount > 0;
+end;
+
+procedure TfNovoPedido.recalculaValorPedido();
+var
+  idPedido: Integer;
+  soma:     Double;
+begin
+  idPedido := fPrincipal.GetPedidoId;
+
+  fdqSomaItens.SQL.Clear;
+  fdqSomaItens.SQL.Add('SELECT SUM(valor_total) AS soma FROM pedidos_itens WHERE pedido_id = :idPedido');
+  fdqSomaItens.ParamByName('idPedido').Value := idPedido;
+  fdqSomaItens.Open();
+  soma := fdqSomaItens.FieldByName('soma').AsFloat;
+  lblValor.Caption := 'Valor Total: R$ ' + soma.ToString;
 end;
 
 end.
