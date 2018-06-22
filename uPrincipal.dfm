@@ -101,6 +101,10 @@ object fPrincipal: TfPrincipal
         Caption = 'Adicionar Usuario'
         OnClick = AdicionarUsuario1Click
       end
+      object VisualizarUsurios1: TMenuItem
+        Caption = 'Visualizar Usu'#225'rios'
+        OnClick = VisualizarUsurios1Click
+      end
     end
     object Sobre1: TMenuItem
       Caption = 'Sobre   '
