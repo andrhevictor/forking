@@ -93,7 +93,8 @@ begin
    if filtro <> '' then begin
       fdqProdutos.SQL.Clear;
       fdqProdutos.SQL.Add(' SELECT * FROM produtos' );
-      fdqProdutos.SQL.Add(' WHERE UPPER(nome) LIKE ' + QuotedStr('%'+ filtro + '%'));
+      fdqProdutos.SQL.Add(' WHERE UPPER(nome) LIKE :filtro');
+      fdqProdutos.ParamByName('filtro').Value := '%'+ filtro + '%';
       fdqProdutos.Open();
    end
    else begin
