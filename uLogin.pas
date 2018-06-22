@@ -3,7 +3,8 @@ unit uLogin;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
@@ -24,9 +25,9 @@ type
     procedure btnEntrarClick(Sender: TObject);
     function GetUsuarioId: Integer;
     function GetNivelAcesso: Integer;
-    function usuarioBloqueado() : Boolean;
+    function usuarioBloqueado(): Boolean;
   private
-    usuario_id:   Integer;
+    usuario_id: Integer;
     nivel_acesso: Integer;
   public
     { Public declarations }
@@ -62,40 +63,43 @@ begin
 end;
 
 procedure TfLogin.btnEntrarClick(Sender: TObject);
-  var
-    n: Integer;
-    senha: String;
-    usuario: String;
+var
+  n: Integer;
+  senha: String;
+  usuario: String;
 begin
-    senha   := uMd5.MD5String(edtSenha.Text);
-    usuario := edtUsuario.Text;
+  senha := uMd5.MD5String(edtSenha.Text);
+  usuario := edtUsuario.Text;
 
-    fdqUsuario.SQL.Clear;
-    fdqUsuario.SQL.Text := 'SELECT * FROM usuarios WHERE login = :usuario AND senha = :senha';
-    fdqUsuario.Params.ParamByName('usuario').Value := usuario;
-    fdqUsuario.Params.ParamByName('senha').Value   := senha;
+  fdqUsuario.SQL.Clear;
+  fdqUsuario.SQL.Text :=
+    'SELECT * FROM usuarios WHERE login = :usuario AND senha = :senha';
+  fdqUsuario.Params.ParamByName('usuario').Value := usuario;
+  fdqUsuario.Params.ParamByName('senha').Value := senha;
 
-    fdqUsuario.Open;
+  fdqUsuario.Open;
 
-    n := fdqUsuario.RecordCount;
+  n := fdqUsuario.RecordCount;
 
-    if(n > 0) then begin
-      usuario_id   := fdqUsuario.FieldByName('id').AsInteger;
-      nivel_acesso := fdqUsuario.FieldByName('nivel_acesso').AsInteger;
+  if (n > 0) then
+  begin
+    usuario_id := fdqUsuario.FieldByName('id').AsInteger;
+    nivel_acesso := fdqUsuario.FieldByName('nivel_acesso').AsInteger;
 
-      if fLogin.usuarioBloqueado then begin
-        ShowMessage('Usuário bloqueado! Entre em contato com o administrador.');
-      end
-      else begin
-        fPrincipal.Show();
-      end;
-
-
+    if fLogin.usuarioBloqueado then
+    begin
+      ShowMessage('Usuário bloqueado! Entre em contato com o administrador.');
     end
-    else begin
-      ShowMessage('Usuario ou senha invalido!');
-    end
+    else
+    begin
+      fPrincipal.Show();
+    end;
 
+  end
+  else
+  begin
+    ShowMessage('Usuario ou senha invalido!');
+  end
 
 end;
 

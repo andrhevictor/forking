@@ -2,8 +2,8 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
   Left = 0
   Top = 0
   Caption = 'Filtros Relat'#243'rio de Produtos'
-  ClientHeight = 279
-  ClientWidth = 566
+  ClientHeight = 414
+  ClientWidth = 579
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,12 +16,12 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 566
+    Width = 579
     Height = 43
     Align = alTop
     TabOrder = 0
     DesignSize = (
-      566
+      579
       43)
     object lblTituloRelatorio: TLabel
       Left = 184
@@ -38,36 +38,22 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       Font.Style = []
       ParentFont = False
     end
-    object btnGerarRelatorio: TButton
-      Left = 480
-      Top = 3
-      Width = 75
-      Height = 35
-      Caption = 'Gerar'
-      TabOrder = 0
-      OnClick = btnGerarRelatorioClick
-    end
   end
   object panelMid: TPanel
     Left = 0
     Top = 43
-    Width = 566
-    Height = 236
+    Width = 579
+    Height = 371
     Align = alClient
     TabOrder = 1
-    object lblAgrupar: TLabel
-      Left = 10
-      Top = 29
-      Width = 63
-      Height = 13
-      Caption = 'Ordenar por:'
-    end
     object DBGrid1: TDBGrid
       Left = 0
-      Top = 68
-      Width = 566
-      Height = 165
+      Top = 87
+      Width = 579
+      Height = 285
       DataSource = dsTodoProdutos
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -86,7 +72,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           Expanded = False
           FieldName = 'nome'
           Title.Caption = 'Produto'
-          Width = 380
+          Width = 393
           Visible = True
         end
         item
@@ -96,39 +82,73 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           Visible = True
         end>
     end
-  end
-  object rbOrdenaCategoria: TRadioButton
-    Left = 57
-    Top = 88
-    Width = 64
-    Height = 17
-    Caption = 'Categoria'
-    Checked = True
-    TabOrder = 2
-    TabStop = True
-    OnClick = rbOrdenaCategoriaClick
-  end
-  object rbOrdenaPreco: TRadioButton
-    Left = 10
-    Top = 88
-    Width = 41
-    Height = 17
-    Caption = 'Pre'#231'o'
-    TabOrder = 3
-    OnClick = rbOrdenaPrecoClick
-  end
-  object cbxAgurpar: TCheckBox
-    Left = 160
-    Top = 88
-    Width = 225
-    Height = 17
-    Caption = 'Agrupa por Categoria (Apenas Impress'#227'o)'
-    TabOrder = 4
+    object gbImpressao: TGroupBox
+      Left = 416
+      Top = 1
+      Width = 153
+      Height = 80
+      Caption = 'Impress'#227'o'
+      TabOrder = 1
+      object btnGerarRelatorio: TButton
+        Left = 15
+        Top = 43
+        Width = 129
+        Height = 25
+        Caption = 'Gerar'
+        TabOrder = 0
+        OnClick = btnGerarRelatorioClick
+      end
+      object cbxAgurpar: TCheckBox
+        Left = 20
+        Top = 20
+        Width = 121
+        Height = 17
+        Caption = 'Agrupa por Categoria'
+        TabOrder = 1
+      end
+    end
+    object gbGridOrdenacao: TGroupBox
+      Left = 3
+      Top = 6
+      Width = 291
+      Height = 75
+      Caption = 'Ordena por:'
+      TabOrder = 2
+      object rbOrdenaCategoria: TRadioButton
+        Left = 15
+        Top = 23
+        Width = 64
+        Height = 17
+        Caption = 'Categoria'
+        Checked = True
+        TabOrder = 0
+        TabStop = True
+        OnClick = rbOrdenaCategoriaClick
+      end
+      object rbOrdenaPreco: TRadioButton
+        Left = 15
+        Top = 46
+        Width = 50
+        Height = 17
+        Caption = 'Pre'#231'o'
+        TabOrder = 1
+        OnClick = rbOrdenaPrecoClick
+      end
+      object rbProdutoMaisVendido: TRadioButton
+        Left = 101
+        Top = 23
+        Width = 84
+        Height = 17
+        Caption = 'Mais Vendidos'
+        TabOrder = 2
+        OnClick = rbProdutoMaisVendidoClick
+      end
+    end
   end
   object dsTodoProdutos: TDataSource
     DataSet = fdqTodosProdutos
-    Left = 64
-    Top = 8
+    Left = 344
+    Top = 192
   end
   object fdqTodosProdutos: TFDQuery
     Active = True
@@ -136,17 +156,55 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     SQL.Strings = (
       'SELECT * FROM produtos'
       'INNER JOIN categorias'
-      'ON produtos.categoria_id = categorias.id')
-    Left = 16
-    Top = 8
+      'ON produtos.categoria_id = categorias.id'
+      'ORDER BY categoria_id')
+    Left = 264
+    Top = 192
+    object fdqTodosProdutosid: TLargeintField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object fdqTodosProdutoscategoria_id: TLargeintField
+      FieldName = 'categoria_id'
+      Origin = 'categoria_id'
+    end
+    object fdqTodosProdutosnome: TWideStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 100
+    end
+    object fdqTodosProdutospreco: TBCDField
+      FieldName = 'preco'
+      Origin = 'preco'
+      DisplayFormat = '0.00'
+      Precision = 6
+      Size = 2
+    end
+    object fdqTodosProdutosdescricao: TWideStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 8190
+    end
+    object fdqTodosProdutosid_1: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_1'
+      Origin = 'id'
+    end
+    object fdqTodosProdutosnome_1: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome_1'
+      Origin = 'nome'
+      Size = 40
+    end
   end
   object frxDBProdutos: TfrxDBDataset
     UserName = 'Produtos'
     CloseDataSource = False
     DataSet = fdqTodosProdutos
     BCDToCurrency = False
-    Left = 400
-    Top = 8
+    Left = 264
+    Top = 144
   end
   object frxProdutos: TfrxReport
     Version = '6.0.10'
@@ -157,14 +215,14 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43260.752307731500000000
-    ReportOptions.LastChange = 43261.715770960600000000
+    ReportOptions.LastChange = 43273.545682384260000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 448
-    Top = 8
+    Left = 344
+    Top = 144
     Datasets = <
       item
         DataSet = frxDBProdutos
@@ -192,7 +250,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 30.236240000000000000
+        Height = 45.354360000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
@@ -212,10 +270,12 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         end
         object Date: TfrxMemoView
           IndexTag = 1
-          Left = 616.063390000000000000
+          Left = 529.134200000000000000
           Top = 7.559060000000000000
-          Width = 98.267780000000000000
+          Width = 185.196970000000000000
           Height = 18.897650000000000000
+          DisplayFormat.FormatStr = 'mm/dd/yyyy'
+          DisplayFormat.Kind = fkDateTime
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -224,24 +284,22 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (
-            '[Date]')
+            'Gera em [Date]')
           ParentFont = False
         end
       end
       object asasasasa: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
-        Top = 154.960730000000000000
+        Height = 18.897650000000000000
+        Top = 166.299320000000000000
         Width = 718.110700000000000000
         DataSet = frxDBProdutos
         DataSetName = 'Produtos'
         RowCount = 0
         object Produtosid: TfrxMemoView
           IndexTag = 1
-          Left = 7.559060000000000000
-          Top = 3.779530000000000000
-          Width = 56.692950000000000000
+          Width = 64.252010000000000000
           Height = 18.897650000000000000
           DataField = 'id'
           DataSet = frxDBProdutos
@@ -258,9 +316,8 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         end
         object Produtosnome: TfrxMemoView
           IndexTag = 1
-          Left = 64.252010000000000000
-          Top = 3.779530000000000000
-          Width = 559.370440000000000000
+          Left = 192.756030000000000000
+          Width = 430.866420000000000000
           Height = 18.897650000000000000
           DataField = 'nome'
           DataSet = frxDBProdutos
@@ -278,11 +335,12 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         object Produtospreco: TfrxMemoView
           IndexTag = 1
           Left = 623.622450000000000000
-          Top = 3.779530000000000000
-          Width = 86.929190000000000000
+          Width = 94.488250000000000000
           Height = 18.897650000000000000
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -291,79 +349,27 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (
-            'R$ [Produtos."preco"]')
+            '[Produtos."preco"]')
           ParentFont = False
         end
-      end
-      object Header1: TfrxHeader
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 109.606370000000000000
-        Width = 718.110700000000000000
-        object Memo2: TfrxMemoView
-          IndexTag = 1
-          Top = 3.779530000000000000
-          Width = 64.252010000000000000
-          Height = 18.897650000000000000
-          DataSet = frxDBProdutos
-          DataSetName = 'Produtos'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Fill.BackColor = clGray
-          Memo.UTF8W = (
-            'C'#243'digo')
-          ParentFont = False
-        end
-        object Memo3: TfrxMemoView
+        object Produtosnome_1: TfrxMemoView
           IndexTag = 1
           Left = 64.252010000000000000
-          Top = 3.779530000000000000
-          Width = 559.370440000000000000
+          Width = 128.504020000000000000
           Height = 18.897650000000000000
+          DataField = 'nome_1'
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
           Memo.UTF8W = (
-            'Nome')
-          ParentFont = False
-        end
-        object Memo4: TfrxMemoView
-          IndexTag = 1
-          Left = 623.622450000000000000
-          Top = 3.779530000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
-          DataSet = frxDBProdutos
-          DataSetName = 'Produtos'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Fill.BackColor = clGray
-          HAlign = haRight
-          Memo.UTF8W = (
-            'Pre'#231'o')
-          ParentFont = False
+            '[Produtos."nome_1"]')
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 287.244280000000000000
+        Top = 291.023810000000000000
         Width = 718.110700000000000000
         object Page: TfrxMemoView
           IndexTag = 1
@@ -382,12 +388,116 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           ParentFont = False
         end
       end
-      object GroupHeader1: TfrxGroupHeader
+      object Footer1: TfrxFooter
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 204.094620000000000000
+        Top = 207.874150000000000000
         Width = 718.110700000000000000
+        object Memo7: TfrxMemoView
+          Left = 619.842920000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total: [SUM(<Produtos."preco">,asasasasa)]')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Top = 1.000000000000000000
+          Width = 721.890230000000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 124.724490000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          IndexTag = 1
+          Width = 64.252010000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clBlack
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          IndexTag = 1
+          Left = 64.252010000000000000
+          Width = 128.504020000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clBlack
+          Memo.UTF8W = (
+            'Categoria')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          IndexTag = 1
+          Left = 623.622450000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clBlack
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Pre'#231'o R$')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          IndexTag = 1
+          Left = 192.756030000000000000
+          Width = 430.866420000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Fill.BackColor = clBlack
+          Memo.UTF8W = (
+            'Produto')
+          ParentFont = False
+        end
       end
     end
   end
@@ -400,14 +510,14 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43260.752307731500000000
-    ReportOptions.LastChange = 43271.969628842600000000
+    ReportOptions.LastChange = 43273.539569618060000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 448
-    Top = 64
+    Left = 440
+    Top = 144
     Datasets = <
       item
         DataSet = frxDBProdutos
@@ -455,10 +565,12 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         end
         object Date: TfrxMemoView
           IndexTag = 1
-          Left = 616.063390000000000000
+          Left = 529.134200000000000000
           Top = 7.559060000000000000
-          Width = 98.267780000000000000
+          Width = 185.196970000000000000
           Height = 18.897650000000000000
+          DisplayFormat.FormatStr = 'mm/dd/yyyy'
+          DisplayFormat.Kind = fkDateTime
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -467,7 +579,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (
-            '[Date]')
+            'Gera em [Date]')
           ParentFont = False
         end
         object Memo5: TfrxMemoView
@@ -483,17 +595,15 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       object asasasasa: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
-        Top = 241.889920000000000000
+        Height = 18.897650000000000000
+        Top = 234.330860000000000000
         Width = 718.110700000000000000
         DataSet = frxDBProdutos
         DataSetName = 'Produtos'
         RowCount = 0
         object Produtosid: TfrxMemoView
           IndexTag = 1
-          Left = 7.559060000000000000
-          Top = 3.779530000000000000
-          Width = 56.692950000000000000
+          Width = 64.252010000000000000
           Height = 18.897650000000000000
           DataField = 'id'
           DataSet = frxDBProdutos
@@ -511,7 +621,6 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         object Produtosnome: TfrxMemoView
           IndexTag = 1
           Left = 64.252010000000000000
-          Top = 3.779530000000000000
           Width = 559.370440000000000000
           Height = 18.897650000000000000
           DataField = 'nome'
@@ -530,11 +639,12 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         object Produtospreco: TfrxMemoView
           IndexTag = 1
           Left = 623.622450000000000000
-          Top = 3.779530000000000000
-          Width = 86.929190000000000000
+          Width = 94.488250000000000000
           Height = 18.897650000000000000
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -543,7 +653,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (
-            'R$ [Produtos."preco"]')
+            '[Produtos."preco"]')
           ParentFont = False
         end
       end
@@ -551,7 +661,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 328.819110000000000000
+        Top = 404.409710000000000000
         Width = 718.110700000000000000
         object Page: TfrxMemoView
           IndexTag = 1
@@ -573,46 +683,50 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
+        Height = 18.897650000000000000
         Top = 151.181200000000000000
         Width = 718.110700000000000000
         Child = frxProdutosPorCategoria.Child1
         Condition = 'Produtos."id_1"'
         object Produtosnome_1: TfrxMemoView
           IndexTag = 1
-          Top = 3.779530000000000000
-          Width = 321.260050000000000000
+          Width = 718.110700000000000000
           Height = 18.897650000000000000
           DataField = 'nome_1'
-          DataSet = frxDBProdutos
-          DataSetName = 'Produtos'
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[Produtos."nome_1"]')
-        end
-      end
-      object Child1: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 196.535560000000000000
-        Width = 718.110700000000000000
-        ToNRows = 0
-        ToNRowsMode = rmCount
-        object Memo2: TfrxMemoView
-          IndexTag = 1
-          Top = 3.779530000000000000
-          Width = 64.252010000000000000
-          Height = 18.897650000000000000
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
+          Font.Style = [fsBold, fsItalic]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Produtos."nome_1"]')
+          ParentFont = False
+        end
+      end
+      object Child1: TfrxChild
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 192.756030000000000000
+        Width = 718.110700000000000000
+        ToNRows = 0
+        ToNRowsMode = rmCount
+        object Memo2: TfrxMemoView
+          IndexTag = 1
+          Width = 64.252010000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBProdutos
+          DataSetName = 'Produtos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
+          Fill.BackColor = clBlack
           Memo.UTF8W = (
             'C'#243'digo')
           ParentFont = False
@@ -620,40 +734,94 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
         object Memo4: TfrxMemoView
           IndexTag = 1
           Left = 623.622450000000000000
-          Top = 3.779530000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
+          Font.Color = clWhite
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
+          Fill.BackColor = clBlack
           HAlign = haRight
           Memo.UTF8W = (
-            'Pre'#231'o')
+            'Pre'#231'o RS')
           ParentFont = False
         end
         object Memo3: TfrxMemoView
           IndexTag = 1
           Left = 64.252010000000000000
-          Top = 3.779530000000000000
           Width = 559.370440000000000000
           Height = 18.897650000000000000
           DataSet = frxDBProdutos
           DataSetName = 'Produtos'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
+          Font.Color = clWhite
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
+          Fill.BackColor = clBlack
           Memo.UTF8W = (
             'Nome')
+          ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 275.905690000000000000
+        Width = 718.110700000000000000
+        object Memo6: TfrxMemoView
+          Left = 551.811380000000000000
+          Top = 3.779530000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total por grupo: [SUM(<Produtos."preco">,asasasasa)]')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Top = 2.000000000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          Frame.Typ = []
+          Diagonal = True
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 321.260050000000000000
+        Width = 718.110700000000000000
+        object Memo7: TfrxMemoView
+          Left = 619.842920000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total: [SUM(<Produtos."preco">,asasasasa)]')
           ParentFont = False
         end
       end

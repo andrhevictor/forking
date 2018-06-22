@@ -39,8 +39,8 @@ object fLogin: TfLogin
       Font.Style = [fsBold]
       ParentBiDiMode = False
       ParentFont = False
-      ExplicitWidth = 106
-      ExplicitHeight = 32
+      ExplicitWidth = 101
+      ExplicitHeight = 30
     end
   end
   object panelMid: TPanel
