@@ -94,8 +94,13 @@ begin
    if InputQuery('Número da ficha: ', 'Insira o número da ficha', fichaInput) then begin
       ficha    := fichaInput.ToInteger();
       pedidoId := fPrincipal.getLastPedidoAbertoByFicha(ficha);
-      fPrincipal.SetPedidoId(pedidoId);
-      fNovoPedido.Show();
+      if pedidoId <> 0 then begin
+        fPrincipal.SetPedidoId(pedidoId);
+        fNovoPedido.Show();
+      end
+      else begin
+        ShowMessage('Não há pedidos em aberto para a ficha número ' + fichaInput);
+      end;
    end;
 end;
 
