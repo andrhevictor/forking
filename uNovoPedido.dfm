@@ -11,6 +11,7 @@ object fNovoPedido: TfNovoPedido
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object panelMid: TPanel
@@ -154,11 +155,11 @@ object fNovoPedido: TfNovoPedido
       OnClick = btnSalvarClick
     end
     object btnCancelar: TButton
-      Left = 677
+      Left = 656
       Top = 445
-      Width = 91
+      Width = 112
       Height = 41
-      Caption = 'Cancelar'
+      Caption = 'Cancelar pedido'
       TabOrder = 4
       OnClick = btnCancelarClick
     end

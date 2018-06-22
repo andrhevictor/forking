@@ -47,6 +47,7 @@ type
     procedure atualizaPedidoWithFicha(ficha, pedido: Integer);
     procedure atualizaQuantidadeValorItem(quantidade: Double);
     Function getFichaDisponivel(ficha: Integer) : Boolean;
+    procedure FormShow(Sender: TObject);
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
@@ -185,6 +186,12 @@ begin
     fNovoPedido.atualizaGridItens();
     fNovoPedido.recalculaValorPedido();
   end;
+end;
+
+procedure TfNovoPedido.FormShow(Sender: TObject);
+begin
+  fNovoPedido.atualizaGridItens;
+  fNovoPedido.recalculaValorPedido
 end;
 
 procedure TfNovoPedido.atualizaFichaDisponivel(ficha: Integer);
