@@ -36,6 +36,9 @@ type
     Usurios1: TMenuItem;
     AdicionarUsuario1: TMenuItem;
     VisualizarUsurios1: TMenuItem;
+    btnEditarPedido: TButton;
+    fdqLastPedidoFicha: TFDQuery;
+    procedure SetPedidoId(idPedido: Integer);
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
     procedure Editar1Click(Sender: TObject);
@@ -47,6 +50,8 @@ type
     procedure Pedidos1Click(Sender: TObject);
     procedure AdicionarUsuario1Click(Sender: TObject);
     procedure VisualizarUsurios1Click(Sender: TObject);
+    procedure btnEditarPedidoClick(Sender: TObject);
+    Function  getLastPedidoAbertoByFicha(ficha: Integer) : Integer;
   private
     id_pedido: Integer;
   public
@@ -70,16 +75,35 @@ begin
   Result := fPrincipal.id_pedido;
 end;
 
+procedure TfPrincipal.SetPedidoId(idPedido: Integer);
+begin
+  id_pedido := idPedido;
+end;
+
 procedure TfPrincipal.AdicionarUsuario1Click(Sender: TObject);
 begin
   fAdicionaUsuario.Show();
+end;
+
+procedure TfPrincipal.btnEditarPedidoClick(Sender: TObject);
+var
+  fichaInput: String;
+  ficha:      Integer;
+  pedidoId:   Integer;
+begin
+   if InputQuery('Número da ficha: ', 'Insira o número da ficha', fichaInput) then begin
+      ficha    := fichaInput.ToInteger();
+      pedidoId := fPrincipal.getLastPedidoAbertoByFicha(ficha);
+      fPrincipal.SetPedidoId(pedidoId);
+      fNovoPedido.Show();
+   end;
 end;
 
 procedure TfPrincipal.btnNovoPedidoClick(Sender: TObject);
 var
   usuarioId: Integer;
 begin
-  usuarioId := 1;               // MUDAR AQUI ASDOAHSDUIAHSIDA
+  usuarioId := fLogin.GetUsuarioId;
   fdqInserePedido.SQL.Clear;
   fdqInserePedido.SQL.Add('INSERT INTO pedidos VALUES (DEFAULT, NULL, :status, :idUsuario, date_trunc(''minute'', LOCALTIMESTAMP))');
   fdqInserePedido.ParamByName('status').Value := 'EM ABERTO';
@@ -105,6 +129,19 @@ end;
 procedure TfPrincipal.Editar1Click(Sender: TObject);
 begin
   fEditaProduto.Show;
+end;
+
+function TfPrincipal.getLastPedidoAbertoByFicha(ficha: Integer): Integer;
+begin
+  fdqLastPedidoFicha.SQL.Clear;
+  fdqLastPedidoFicha.SQL.Add('SELECT MAX(id) AS ultimo_pedido FROM pedidos');
+  fdqLastPedidoFicha.SQL.Add('WHERE numero_ficha = :ficha');
+  fdqLastPedidoFicha.SQL.Add('AND status = :status');
+  fdqLastPedidoFicha.ParamByName('ficha').Value := ficha;
+  fdqLastPedidoFicha.ParamByName('status').Value := 'EM ABERTO';
+  fdqLastPedidoFicha.Open();
+
+  Result := fdqLastPedidoFicha.FieldByName('ultimo_pedido').AsInteger;
 end;
 
 procedure TfPrincipal.Pedidos1Click(Sender: TObject);

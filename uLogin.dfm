@@ -26,8 +26,8 @@ object fLogin: TfLogin
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 101
-      Height = 30
+      Width = 106
+      Height = 32
       Align = alClient
       Alignment = taCenter
       BiDiMode = bdLeftToRight

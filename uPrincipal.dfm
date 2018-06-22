@@ -40,6 +40,15 @@ object fPrincipal: TfPrincipal
       TabOrder = 1
       OnClick = btnPagamentoClick
     end
+    object btnEditarPedido: TButton
+      Left = 328
+      Top = 28
+      Width = 137
+      Height = 76
+      Caption = 'Editar Pedido'
+      TabOrder = 2
+      OnClick = btnEditarPedidoClick
+    end
   end
   object panelMid: TPanel
     Left = 0
@@ -50,8 +59,7 @@ object fPrincipal: TfPrincipal
     TabOrder = 1
   end
   object mmMenu: TMainMenu
-    Left = 440
-    Top = 65528
+    Left = 512
     object Arquivo1: TMenuItem
       Caption = 'Arquivo   '
       object Sair1: TMenuItem
@@ -119,5 +127,9 @@ object fPrincipal: TfPrincipal
   object fdqInserePedido: TFDQuery
     Connection = dmConnection.fdcDatabase
     Left = 592
+  end
+  object fdqLastPedidoFicha: TFDQuery
+    Connection = dmConnection.fdcDatabase
+    Left = 680
   end
 end

@@ -1,7 +1,7 @@
 object fNovoPedido: TfNovoPedido
   Left = 0
   Top = 0
-  Caption = 'Novo Pedido'
+  Caption = 'Cadastro de Pedido'
   ClientHeight = 564
   ClientWidth = 875
   Color = clBtnFace

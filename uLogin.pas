@@ -64,7 +64,6 @@ begin
       usuario_id := fdqUsuario.FieldByName('id').AsInteger;
 
       fPrincipal.Show();
-//      fLogin.Close;
     end
     else begin
       ShowMessage('Usuario ou senha invalido!');
