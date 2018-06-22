@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls;
 
 type
   TfVisualizarProduto = class(TForm)
@@ -23,10 +23,27 @@ type
     lblFiltro: TLabel;
     edtFiltroNome: TEdit;
     btnLimpaFiltros: TButton;
+    fdqProdutosid: TLargeintField;
+    fdqProdutoscategoria_id: TLargeintField;
+    fdqProdutosnome: TWideStringField;
+    fdqProdutospreco: TBCDField;
+    fdqProdutosdescricao: TWideStringField;
+    lblId: TLabel;
+    DBEdit1: TDBEdit;
+    lblNome: TLabel;
+    DBEdit2: TDBEdit;
+    lblPreco: TLabel;
+    DBEdit3: TDBEdit;
+    lblDescricao: TLabel;
+    DBEdit4: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    lblCategoria: TLabel;
+    btnSalvar: TButton;
     procedure FormCreate(Sender: TObject);
     procedure edtFiltroNomeChange(Sender: TObject);
     procedure dbgCategoriasCellClick(Column: TColumn);
     procedure btnLimpaFiltrosClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,6 +67,11 @@ begin
    fdqProdutos.Open();
 end;
 
+procedure TfVisualizarProduto.btnSalvarClick(Sender: TObject);
+begin
+  fdqProdutos.Post;
+end;
+
 procedure TfVisualizarProduto.dbgCategoriasCellClick(Column: TColumn);
 var
 idCategoria: Integer;
@@ -67,10 +89,11 @@ var
   filtro: String;
 begin
   filtro := edtFiltroNome.Text;
+  filtro := UpperCase(filtro);
    if filtro <> '' then begin
       fdqProdutos.SQL.Clear;
       fdqProdutos.SQL.Add(' SELECT * FROM produtos' );
-      fdqProdutos.SQL.Add(' WHERE nome LIKE ' + QuotedStr('%'+ filtro + '%'));
+      fdqProdutos.SQL.Add(' WHERE UPPER(nome) LIKE ' + QuotedStr('%'+ filtro + '%'));
       fdqProdutos.Open();
    end
    else begin
