@@ -52,6 +52,7 @@ type
     procedure VisualizarUsurios1Click(Sender: TObject);
     procedure btnEditarPedidoClick(Sender: TObject);
     Function  getLastPedidoAbertoByFicha(ficha: Integer) : Integer;
+    procedure FormShow(Sender: TObject);
   private
     id_pedido: Integer;
   public
@@ -134,6 +135,18 @@ end;
 procedure TfPrincipal.Editar1Click(Sender: TObject);
 begin
   fEditaProduto.Show;
+end;
+
+procedure TfPrincipal.FormShow(Sender: TObject);
+var
+  nivel_acesso: Integer;
+begin
+  nivel_acesso := fLogin.GetNivelAcesso();
+
+  if nivel_acesso = 1 then begin
+      mmMenu.Items[4].Enabled := False;
+  end;
+
 end;
 
 function TfPrincipal.getLastPedidoAbertoByFicha(ficha: Integer): Integer;

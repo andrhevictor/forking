@@ -23,8 +23,10 @@ type
     btnEntrar: TButton;
     procedure btnEntrarClick(Sender: TObject);
     function GetUsuarioId: Integer;
+    function GetNivelAcesso: Integer;
   private
-    usuario_id : Integer;
+    usuario_id:   Integer;
+    nivel_acesso: Integer;
   public
     { Public declarations }
   end;
@@ -38,10 +40,15 @@ implementation
 
 uses dmDados, uPrincipal, uMd5;
 
+function TfLogin.GetNivelAcesso: Integer;
+begin
+  Result := fLogin.usuario_id;
+end;
+
 function TfLogin.GetUsuarioId: Integer;
-  begin
-    Result := fLogin.usuario_id;
-  end;
+begin
+  Result := fLogin.usuario_id;
+end;
 
 procedure TfLogin.btnEntrarClick(Sender: TObject);
   var
@@ -61,7 +68,8 @@ begin
     n := fdqUsuario.RecordCount;
 
     if(n > 0) then begin
-      usuario_id := fdqUsuario.FieldByName('id').AsInteger;
+      usuario_id   := fdqUsuario.FieldByName('id').AsInteger;
+      nivel_acesso := fdqUsuario.FieldByName('nivel_acesso').AsInteger;
 
       fPrincipal.Show();
     end

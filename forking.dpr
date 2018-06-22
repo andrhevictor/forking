@@ -15,7 +15,8 @@ uses
   uEditaPedido in 'uEditaPedido.pas' {fEditaPedido},
   uVisualizaPedido in 'uVisualizaPedido.pas' {fVisualizaPedidos},
   uMd5 in 'uMd5.pas',
-  uCriaUsuario in 'uCriaUsuario.pas' {fAdicionaUsuario};
+  uCriaUsuario in 'uCriaUsuario.pas' {fAdicionaUsuario},
+  uVisualizaUsuarios in 'uVisualizaUsuarios.pas' {fVisualizaUsuarios};
 
 {$R *.res}
 
@@ -35,5 +36,6 @@ begin
   Application.CreateForm(TfEditaPedido, fEditaPedido);
   Application.CreateForm(TfVisualizaPedidos, fVisualizaPedidos);
   Application.CreateForm(TfAdicionaUsuario, fAdicionaUsuario);
+  Application.CreateForm(TfVisualizaUsuarios, fVisualizaUsuarios);
   Application.Run;
 end.

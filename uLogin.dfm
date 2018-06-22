@@ -26,8 +26,8 @@ object fLogin: TfLogin
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 106
-      Height = 32
+      Width = 497
+      Height = 33
       Align = alClient
       Alignment = taCenter
       BiDiMode = bdLeftToRight
@@ -39,6 +39,8 @@ object fLogin: TfLogin
       Font.Style = [fsBold]
       ParentBiDiMode = False
       ParentFont = False
+      ExplicitWidth = 106
+      ExplicitHeight = 32
     end
   end
   object panelMid: TPanel
