@@ -1,9 +1,6 @@
 ﻿[panelTop]
 Coordinates=211,188,68,58
 
-[DBGrid1]
-Coordinates=87,256,64,36
-
 [panelMid]
 Coordinates=10,256,67,58
 
@@ -22,4 +19,7 @@ Visible=True
 
 [fRelatorios.]
 Coordinates=10,10,185,168
+
+[dbGrid1]
+Coordinates=87,256,64,36
 

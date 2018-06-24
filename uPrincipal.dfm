@@ -99,6 +99,12 @@ object fPrincipal: TfPrincipal
         Caption = 'Produtos'
         OnClick = Produtos2Click
       end
+      object Faturamento1: TMenuItem
+        Caption = 'Faturamento'
+      end
+      object Pagamento1: TMenuItem
+        Caption = 'Pagamento'
+      end
       object Pedidos1: TMenuItem
         Caption = 'Pedidos'
         OnClick = Pedidos1Click
@@ -123,6 +129,10 @@ object fPrincipal: TfPrincipal
       object Ajuda1: TMenuItem
         Caption = 'Ajuda'
       end
+    end
+    object Pedidos2: TMenuItem
+      Caption = 'Pedidos'
+      OnClick = Pedidos2Click
     end
   end
   object fdqInserePedido: TFDQuery

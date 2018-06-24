@@ -12,8 +12,8 @@ Sistema para restaurantes, elaborado para a disciplina de Linguagem Comercial so
 	- [x] ~~Permissão de acesso (?)~~
 	- [X] ~~Salvar senha como Hash(md5) no banco~~
 - [ ] Relatórios
-    - [x] Produtos (Verificar código dos mais vendidos)
-    - [ ] Pedidos
+    - [x] Produtos
+    - [ ] Pedidos (em andamento)
     - [ ] Pagamentos
     - [ ] Faturamento
 - [ ] Melhorar aparência

@@ -32,12 +32,15 @@ type
     SobreoSistema1: TMenuItem;
     Ajuda1: TMenuItem;
     Produtos2: TMenuItem;
-    Pedidos1: TMenuItem;
     Usurios1: TMenuItem;
     AdicionarUsuario1: TMenuItem;
     VisualizarUsurios1: TMenuItem;
     btnEditarPedido: TButton;
     fdqLastPedidoFicha: TFDQuery;
+    Faturamento1: TMenuItem;
+    Pagamento1: TMenuItem;
+    Pedidos2: TMenuItem;
+    Pedidos1: TMenuItem;
     procedure SetPedidoId(idPedido: Integer);
     procedure Cadastrar1Click(Sender: TObject);
     procedure VisualizarTodos1Click(Sender: TObject);
@@ -47,12 +50,13 @@ type
     procedure btnNovoPedidoClick(Sender: TObject);
     procedure Produtos2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
-    procedure Pedidos1Click(Sender: TObject);
     procedure AdicionarUsuario1Click(Sender: TObject);
     procedure VisualizarUsurios1Click(Sender: TObject);
     procedure btnEditarPedidoClick(Sender: TObject);
     Function  getLastPedidoAbertoByFicha(ficha: Integer) : Integer;
     procedure FormShow(Sender: TObject);
+    procedure Pedidos2Click(Sender: TObject);
+    procedure Pedidos1Click(Sender: TObject);
   private
     id_pedido: Integer;
   public
@@ -67,9 +71,9 @@ implementation
 {$R *.dfm}
 
 uses dmDados, uVisualizaProduto, uCadastraProduto, uEditaProduto,
-  uVisualizaFichas, uPagamento, uLogin, uNovoPedido, uRelatorio,
+  uVisualizaFichas, uPagamento, uLogin, uNovoPedido,
   uOpcaoRelatorioProdutos, uVisualizaPedido, uEditaPedido, uCriaUsuario,
-  uVisualizaUsuarios;
+  uVisualizaUsuarios, uRelatorioPedidos;
 
 function TfPrincipal.GetPedidoId: Integer;
 begin
@@ -163,6 +167,11 @@ begin
 end;
 
 procedure TfPrincipal.Pedidos1Click(Sender: TObject);
+begin
+  fRelatorioPedidos.Show;
+end;
+
+procedure TfPrincipal.Pedidos2Click(Sender: TObject);
 begin
   fVisualizaPedidos.Show;
 end;

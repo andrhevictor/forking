@@ -18,7 +18,7 @@ type
     panelMid: TPanel;
     lblTituloRelatorio: TLabel;
     btnGerarRelatorio: TButton;
-    DBGrid1: TDBGrid;
+    dbGrid1: TDBGrid;
     rbOrdenaCategoria: TRadioButton;
     rbOrdenaPreco: TRadioButton;
     dsTodoProdutos: TDataSource;
@@ -37,6 +37,15 @@ type
     fdqTodosProdutosdescricao: TWideStringField;
     fdqTodosProdutosid_1: TLargeintField;
     fdqTodosProdutosnome_1: TWideStringField;
+    dbGrid2: TDBGrid;
+    fdqProdutosMaisVendidos: TFDQuery;
+    dsProdutosMaisVendidos: TDataSource;
+    fdqProdutosMaisVendidosproduto: TWideStringField;
+    fdqProdutosMaisVendidosquantidade: TLargeintField;
+    fdqProdutosMaisVendidospreco: TBCDField;
+    frxMaisVendidos: TfrxReport;
+    frxDBMaisVendidos: TfrxDBDataset;
+    fdqProdutosMaisVendidosid: TLargeintField;
     procedure btnGerarRelatorioClick(Sender: TObject);
     procedure rbOrdenaPrecoClick(Sender: TObject);
     procedure rbOrdenaCategoriaClick(Sender: TObject);
@@ -44,6 +53,8 @@ type
     procedure buscaProdutoOrdenadoPreco();
     procedure buscaProdutoMaisVendido();
     procedure rbProdutoMaisVendidoClick(Sender: TObject);
+    procedure ativaGrid1();
+    Procedure ativaGrid2();
 
   private
     { Private declarations }
@@ -58,7 +69,7 @@ implementation
 
 {$R *.dfm}
 
-uses dmDados, uRelatorio, uCadastraProduto, uEditaProduto, uLogin, uNovoPedido,
+uses dmDados, uCadastraProduto, uEditaProduto, uLogin, uNovoPedido,
   uPagamento, uPrincipal, uVisualizaFichas, uVisualizaProduto;
 
 // -------------------BOTÃO GERAR---------------------//
@@ -67,49 +78,60 @@ var
   path: string;
 begin
   path := ExtractFilePath(Application.ExeName);
-  if cbxAgurpar.Checked then
+  if cbxAgurpar.Checked and rbProdutoMaisVendido.Checked then
   begin
-    fOpcaoRelatorioProduto.buscaProdutoOrdenadoPreco();
-    fOpcaoRelatorioProduto.frxProdutos.LoadFromFile
-      (path + 'relatorios\relProdutosAgrupadoCategoria.fr3');
+    fOpcaoRelatorioProduto.frxMaisVendidos.LoadFromFile
+      (path + 'relatorios\relProdutosMaisVendidos.fr3');
   end
   else
   begin
-    if rbOrdenaCategoria.Checked then
+    if cbxAgurpar.Checked then
     begin
       fOpcaoRelatorioProduto.buscaProdutoOrdenadoCategoria();
+      fOpcaoRelatorioProduto.frxProdutos.LoadFromFile
+        (path + 'relatorios\relProdutosAgrupadoCategoria.fr3');
     end
     else
     begin
-      if rbOrdenaPreco.Checked then
+      if rbOrdenaCategoria.Checked then
       begin
-        fOpcaoRelatorioProduto.buscaProdutoOrdenadoPreco();
+        fOpcaoRelatorioProduto.buscaProdutoOrdenadoCategoria();
       end
       else
       begin
-        fOpcaoRelatorioProduto.buscaProdutoMaisVendido();
-      end
+        if rbOrdenaPreco.Checked then
+        begin
+          fOpcaoRelatorioProduto.buscaProdutoOrdenadoPreco();
+        end
+        else
+        begin
+          fOpcaoRelatorioProduto.buscaProdutoMaisVendido();
+        end
+      end;
+      fOpcaoRelatorioProduto.frxProdutos.LoadFromFile
+        (path + 'relatorios\relProdutos.fr3');
     end;
-    fOpcaoRelatorioProduto.frxProdutos.LoadFromFile
-      (path + 'relatorios\relProdutos.fr3');
+    fOpcaoRelatorioProduto.frxProdutos.ShowReport();
   end;
-  fOpcaoRelatorioProduto.frxProdutos.ShowReport();
+  fOpcaoRelatorioProduto.frxMaisVendidos.ShowReport();
 end;
 
 // -------------------CHECKBOX---------------------//
 procedure TfOpcaoRelatorioProduto.rbOrdenaCategoriaClick(Sender: TObject);
 begin
+  fOpcaoRelatorioProduto.ativaGrid1();
   fOpcaoRelatorioProduto.buscaProdutoOrdenadoCategoria();
 end;
 
 procedure TfOpcaoRelatorioProduto.rbOrdenaPrecoClick(Sender: TObject);
 begin
+  fOpcaoRelatorioProduto.ativaGrid1();
   fOpcaoRelatorioProduto.buscaProdutoOrdenadoPreco();
 end;
 
 procedure TfOpcaoRelatorioProduto.rbProdutoMaisVendidoClick(Sender: TObject);
 begin
-  fOpcaoRelatorioProduto.buscaProdutoMaisVendido();
+  fOpcaoRelatorioProduto.ativaGrid2();
 end;
 
 // -------------------FUNÇÕES---------------------//
@@ -137,7 +159,8 @@ procedure TfOpcaoRelatorioProduto.buscaProdutoMaisVendido();
 begin
 
   fdqTodosProdutos.SQL.Clear;
-  fdqTodosProdutos.SQL.Add('SELECT p.nome AS PRODUTO, count(1) AS QUANTIDADE');
+  fdqTodosProdutos.SQL.Add
+    ('SELECT p.descricao, p.categoria_id, p.id, p.nome AS PRODUTO, count(1) AS QUANTIDADE, p.preco, c.nome');
   fdqTodosProdutos.SQL.Add('FROM pedidos_itens');
   fdqTodosProdutos.SQL.Add
     ('INNER JOIN produtos p on pedidos_itens.produto_id = p.id');
@@ -146,10 +169,23 @@ begin
     ('INNER JOIN pedidos ON pedidos_itens.pedido_id = pedidos.id');
   fdqTodosProdutos.SQL.Add
     ('INNER JOIN pagamentos p2 on pedidos.id = p2.pedido_id');
-  fdqTodosProdutos.SQL.Add('GROUP BY p.nome');
+  fdqTodosProdutos.SQL.Add
+    ('GROUP BY p.nome, p.preco, c.nome, p.id, p.categoria_id, p.descricao');
   fdqTodosProdutos.SQL.Add('ORDER BY QUANTIDADE DESC;');
   fdqTodosProdutos.Open();
 
+end;
+
+procedure TfOpcaoRelatorioProduto.ativaGrid1();
+begin
+  dbGrid1.visible := true;
+  dbGrid2.visible := false;
+end;
+
+procedure TfOpcaoRelatorioProduto.ativaGrid2();
+begin
+  dbGrid2.visible := true;
+  dbGrid1.visible := false;
 end;
 
 end.

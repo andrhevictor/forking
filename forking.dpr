@@ -16,7 +16,8 @@ uses
   uVisualizaPedido in 'uVisualizaPedido.pas' {fVisualizaPedidos},
   uMd5 in 'uMd5.pas',
   uCriaUsuario in 'uCriaUsuario.pas' {fAdicionaUsuario},
-  uVisualizaUsuarios in 'uVisualizaUsuarios.pas' {fVisualizaUsuarios};
+  uVisualizaUsuarios in 'uVisualizaUsuarios.pas' {fVisualizaUsuarios},
+  uRelatorioPedidos in 'uRelatorioPedidos.pas' {fRelatorioPedidos};
 
 {$R *.res}
 
@@ -37,5 +38,6 @@ begin
   Application.CreateForm(TfVisualizaPedidos, fVisualizaPedidos);
   Application.CreateForm(TfAdicionaUsuario, fAdicionaUsuario);
   Application.CreateForm(TfVisualizaUsuarios, fVisualizaUsuarios);
+  Application.CreateForm(TfRelatorioPedidos, fRelatorioPedidos);
   Application.Run;
 end.
