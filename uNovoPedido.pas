@@ -59,6 +59,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure dbgItensPedidoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    Function pedidoHasFicha(idPedido: Integer): Boolean;
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
@@ -79,7 +80,7 @@ var
 begin
   idPedido := fPrincipal.GetPedidoId;
 
-  if Application.MessageBox('Você deseja realmente cancelar o pedido?','Cancelar o pedido',mb_yesno + mb_iconquestion) = id_yes then
+  if Application.MessageBox('Vocï¿½ deseja realmente cancelar o pedido?','Cancelar o pedido',mb_yesno + mb_iconquestion) = id_yes then
     Begin
       fNovoPedido.deletaTodosItemsByPedido(idPedido);
       fNovoPedido.deletaPedido(idPedido);
@@ -99,7 +100,7 @@ begin
     ShowMessage('O pedido precisa ter ao menos um item para ser salvo!');
   end
   else begin
-    if InputQuery('Ficha', 'Insira o número da ficha', fichaInput) then begin
+    if InputQuery('Ficha', 'Insira o nï¿½mero da ficha', fichaInput) then begin
 
     ficha := fichaInput.ToInteger();
       if (fNovoPedido.getFichaDisponivel(ficha)) then begin
@@ -107,15 +108,15 @@ begin
         fNovoPedido.atualizaPedidoWithFicha(ficha, idPedido);
         fNovoPedido.atualizaFichaDisponivel(ficha);
 
-        ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + fichaInput);
+        ShowMessage('Pedido salvo com sucesso! Nï¿½mero da ficha: ' + fichaInput);
         fNovoPedido.Close;
       end
       else begin
-        ShowMessage('Essa ficha não está dísponivel!');
+        ShowMessage('Essa ficha nï¿½o estï¿½ dï¿½sponivel!');
       end;
   end
   else begin
-    ShowMessage('Para salvar o pedido, é necessário informar a ficha!');
+    ShowMessage('Para salvar o pedido, ï¿½ necessï¿½rio informar a ficha!');
   end;
   end;
 
@@ -208,8 +209,12 @@ procedure TfNovoPedido.dbgItensPedidoDblClick(Sender: TObject);
 var
   quantidadeInput: String;
   quantidade:      Double;
+  idPedido:        Integer;
 begin
   quantidadeInput := dbgItensPedido.DataSource.DataSet.FieldByName('quantidade').AsString;
+ idPedido := fPrincipal.GetPedidoId();
+
+ ShowMessage(fNovoPedido.pedidoHasFicha(idPedido).ToString());
 
   if InputQuery('Quantidade', 'Insira a quantidade', quantidadeInput) then begin
     quantidade := quantidadeInput.ToDouble();
@@ -337,6 +342,17 @@ begin
   fdqFichaDisponivel.Open();
 
   Result := fdqFichaDisponivel.RecordCount > 0;
+end;
+
+function TfNovoPedido.pedidoHasFicha(idPedido: Integer): Boolean;
+begin
+  fdqAtualizaPedido.SQL.Clear;
+  fdqAtualizaPedido.SQL.Add('SELECT numero_ficha FROM pedidos');
+  fdqAtualizaPedido.SQL.Add('WHERE id = :pedido');
+  fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
+  fdqAtualizaPedido.Open();
+
+  Result := fdqAtualizaPedido.FieldByName('numero_ficha').AsInteger <> 0;
 end;
 
 procedure TfNovoPedido.recalculaValorPedido();
