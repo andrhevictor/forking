@@ -36,9 +36,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       Font.Style = []
       ParentFont = False
       Layout = tlCenter
-      ExplicitLeft = 0
-      ExplicitTop = 8
-      ExplicitWidth = 469
+      ExplicitWidth = 192
       ExplicitHeight = 24
     end
   end
@@ -69,6 +67,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnDrawColumnCell = dbGrid1DrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -177,6 +176,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       Visible = False
+      OnDrawColumnCell = dbGrid2DrawColumnCell
       Columns = <
         item
           Alignment = taCenter

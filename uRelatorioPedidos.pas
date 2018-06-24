@@ -9,7 +9,7 @@ uses
   Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, frxClass, frxDBSet;
+  FireDAC.Comp.Client, frxClass, frxDBSet, Vcl.ComCtrls;
 
 type
   TfRelatorioPedidos = class(TForm)
@@ -18,7 +18,6 @@ type
     panelMid: TPanel;
     gbImpressao: TGroupBox;
     btnGerarRelatorio: TButton;
-    cbxAgurpar: TCheckBox;
     gbStatus: TGroupBox;
     rbStatusAberto: TRadioButton;
     rbStatusCancelado: TRadioButton;
@@ -29,6 +28,11 @@ type
     frxDBPedidos: TfrxDBDataset;
     frxPedidos: TfrxReport;
     rbStatusTodos: TRadioButton;
+    gbData: TGroupBox;
+    dtpFim: TDateTimePicker;
+    dtpInicio: TDateTimePicker;
+    lblDataInicio: TLabel;
+    lblDataFim: TLabel;
     procedure rbStatusAbertoClick(Sender: TObject);
     procedure filtraStatusAberto();
     procedure filtraStatusFechado();
@@ -37,6 +41,12 @@ type
     procedure rbStatusCanceladoClick(Sender: TObject);
     procedure rbStatusTodosClick(Sender: TObject);
     procedure filtraStatusTodos();
+    procedure btnGerarRelatorioClick(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure filtroData();
+//    procedure dtpInicioChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -52,6 +62,12 @@ implementation
 {$R *.dfm}
 
 uses dmDados;
+
+procedure TfRelatorioPedidos.FormCreate(Sender: TObject);
+begin
+  dtpFim.DateTime := now;
+  dtpInicio.DateTime := now;
+end;
 
 procedure TfRelatorioPedidos.rbStatusAbertoClick(Sender: TObject);
 begin
@@ -74,6 +90,23 @@ begin
 end;
 
 // ----------FUNÇÕES----------//
+procedure TfRelatorioPedidos.filtroData();
+var
+  dataInicial: String;
+  dataFinal: String;
+begin
+  dataInicial := FormatDateTime('yyyy-mm-dd', dtpInicio.Date);
+  dataFinal := FormatDateTime('yyyy-mm-dd', dtpFim.Date);
+
+  fdqPedidos.SQL.Clear;
+  fdqPedidos.SQL.Add('SELECT * FROM pedidos');
+  fdqPedidos.SQL.Add
+    ('WHERE criado_em::date BETWEEN DATE(:datainicial) AND DATE(:dataFinal)');
+  fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
+  fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
+
+end;
+
 procedure TfRelatorioPedidos.filtraStatusTodos();
 begin
   fdqPedidos.SQL.Clear;
@@ -82,8 +115,67 @@ begin
   fdqPedidos.Open();
 end;
 
-procedure TfRelatorioPedidos.filtraStatusAberto();
+procedure TfRelatorioPedidos.btnGerarRelatorioClick(Sender: TObject);
+var
+  path: string;
 begin
+  path := ExtractFilePath(Application.ExeName);
+  if rbStatusAberto.Checked then
+  begin
+    fRelatorioPedidos.filtraStatusAberto();
+  end
+  else
+  begin
+    if rbStatusFechado.Checked then
+    begin
+      fRelatorioPedidos.filtraStatusFechado();
+    end
+    else
+    begin
+      if rbStatusCancelado.Checked then
+      begin
+        fRelatorioPedidos.filtraStatusCancelado();
+      end
+      else
+      begin
+        fRelatorioPedidos.filtraStatusTodos();
+      end;
+    end;
+  end;
+  fRelatorioPedidos.frxPedidos.LoadFromFile(path + 'relatorios\relPedidos.fr3');
+  fRelatorioPedidos.frxPedidos.ShowReport();
+end;
+
+procedure TfRelatorioPedidos.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (TStringGrid(DBGrid1).RowCount - 1) < 14 then
+  begin
+    // Se tiver menos de 10 linhas
+    ShowScrollBar(DBGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+  end;
+end;
+
+//procedure TfRelatorioPedidos.dtpInicioChange(Sender: TObject);
+//var
+//
+//begin
+//
+//  fdqPedidos.SQL.Clear;
+//  fdqPedidos.SQL.Add('SELECT * FROM pedidos');
+//  fdqPedidos.SQL.Add
+//    ('WHERE criado_em::date BETWEEN DATE(:datainicial) AND DATE(:dataFinal)');
+//  fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
+//  fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
+//end;
+
+procedure TfRelatorioPedidos.filtraStatusAberto();
+var
+  dataInicial: String;
+  dataFinal: String;
+begin
+  dataInicial := FormatDateTime('yyyy-mm-dd', dtpInicio.Date);
+  dataFinal := FormatDateTime('yyyy-mm-dd', dtpFim.Date);
   fdqPedidos.SQL.Clear;
   fdqPedidos.SQL.Add('SELECT * FROM pedidos');
   fdqPedidos.SQL.Add('WHERE status =' + QuotedStr('EM ABERTO'));

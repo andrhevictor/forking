@@ -55,6 +55,10 @@ type
     procedure rbProdutoMaisVendidoClick(Sender: TObject);
     procedure ativaGrid1();
     Procedure ativaGrid2();
+    procedure dbGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure dbGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
 
   private
     { Private declarations }
@@ -155,6 +159,26 @@ begin
   fdqTodosProdutos.Open();
 end;
 
+procedure TfOpcaoRelatorioProduto.dbGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (TStringGrid(dbGrid1).RowCount - 1) < 20 then
+  begin
+    // Se tiver menos de 10 linhas
+    ShowScrollBar(dbGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+  end;
+end;
+
+procedure TfOpcaoRelatorioProduto.dbGrid2DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (TStringGrid(dbGrid1).RowCount - 1) < 20 then
+  begin
+    // Se tiver menos de 10 linhas
+    ShowScrollBar(dbGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+  end;
+end;
+
 procedure TfOpcaoRelatorioProduto.buscaProdutoMaisVendido();
 begin
 
@@ -179,13 +203,13 @@ end;
 procedure TfOpcaoRelatorioProduto.ativaGrid1();
 begin
   dbGrid1.visible := true;
-  dbGrid2.visible := false;
+  dbGrid2.visible := False;
 end;
 
 procedure TfOpcaoRelatorioProduto.ativaGrid2();
 begin
   dbGrid2.visible := true;
-  dbGrid1.visible := false;
+  dbGrid1.visible := False;
 end;
 
 end.

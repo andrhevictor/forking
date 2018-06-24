@@ -1,6 +1,7 @@
 object fRelatorioPedidos: TfRelatorioPedidos
   Left = 0
   Top = 0
+  AutoSize = True
   Caption = 'Relatorios de Pedidos'
   ClientHeight = 392
   ClientWidth = 469
@@ -11,6 +12,7 @@ object fRelatorioPedidos: TfRelatorioPedidos
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object panelTop: TPanel
@@ -35,7 +37,8 @@ object fRelatorioPedidos: TfRelatorioPedidos
       Font.Style = []
       ParentFont = False
       Layout = tlCenter
-      ExplicitHeight = 10
+      ExplicitWidth = 183
+      ExplicitHeight = 24
     end
   end
   object panelMid: TPanel
@@ -49,40 +52,33 @@ object fRelatorioPedidos: TfRelatorioPedidos
       469
       349)
     object gbImpressao: TGroupBox
-      Left = 312
+      Left = 344
       Top = 6
-      Width = 153
+      Width = 121
       Height = 75
       Anchors = [akLeft, akTop, akBottom]
       Caption = 'Impress'#227'o'
       TabOrder = 0
       object btnGerarRelatorio: TButton
-        Left = 15
-        Top = 43
-        Width = 129
-        Height = 25
+        Left = 14
+        Top = 23
+        Width = 95
+        Height = 32
         Caption = 'Gerar'
         TabOrder = 0
-      end
-      object cbxAgurpar: TCheckBox
-        Left = 20
-        Top = 20
-        Width = 121
-        Height = 17
-        Caption = 'Agrupa por Categoria'
-        TabOrder = 1
+        OnClick = btnGerarRelatorioClick
       end
     end
     object gbStatus: TGroupBox
       Left = 4
       Top = 6
-      Width = 291
+      Width = 157
       Height = 75
       Caption = 'Status'
       TabOrder = 1
       object rbStatusAberto: TRadioButton
-        Left = 76
-        Top = 28
+        Left = 14
+        Top = 44
         Width = 58
         Height = 17
         Caption = 'Aberto'
@@ -90,8 +86,8 @@ object fRelatorioPedidos: TfRelatorioPedidos
         OnClick = rbStatusAbertoClick
       end
       object rbStatusCancelado: TRadioButton
-        Left = 206
-        Top = 28
+        Left = 78
+        Top = 44
         Width = 74
         Height = 17
         Caption = 'Cancelado'
@@ -99,8 +95,8 @@ object fRelatorioPedidos: TfRelatorioPedidos
         OnClick = rbStatusCanceladoClick
       end
       object rbStatusFechado: TRadioButton
-        Left = 140
-        Top = 28
+        Left = 78
+        Top = 21
         Width = 60
         Height = 17
         Caption = 'Fechado'
@@ -108,8 +104,8 @@ object fRelatorioPedidos: TfRelatorioPedidos
         OnClick = rbStatusFechadoClick
       end
       object rbStatusTodos: TRadioButton
-        Left = 12
-        Top = 28
+        Left = 14
+        Top = 21
         Width = 58
         Height = 17
         Caption = 'Todos'
@@ -136,6 +132,7 @@ object fRelatorioPedidos: TfRelatorioPedidos
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGrid1DrawColumnCell
       Columns = <
         item
           Alignment = taCenter
@@ -172,6 +169,46 @@ object fRelatorioPedidos: TfRelatorioPedidos
           Width = 204
           Visible = True
         end>
+    end
+    object gbData: TGroupBox
+      Left = 167
+      Top = 6
+      Width = 171
+      Height = 75
+      Caption = 'Data'
+      TabOrder = 3
+      object lblDataInicio: TLabel
+        Left = 6
+        Top = 25
+        Width = 53
+        Height = 13
+        Caption = 'Data inicio'
+      end
+      object lblDataFim: TLabel
+        Left = 88
+        Top = 25
+        Width = 40
+        Height = 13
+        Caption = 'Data fim'
+      end
+      object dtpFim: TDateTimePicker
+        Left = 88
+        Top = 40
+        Width = 78
+        Height = 21
+        Date = 42909.856660659720000000
+        Time = 42909.856660659720000000
+        TabOrder = 0
+      end
+      object dtpInicio: TDateTimePicker
+        Left = 6
+        Top = 40
+        Width = 78
+        Height = 21
+        Date = 42909.856660659720000000
+        Time = 42909.856660659720000000
+        TabOrder = 1
+      end
     end
   end
   object dsPedidos: TDataSource

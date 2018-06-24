@@ -471,6 +471,7 @@ object fVisualizaPedidos: TfVisualizaPedidos
     Top = 8
   end
   object fdqPagamentoByPedido: TFDQuery
+    Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'SELECT * FROM pedidos'
