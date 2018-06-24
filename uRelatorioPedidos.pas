@@ -45,8 +45,9 @@ type
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
-    procedure filtroData();
-//    procedure dtpInicioChange(Sender: TObject);
+    procedure dtpInicioChange(Sender: TObject);
+    procedure dtpFimChange(Sender: TObject);
+    // procedure dtpInicioChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -63,12 +64,92 @@ implementation
 
 uses dmDados;
 
+// SETA DATA ATUAL
 procedure TfRelatorioPedidos.FormCreate(Sender: TObject);
 begin
   dtpFim.DateTime := now;
   dtpInicio.DateTime := now;
 end;
 
+// AJUSTA SCROLBAR
+procedure TfRelatorioPedidos.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (TStringGrid(DBGrid1).RowCount - 1) < 14 then
+  begin
+    // Se tiver menos de 10 linhas
+    ShowScrollBar(DBGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+  end;
+end;
+
+// CHANGE DATA
+procedure TfRelatorioPedidos.dtpFimChange(Sender: TObject);
+begin
+  if rbStatusAberto.Checked then
+  begin
+    fRelatorioPedidos.filtraStatusAberto();
+  end
+  else
+  begin
+    if rbStatusFechado.Checked then
+    begin
+      fRelatorioPedidos.filtraStatusFechado();
+    end
+    else
+    begin
+      if rbStatusCancelado.Checked then
+      begin
+        fRelatorioPedidos.filtraStatusCancelado();
+      end
+      else
+      begin
+        if rbStatusTodos.Checked then
+        begin
+          fRelatorioPedidos.filtraStatusTodos();
+        end
+        else
+        begin
+          ShowMessage('Erro interno');
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TfRelatorioPedidos.dtpInicioChange(Sender: TObject);
+begin
+  if rbStatusAberto.Checked then
+  begin
+    fRelatorioPedidos.filtraStatusAberto();
+  end
+  else
+  begin
+    if rbStatusFechado.Checked then
+    begin
+      fRelatorioPedidos.filtraStatusFechado();
+    end
+    else
+    begin
+      if rbStatusCancelado.Checked then
+      begin
+        fRelatorioPedidos.filtraStatusCancelado();
+      end
+      else
+      begin
+        if rbStatusTodos.Checked then
+        begin
+          fRelatorioPedidos.filtraStatusTodos();
+        end
+        else
+        begin
+          ShowMessage('Erro interno');
+        end;
+      end;
+    end;
+  end;
+end;
+
+// BOTOES DE STATUS
 procedure TfRelatorioPedidos.rbStatusAbertoClick(Sender: TObject);
 begin
   fRelatorioPedidos.filtraStatusAberto();
@@ -90,28 +171,20 @@ begin
 end;
 
 // ----------FUNÇÕES----------//
-procedure TfRelatorioPedidos.filtroData();
+procedure TfRelatorioPedidos.filtraStatusTodos();
 var
   dataInicial: String;
   dataFinal: String;
 begin
   dataInicial := FormatDateTime('yyyy-mm-dd', dtpInicio.Date);
   dataFinal := FormatDateTime('yyyy-mm-dd', dtpFim.Date);
-
   fdqPedidos.SQL.Clear;
   fdqPedidos.SQL.Add('SELECT * FROM pedidos');
-  fdqPedidos.SQL.Add
-    ('WHERE criado_em::date BETWEEN DATE(:datainicial) AND DATE(:dataFinal)');
+  fdqPedidos.SQL.Add('WHERE criado_em::date BETWEEN DATE(:datainicial)');
+  fdqPedidos.SQL.Add('AND DATE(:dataFinal)');
+  fdqPedidos.SQL.Add('ORDER BY criado_em DESC');
   fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
   fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
-
-end;
-
-procedure TfRelatorioPedidos.filtraStatusTodos();
-begin
-  fdqPedidos.SQL.Clear;
-  fdqPedidos.SQL.Add('SELECT * FROM pedidos');
-  fdqPedidos.SQL.Add('ORDER BY criado_em DESC');
   fdqPedidos.Open();
 end;
 
@@ -138,36 +211,20 @@ begin
       end
       else
       begin
-        fRelatorioPedidos.filtraStatusTodos();
+        if rbStatusTodos.Checked then
+        begin
+          fRelatorioPedidos.filtraStatusTodos();
+        end
+        else
+        begin
+          ShowMessage('Erro interno');
+        end;
       end;
     end;
   end;
   fRelatorioPedidos.frxPedidos.LoadFromFile(path + 'relatorios\relPedidos.fr3');
   fRelatorioPedidos.frxPedidos.ShowReport();
 end;
-
-procedure TfRelatorioPedidos.DBGrid1DrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  if (TStringGrid(DBGrid1).RowCount - 1) < 14 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(DBGrid1.Handle, SB_VERT, False); // Remove barra Vertical
-  end;
-end;
-
-//procedure TfRelatorioPedidos.dtpInicioChange(Sender: TObject);
-//var
-//
-//begin
-//
-//  fdqPedidos.SQL.Clear;
-//  fdqPedidos.SQL.Add('SELECT * FROM pedidos');
-//  fdqPedidos.SQL.Add
-//    ('WHERE criado_em::date BETWEEN DATE(:datainicial) AND DATE(:dataFinal)');
-//  fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
-//  fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
-//end;
 
 procedure TfRelatorioPedidos.filtraStatusAberto();
 var
@@ -178,26 +235,48 @@ begin
   dataFinal := FormatDateTime('yyyy-mm-dd', dtpFim.Date);
   fdqPedidos.SQL.Clear;
   fdqPedidos.SQL.Add('SELECT * FROM pedidos');
-  fdqPedidos.SQL.Add('WHERE status =' + QuotedStr('EM ABERTO'));
+  fdqPedidos.SQL.Add('WHERE criado_em::date BETWEEN DATE(:datainicial)');
+  fdqPedidos.SQL.Add('AND DATE(:dataFinal) AND status =' +
+    QuotedStr('EM ABERTO'));
   fdqPedidos.SQL.Add('ORDER BY criado_em DESC');
+  fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
+  fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
   fdqPedidos.Open();
 end;
 
 procedure TfRelatorioPedidos.filtraStatusFechado();
+var
+  dataInicial: String;
+  dataFinal: String;
 begin
+  dataInicial := FormatDateTime('yyyy-mm-dd', dtpInicio.Date);
+  dataFinal := FormatDateTime('yyyy-mm-dd', dtpFim.Date);
   fdqPedidos.SQL.Clear;
   fdqPedidos.SQL.Add('SELECT * FROM pedidos');
-  fdqPedidos.SQL.Add('WHERE status =' + QuotedStr('FECHADO'));
+  fdqPedidos.SQL.Add('WHERE criado_em::date BETWEEN DATE(:datainicial)');
+  fdqPedidos.SQL.Add('AND DATE(:dataFinal) AND status =' +
+    QuotedStr('FECHADO'));
   fdqPedidos.SQL.Add('ORDER BY criado_em DESC');
+  fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
+  fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
   fdqPedidos.Open();
 end;
 
 procedure TfRelatorioPedidos.filtraStatusCancelado();
+var
+  dataInicial: String;
+  dataFinal: String;
 begin
+  dataInicial := FormatDateTime('yyyy-mm-dd', dtpInicio.Date);
+  dataFinal := FormatDateTime('yyyy-mm-dd', dtpFim.Date);
   fdqPedidos.SQL.Clear;
   fdqPedidos.SQL.Add('SELECT * FROM pedidos');
-  fdqPedidos.SQL.Add('WHERE status =' + QuotedStr('CANCELADO'));
+  fdqPedidos.SQL.Add('WHERE criado_em::date BETWEEN DATE(:datainicial)');
+  fdqPedidos.SQL.Add('AND DATE(:dataFinal) AND status =' +
+    QuotedStr('CANCELADO'));
   fdqPedidos.SQL.Add('ORDER BY criado_em DESC');
+  fdqPedidos.ParamByName('dataInicial').Value := dataInicial;
+  fdqPedidos.ParamByName('dataFinal').Value := dataFinal;
   fdqPedidos.Open();
 end;
 

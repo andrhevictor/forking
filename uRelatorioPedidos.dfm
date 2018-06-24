@@ -1,10 +1,9 @@
 object fRelatorioPedidos: TfRelatorioPedidos
   Left = 0
   Top = 0
-  AutoSize = True
   Caption = 'Relatorios de Pedidos'
-  ClientHeight = 392
-  ClientWidth = 469
+  ClientHeight = 395
+  ClientWidth = 470
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +17,15 @@ object fRelatorioPedidos: TfRelatorioPedidos
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 469
+    Width = 470
     Height = 43
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 304
     object lblTituloRelatorio: TLabel
       Left = 1
       Top = 1
-      Width = 467
+      Width = 468
       Height = 41
       Align = alClient
       Alignment = taCenter
@@ -44,21 +44,24 @@ object fRelatorioPedidos: TfRelatorioPedidos
   object panelMid: TPanel
     Left = 0
     Top = 43
-    Width = 469
-    Height = 349
+    Width = 470
+    Height = 352
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 304
+    ExplicitHeight = 158
     DesignSize = (
-      469
-      349)
+      470
+      352)
     object gbImpressao: TGroupBox
       Left = 344
       Top = 6
       Width = 121
-      Height = 75
+      Height = 269
       Anchors = [akLeft, akTop, akBottom]
       Caption = 'Impress'#227'o'
       TabOrder = 0
+      ExplicitHeight = 75
       object btnGerarRelatorio: TButton
         Left = 14
         Top = 23
@@ -180,7 +183,7 @@ object fRelatorioPedidos: TfRelatorioPedidos
       object lblDataInicio: TLabel
         Left = 6
         Top = 25
-        Width = 53
+        Width = 49
         Height = 13
         Caption = 'Data inicio'
       end
@@ -199,6 +202,7 @@ object fRelatorioPedidos: TfRelatorioPedidos
         Date = 42909.856660659720000000
         Time = 42909.856660659720000000
         TabOrder = 0
+        OnChange = dtpFimChange
       end
       object dtpInicio: TDateTimePicker
         Left = 6
@@ -208,6 +212,7 @@ object fRelatorioPedidos: TfRelatorioPedidos
         Date = 42909.856660659720000000
         Time = 42909.856660659720000000
         TabOrder = 1
+        OnChange = dtpInicioChange
       end
     end
   end
@@ -313,6 +318,13 @@ object fRelatorioPedidos: TfRelatorioPedidos
           Memo.UTF8W = (
             'Gerado em [Date]')
           ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 302.362400000000000000
+          Top = 22.677180000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
         end
       end
       object asasasasa: TfrxMasterData
