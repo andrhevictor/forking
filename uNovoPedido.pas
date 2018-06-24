@@ -53,6 +53,7 @@ type
     procedure atualizaQuantidadeValorItem(quantidade: Double);
     Function getFichaDisponivel(ficha: Integer) : Boolean;
     procedure FormShow(Sender: TObject);
+    Function pedidoHasFicha(idPedido: Integer): Boolean;
     procedure dbgCategoriaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure dbgProdutosDrawColumnCell(Sender: TObject; const Rect: TRect;
