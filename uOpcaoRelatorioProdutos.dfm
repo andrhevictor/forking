@@ -246,7 +246,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     object fdqTodosProdutospreco: TBCDField
       FieldName = 'preco'
       Origin = 'preco'
-      DisplayFormat = '0.00'
+      DisplayFormat = 'R$ 0.00'
       Precision = 6
       Size = 2
     end
@@ -923,7 +923,7 @@ object fOpcaoRelatorioProduto: TfOpcaoRelatorioProduto
     object fdqProdutosMaisVendidospreco: TBCDField
       DisplayWidth = 7
       FieldName = 'preco'
-      DisplayFormat = '0.00'
+      DisplayFormat = 'R$ 0.00'
       Precision = 6
       Size = 2
     end

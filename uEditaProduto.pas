@@ -25,7 +25,6 @@ type
     fdqProdutosdescricao: TWideStringField;
     dbgProdutos: TDBGrid;
     dbgCategorias: TDBGrid;
-    lblCategoria: TLabel;
     lblCategoriaEdit: TLabel;
     DBEdit1: TDBEdit;
     lblNome: TLabel;
@@ -39,6 +38,7 @@ type
     btnSalvar: TButton;
     procedure dbgCategoriasCellClick(Column: TColumn);
     procedure btnSalvarClick(Sender: TObject);
+
   private
     { Private declarations }
   public

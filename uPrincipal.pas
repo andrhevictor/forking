@@ -25,10 +25,8 @@ type
     btnPagamento: TButton;
     fdqInserePedido: TFDQuery;
     Relatrios1: TMenuItem;
-    Arquivo1: TMenuItem;
     Sobre1: TMenuItem;
     Sair1: TMenuItem;
-    N1: TMenuItem;
     SobreoSistema1: TMenuItem;
     Ajuda1: TMenuItem;
     Produtos2: TMenuItem;

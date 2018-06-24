@@ -4,8 +4,8 @@ object fCadastraProduto: TfCadastraProduto
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastrar Produto'
-  ClientHeight = 536
-  ClientWidth = 688
+  ClientHeight = 305
+  ClientWidth = 391
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,25 +21,24 @@ object fCadastraProduto: TfCadastraProduto
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 688
-    Height = 89
+    Width = 391
+    Height = 57
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 883
     object btnCancelar: TButton
-      Left = 150
-      Top = 21
+      Left = 22
+      Top = 11
       Width = 89
-      Height = 49
+      Height = 36
       Caption = 'Cancelar'
       TabOrder = 0
       OnClick = btnCancelarClick
     end
     object btnSalvar: TButton
-      Left = 40
-      Top = 21
+      Left = 282
+      Top = 11
       Width = 89
-      Height = 49
+      Height = 36
       Caption = 'Salvar'
       TabOrder = 1
       OnClick = btnSalvarClick
@@ -47,56 +46,56 @@ object fCadastraProduto: TfCadastraProduto
   end
   object panelMid: TPanel
     Left = 0
-    Top = 89
-    Width = 688
-    Height = 447
+    Top = 57
+    Width = 391
+    Height = 248
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 883
-    ExplicitHeight = 359
+    ExplicitTop = 54
+    ExplicitHeight = 378
     object lblId: TLabel
-      Left = 40
-      Top = 37
+      Left = 22
+      Top = 17
       Width = 11
       Height = 13
       Caption = 'ID'
       FocusControl = DBEdit1
     end
     object lblNome: TLabel
-      Left = 40
-      Top = 128
+      Left = 22
+      Top = 66
       Width = 27
       Height = 13
       Caption = 'Nome'
       FocusControl = DBEdit3
     end
     object lblPreco: TLabel
-      Left = 40
-      Top = 168
+      Left = 303
+      Top = 17
       Width = 27
       Height = 13
       Caption = 'Pre'#231'o'
       FocusControl = DBEdit4
     end
     object lblDescricao: TLabel
-      Left = 40
-      Top = 208
+      Left = 22
+      Top = 109
       Width = 46
       Height = 13
       Caption = 'Descri'#231#227'o'
       FocusControl = DBEdit5
     end
     object lblCategoria: TLabel
-      Left = 40
-      Top = 77
+      Left = 75
+      Top = 18
       Width = 47
-      Height = 13
+      Height = 12
       Caption = 'Categoria'
       FocusControl = DBEdit1
     end
     object dblcCategorias: TDBLookupComboBox
-      Left = 40
-      Top = 96
+      Left = 75
+      Top = 36
       Width = 199
       Height = 21
       DataField = 'categoria_id'
@@ -107,9 +106,9 @@ object fCadastraProduto: TfCadastraProduto
       TabOrder = 0
     end
     object DBEdit1: TDBEdit
-      Left = 40
-      Top = 56
-      Width = 199
+      Left = 22
+      Top = 36
+      Width = 27
       Height = 21
       DataField = 'id'
       DataSource = dsProdutos
@@ -117,28 +116,28 @@ object fCadastraProduto: TfCadastraProduto
       TabOrder = 1
     end
     object DBEdit3: TDBEdit
-      Left = 40
-      Top = 144
-      Width = 300
+      Left = 22
+      Top = 82
+      Width = 349
       Height = 21
       DataField = 'nome'
       DataSource = dsProdutos
       TabOrder = 2
     end
     object DBEdit4: TDBEdit
-      Left = 40
-      Top = 184
-      Width = 95
+      Left = 303
+      Top = 36
+      Width = 68
       Height = 21
       DataField = 'preco'
       DataSource = dsProdutos
       TabOrder = 3
     end
     object DBEdit5: TDBEdit
-      Left = 40
-      Top = 224
-      Width = 300
-      Height = 21
+      Left = 22
+      Top = 126
+      Width = 349
+      Height = 77
       DataField = 'descricao'
       DataSource = dsProdutos
       TabOrder = 4
@@ -146,29 +145,29 @@ object fCadastraProduto: TfCadastraProduto
   end
   object dsProdutos: TDataSource
     DataSet = fdqProdutos
-    Left = 544
-    Top = 32
+    Left = 168
+    Top = 256
   end
   object fdqCategorias: TFDQuery
     Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from categorias')
-    Left = 472
-    Top = 32
+    Left = 104
+    Top = 256
   end
   object dsCategorias: TDataSource
     DataSet = fdqCategorias
-    Left = 392
-    Top = 32
+    Left = 24
+    Top = 256
   end
   object fdqProdutos: TFDQuery
     Active = True
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from produtos')
-    Left = 608
-    Top = 32
+    Left = 232
+    Top = 256
     object fdqProdutosid: TLargeintField
       FieldName = 'id'
       Origin = 'id'
@@ -186,6 +185,7 @@ object fCadastraProduto: TfCadastraProduto
     object fdqProdutospreco: TBCDField
       FieldName = 'preco'
       Origin = 'preco'
+      DisplayFormat = 'R$ 0.00'
       Precision = 6
       Size = 2
     end

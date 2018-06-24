@@ -2,8 +2,8 @@ object fVisualizaFichas: TfVisualizaFichas
   Left = 0
   Top = 0
   Caption = 'Visualizar fichas'
-  ClientHeight = 591
-  ClientWidth = 1031
+  ClientHeight = 453
+  ClientWidth = 640
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,34 +16,38 @@ object fVisualizaFichas: TfVisualizaFichas
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 1031
-    Height = 73
+    Width = 640
+    Height = 67
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 1031
   end
   object panelMid: TPanel
     Left = 0
-    Top = 73
-    Width = 1031
-    Height = 518
+    Top = 67
+    Width = 640
+    Height = 386
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 721
+    ExplicitHeight = 524
     object lblValorTotal: TLabel
-      Left = 752
-      Top = 431
-      Width = 108
+      Left = 434
+      Top = 355
+      Width = 188
       Height = 19
+      Alignment = taRightJustify
       Caption = 'Valor Total: R$'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clRed
       Font.Height = -16
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
     end
     object lblPedidoID: TLabel
-      Left = 264
-      Top = 63
+      Left = 176
+      Top = 6
       Width = 144
       Height = 19
       Caption = 'N'#250'mero do Pedido: '
@@ -55,8 +59,8 @@ object fVisualizaFichas: TfVisualizaFichas
       ParentFont = False
     end
     object lblStatusPedido: TLabel
-      Left = 264
-      Top = 95
+      Left = 384
+      Top = 6
       Width = 130
       Height = 19
       Caption = 'Status do Pedido: '
@@ -68,10 +72,10 @@ object fVisualizaFichas: TfVisualizaFichas
       ParentFont = False
     end
     object dbgFichas: TDBGrid
-      Left = 24
-      Top = 24
-      Width = 201
-      Height = 449
+      Left = 0
+      Top = 0
+      Width = 163
+      Height = 385
       DataSource = dsFichas
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
@@ -101,10 +105,10 @@ object fVisualizaFichas: TfVisualizaFichas
         end>
     end
     object dbgPedido: TDBGrid
-      Left = 264
-      Top = 120
-      Width = 705
-      Height = 305
+      Left = 169
+      Top = 31
+      Width = 464
+      Height = 314
       DataSource = dsPedidoByFicha
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 1
@@ -122,22 +126,28 @@ object fVisualizaFichas: TfVisualizaFichas
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'quantidade'
-          Title.Caption = 'Quantidade'
-          Width = 70
+          Title.Alignment = taCenter
+          Title.Caption = 'QTD'
+          Width = 53
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'preco'
+          Title.Alignment = taCenter
           Title.Caption = 'Valor Unit'#225'rio'
-          Width = 70
+          Width = 72
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'valor_total'
+          Title.Alignment = taCenter
           Title.Caption = 'Valor Total'
           Width = 70
           Visible = True
@@ -150,28 +160,28 @@ object fVisualizaFichas: TfVisualizaFichas
     SQL.Strings = (
       'SELECT * FROM fichas'
       'ORDER BY numero_ficha')
-    Left = 664
+    Left = 56
     Top = 16
   end
   object dsFichas: TDataSource
     DataSet = fdqFichas
     OnDataChange = dsFichasDataChange
-    Left = 848
+    Left = 224
     Top = 16
   end
   object fdqPedidoByFicha: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 584
+    Left = 408
     Top = 16
   end
   object dsPedidoByFicha: TDataSource
     DataSet = fdqPedidoByFicha
-    Left = 784
+    Left = 168
     Top = 16
   end
   object fdqSomaValorPedido: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 480
+    Left = 304
     Top = 16
   end
 end

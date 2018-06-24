@@ -2,8 +2,8 @@ object fPrincipal: TfPrincipal
   Left = 0
   Top = 0
   Caption = 'Tela Principal'
-  ClientHeight = 684
-  ClientWidth = 1101
+  ClientHeight = 506
+  ClientWidth = 858
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,10 +19,11 @@ object fPrincipal: TfPrincipal
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 1101
+    Width = 858
     Height = 129
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 1101
     object btnNovoPedido: TButton
       Left = 16
       Top = 28
@@ -54,23 +55,15 @@ object fPrincipal: TfPrincipal
   object panelMid: TPanel
     Left = 0
     Top = 129
-    Width = 1101
-    Height = 555
+    Width = 858
+    Height = 377
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 1101
+    ExplicitHeight = 555
   end
   object mmMenu: TMainMenu
     Left = 512
-    object Arquivo1: TMenuItem
-      Caption = 'Arquivo   '
-      object Sair1: TMenuItem
-        Caption = 'Sair'
-        OnClick = Sair1Click
-      end
-      object N1: TMenuItem
-        Caption = '...'
-      end
-    end
     object Produtos1: TMenuItem
       Caption = 'Produtos   '
       object Cadastrar1: TMenuItem
@@ -92,13 +85,13 @@ object fPrincipal: TfPrincipal
         Caption = 'Visualizar Todas'
         OnClick = VisualizarTodas1Click
       end
+      object Pedidos2: TMenuItem
+        Caption = 'Pedidos'
+        OnClick = Pedidos2Click
+      end
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios   '
-      object Produtos2: TMenuItem
-        Caption = 'Produtos'
-        OnClick = Produtos2Click
-      end
       object Faturamento1: TMenuItem
         Caption = 'Faturamento'
       end
@@ -108,6 +101,10 @@ object fPrincipal: TfPrincipal
       object Pedidos1: TMenuItem
         Caption = 'Pedidos'
         OnClick = Pedidos1Click
+      end
+      object Produtos2: TMenuItem
+        Caption = 'Produtos'
+        OnClick = Produtos2Click
       end
     end
     object Usurios1: TMenuItem
@@ -130,9 +127,9 @@ object fPrincipal: TfPrincipal
         Caption = 'Ajuda'
       end
     end
-    object Pedidos2: TMenuItem
-      Caption = 'Pedidos'
-      OnClick = Pedidos2Click
+    object Sair1: TMenuItem
+      Caption = 'Sair'
+      OnClick = Sair1Click
     end
   end
   object fdqInserePedido: TFDQuery
