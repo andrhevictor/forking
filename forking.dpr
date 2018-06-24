@@ -17,7 +17,8 @@ uses
   uMd5 in 'uMd5.pas',
   uCriaUsuario in 'uCriaUsuario.pas' {fAdicionaUsuario},
   uVisualizaUsuarios in 'uVisualizaUsuarios.pas' {fVisualizaUsuarios},
-  uRelatorioPedidos in 'uRelatorioPedidos.pas' {fRelatorioPedidos};
+  uRelatorioPedidos in 'uRelatorioPedidos.pas' {fRelatorioPedidos},
+  uRelatorioFaturamento in 'uRelatorioFaturamento.pas' {fRelatorioFaturamento};
 
 {$R *.res}
 
@@ -39,5 +40,6 @@ begin
   Application.CreateForm(TfAdicionaUsuario, fAdicionaUsuario);
   Application.CreateForm(TfVisualizaUsuarios, fVisualizaUsuarios);
   Application.CreateForm(TfRelatorioPedidos, fRelatorioPedidos);
+  Application.CreateForm(TfRelatorioFaturamento, fRelatorioFaturamento);
   Application.Run;
 end.
