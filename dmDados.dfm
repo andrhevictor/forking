@@ -6,9 +6,10 @@ object dmConnection: TdmConnection
     Params.Strings = (
       'Database=restaurante'
       'User_Name=postgres'
-      'Password=postgres'
-      'DriverID=pG')
-    Connected = True
+      'Password=admin'
+      'Server=localhost'
+      'DriverID=PG'
+      'Port=5433')
     LoginPrompt = False
     Left = 40
     Top = 40
