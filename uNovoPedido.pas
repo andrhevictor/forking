@@ -53,12 +53,6 @@ type
     procedure atualizaQuantidadeValorItem(quantidade: Double);
     Function getFichaDisponivel(ficha: Integer) : Boolean;
     procedure FormShow(Sender: TObject);
-    procedure dbgCategoriaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure dbgProdutosDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure dbgItensPedidoDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     Function pedidohasFicha(idPedido: Integer): Boolean;
     Function getNumeroFichaByPedido(idPedido: Integer): Integer;
     Function countItensByPedido(idPedido: Integer) : Integer;
@@ -205,16 +199,6 @@ begin
   fNovoPedido.checkQuantityItens();
 end;
 
-procedure TfNovoPedido.dbgProdutosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  if (TStringGrid(dbgProdutos).RowCount - 1) < 14 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(dbgProdutos.Handle, SB_VERT, False); // Remove barra Vertical
-  end;
-end;
-
 procedure TfNovoPedido.dbgCategoriaCellClick(Column: TColumn);
 var
   categoria_id: Integer;
@@ -225,16 +209,6 @@ begin
   fdqProdutos.SQL.Add('WHERE categoria_id = :id');
   fdqProdutos.ParamByName('id').Value := categoria_id;
   fdqProdutos.Open();
-end;
-
-procedure TfNovoPedido.dbgCategoriaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  if (TStringGrid(dbgCategoria).RowCount - 1) < 14 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(dbgCategoria.Handle, SB_VERT, False); // Remove barra Vertical
-  end;
 end;
 
 procedure TfNovoPedido.dbgItensPedidoDblClick(Sender: TObject);
@@ -249,16 +223,6 @@ begin
     fNovoPedido.atualizaQuantidadeValorItem(quantidade);
     fNovoPedido.atualizaGridItens();
     fNovoPedido.recalculaValorPedido();
-  end;
-end;
-
-procedure TfNovoPedido.dbgItensPedidoDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  if (TStringGrid(dbgItensPedido).RowCount - 1) < 14 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(dbgItensPedido.Handle, SB_VERT, False); // Remove barra Vertical
   end;
 end;
 

@@ -21,8 +21,6 @@ object fNovoPedido: TfNovoPedido
     Height = 487
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitTop = 59
     DesignSize = (
       672
       487)
@@ -57,7 +55,6 @@ object fNovoPedido: TfNovoPedido
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
-      OnDrawColumnCell = dbgProdutosDrawColumnCell
       OnDblClick = dbgProdutosDblClick
       Columns = <
         item
@@ -92,7 +89,6 @@ object fNovoPedido: TfNovoPedido
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnCellClick = dbgCategoriaCellClick
-      OnDrawColumnCell = dbgCategoriaDrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -122,7 +118,6 @@ object fNovoPedido: TfNovoPedido
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
-      OnDrawColumnCell = dbgItensPedidoDrawColumnCell
       OnDblClick = dbgItensPedidoDblClick
       Columns = <
         item
