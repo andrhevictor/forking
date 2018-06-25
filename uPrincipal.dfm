@@ -23,7 +23,6 @@ object fPrincipal: TfPrincipal
     Height = 129
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 1101
     object btnNovoPedido: TButton
       Left = 16
       Top = 28
@@ -59,8 +58,6 @@ object fPrincipal: TfPrincipal
     Height = 377
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 1101
-    ExplicitHeight = 555
   end
   object mmMenu: TMainMenu
     Left = 512

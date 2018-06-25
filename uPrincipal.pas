@@ -146,7 +146,7 @@ begin
   nivel_acesso := fLogin.GetNivelAcesso();
 
   if nivel_acesso = 1 then begin
-      mmMenu.Items[4].Enabled := False;
+      mmMenu.Items[3].Enabled := False;
   end;
 
 end;
