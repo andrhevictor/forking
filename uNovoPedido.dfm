@@ -43,7 +43,7 @@ object fNovoPedido: TfNovoPedido
       ParentFont = False
     end
     object dbgProdutos: TDBGrid
-      Left = 183
+      Left = 181
       Top = 6
       Width = 475
       Height = 201
@@ -191,6 +191,7 @@ object fNovoPedido: TfNovoPedido
       Width = 140
       Height = 41
       Caption = 'Deletar Item Selecionado'
+      Enabled = False
       TabOrder = 2
       OnClick = btnDeletaItemClick
     end
@@ -269,7 +270,7 @@ object fNovoPedido: TfNovoPedido
   end
   object fdqAtualizaPedido: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 336
+    Left = 344
     Top = 328
   end
   object fdqFichaDisponivel: TFDQuery

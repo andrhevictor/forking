@@ -61,6 +61,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     Function pedidohasFicha(idPedido: Integer): Boolean;
     Function getNumeroFichaByPedido(idPedido: Integer): Integer;
+    Function countItensByPedido(idPedido: Integer) : Integer;
+    procedure checkQuantityItens();
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
@@ -130,6 +132,25 @@ begin
 
 end;
 
+procedure TfNovoPedido.checkQuantityItens;
+var
+  idPedido: Integer;
+begin
+  idPedido := fPrincipal.GetPedidoId;
+  if fNovoPedido.countItensByPedido(idPedido) > 0 then begin
+    btnDeletaItem.Enabled := True;
+  end
+  else begin
+    btnDeletaItem.Enabled := False;
+  end;
+
+end;
+
+function TfNovoPedido.countItensByPedido(idPedido: Integer): Integer;
+begin
+  Result := fdqItensPedido.RecordCount;
+end;
+
 procedure TfNovoPedido.btnDeletaItemClick(Sender: TObject);
 var
   itemNome: String;
@@ -142,12 +163,14 @@ begin
   itemNome   := dbgItensPedido.DataSource.DataSet.FieldByName('nome').AsString;
   textoMsg   := 'Deseja realmente deletar ' + quantidade + ' ' + itemNome + '(s) do pedido?';
 
-if Application.MessageBox(PChar(textoMsg),'Excluir item',mb_yesno + mb_iconquestion) = id_yes then
+  if Application.MessageBox(PChar(textoMsg),'Excluir item',mb_yesno + mb_iconquestion) = id_yes then
     Begin
       fNovoPedido.deletaItemPedido(itemId);
       fNovoPedido.atualizaGridItens();
       fNovoPedido.recalculaValorPedido();
     End;
+
+  fNovoPedido.checkQuantityItens();
 end;
 
 procedure TfNovoPedido.dbgProdutosDblClick(Sender: TObject);
@@ -179,6 +202,7 @@ begin
   end;
   fNovoPedido.atualizaGridItens();
   fNovoPedido.recalculaValorPedido();
+  fNovoPedido.checkQuantityItens();
 end;
 
 procedure TfNovoPedido.dbgProdutosDrawColumnCell(Sender: TObject;
