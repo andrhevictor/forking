@@ -1,4 +1,4 @@
-unit uNovoPedido;
+﻿unit uNovoPedido;
 
 interface
 
@@ -54,16 +54,12 @@ type
     Function getFichaDisponivel(ficha: Integer) : Boolean;
     procedure FormShow(Sender: TObject);
     Function pedidoHasFicha(idPedido: Integer): Boolean;
-<<<<<<< Updated upstream
     procedure dbgCategoriaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure dbgProdutosDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure dbgItensPedidoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    Function pedidoHasFicha(idPedido: Integer): Boolean;
-=======
->>>>>>> Stashed changes
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
