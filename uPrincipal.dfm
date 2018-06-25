@@ -61,15 +61,12 @@ object fPrincipal: TfPrincipal
   end
   object mmMenu: TMainMenu
     Left = 512
+    Top = 16
     object Produtos1: TMenuItem
       Caption = 'Produtos   '
       object Cadastrar1: TMenuItem
         Caption = 'Cadastrar'
         OnClick = Cadastrar1Click
-      end
-      object Editar1: TMenuItem
-        Caption = 'Editar'
-        OnClick = Editar1Click
       end
       object VisualizarTodos1: TMenuItem
         Caption = 'Visualizar Todos'
@@ -89,12 +86,6 @@ object fPrincipal: TfPrincipal
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios   '
-      object Faturamento1: TMenuItem
-        Caption = 'Faturamento'
-      end
-      object Pagamento1: TMenuItem
-        Caption = 'Pagamento'
-      end
       object Pedidos1: TMenuItem
         Caption = 'Pedidos'
         OnClick = Pedidos1Click
@@ -115,15 +106,6 @@ object fPrincipal: TfPrincipal
         OnClick = VisualizarUsurios1Click
       end
     end
-    object Sobre1: TMenuItem
-      Caption = 'Sobre   '
-      object SobreoSistema1: TMenuItem
-        Caption = 'Sobre o Sistema'
-      end
-      object Ajuda1: TMenuItem
-        Caption = 'Ajuda'
-      end
-    end
     object Sair1: TMenuItem
       Caption = 'Sair'
       OnClick = Sair1Click
@@ -132,9 +114,11 @@ object fPrincipal: TfPrincipal
   object fdqInserePedido: TFDQuery
     Connection = dmConnection.fdcDatabase
     Left = 592
+    Top = 16
   end
   object fdqLastPedidoFicha: TFDQuery
     Connection = dmConnection.fdcDatabase
     Left = 680
+    Top = 16
   end
 end

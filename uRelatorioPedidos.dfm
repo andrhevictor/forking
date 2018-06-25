@@ -21,7 +21,6 @@ object fRelatorioPedidos: TfRelatorioPedidos
     Height = 43
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 304
     object lblTituloRelatorio: TLabel
       Left = 1
       Top = 1
@@ -48,8 +47,6 @@ object fRelatorioPedidos: TfRelatorioPedidos
     Height = 352
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 304
-    ExplicitHeight = 158
     DesignSize = (
       470
       352)
@@ -61,7 +58,6 @@ object fRelatorioPedidos: TfRelatorioPedidos
       Anchors = [akLeft, akTop, akBottom]
       Caption = 'Impress'#227'o'
       TabOrder = 0
-      ExplicitHeight = 75
       object btnGerarRelatorio: TButton
         Left = 14
         Top = 23

@@ -39,11 +39,13 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     lblCategoria: TLabel;
     btnSalvar: TButton;
+    btnDeletar: TButton;
     procedure FormCreate(Sender: TObject);
     procedure edtFiltroNomeChange(Sender: TObject);
     procedure dbgCategoriasCellClick(Column: TColumn);
     procedure btnLimpaFiltrosClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure btnDeletarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,11 +61,20 @@ implementation
 
 uses dmDados;
 
+procedure TfVisualizarProduto.btnDeletarClick(Sender: TObject);
+begin
+  if Application.MessageBox('Você deseja realmente excluir o produto?','Excluir produto',mb_yesno + mb_iconquestion) = id_yes then
+    Begin
+      fdqProdutos.Delete;
+      ShowMessage('Produto deletado com sucesso!');
+    End;
+end;
+
 procedure TfVisualizarProduto.btnLimpaFiltrosClick(Sender: TObject);
 begin
    edtFiltroNome.Text := '';
    fdqProdutos.SQL.Clear;
-   fdqProdutos.SQL.Add(' SELECT * FROM produtos' );
+   fdqProdutos.SQL.Add('SELECT * FROM produtos');
    fdqProdutos.Open();
 end;
 

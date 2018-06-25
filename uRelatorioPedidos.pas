@@ -75,11 +75,11 @@ end;
 procedure TfRelatorioPedidos.DBGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (TStringGrid(DBGrid1).RowCount - 1) < 14 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(DBGrid1.Handle, SB_VERT, False); // Remove barra Vertical
-  end;
+//  if (TStringGrid(DBGrid1).RowCount - 1) < 14 then
+//  begin
+//    // Se tiver menos de 10 linhas
+//    ShowScrollBar(DBGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+//  end;
 end;
 
 // CHANGE DATA

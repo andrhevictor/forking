@@ -2,8 +2,8 @@ object fVisualizarProduto: TfVisualizarProduto
   Left = 0
   Top = 0
   Caption = 'Visualizar Produtos'
-  ClientHeight = 645
-  ClientWidth = 1061
+  ClientHeight = 497
+  ClientWidth = 939
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,24 +17,14 @@ object fVisualizarProduto: TfVisualizarProduto
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 1061
+    Width = 939
     Height = 89
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 1079
-  end
-  object panelMid: TPanel
-    Left = 0
-    Top = 89
-    Width = 1061
-    Height = 556
-    Align = alClient
-    TabOrder = 1
-    ExplicitWidth = 1079
-    ExplicitHeight = 619
+    ExplicitWidth = 1061
     object lblFiltro: TLabel
       Left = 16
-      Top = 6
+      Top = 22
       Width = 48
       Height = 23
       Caption = 'Filtrar'
@@ -45,9 +35,37 @@ object fVisualizarProduto: TfVisualizarProduto
       Font.Style = []
       ParentFont = False
     end
+    object btnLimpaFiltros: TButton
+      Left = 319
+      Top = 49
+      Width = 122
+      Height = 25
+      Caption = 'Limpar Filtro'
+      TabOrder = 0
+      OnClick = btnLimpaFiltrosClick
+    end
+    object edtFiltroNome: TEdit
+      Left = 16
+      Top = 51
+      Width = 257
+      Height = 21
+      TabOrder = 1
+      TextHint = 'Filtre pelo nome do produto'
+      OnChange = edtFiltroNomeChange
+    end
+  end
+  object panelMid: TPanel
+    Left = 0
+    Top = 89
+    Width = 939
+    Height = 408
+    Align = alClient
+    TabOrder = 1
+    ExplicitWidth = 1061
+    ExplicitHeight = 556
     object lblId: TLabel
       Left = 648
-      Top = 78
+      Top = 30
       Width = 11
       Height = 13
       Caption = 'ID'
@@ -55,7 +73,7 @@ object fVisualizarProduto: TfVisualizarProduto
     end
     object lblNome: TLabel
       Left = 648
-      Top = 176
+      Top = 128
       Width = 27
       Height = 13
       Caption = 'Nome'
@@ -63,7 +81,7 @@ object fVisualizarProduto: TfVisualizarProduto
     end
     object lblPreco: TLabel
       Left = 648
-      Top = 273
+      Top = 225
       Width = 27
       Height = 13
       Caption = 'Pre'#231'o'
@@ -71,7 +89,7 @@ object fVisualizarProduto: TfVisualizarProduto
     end
     object lblDescricao: TLabel
       Left = 648
-      Top = 221
+      Top = 173
       Width = 46
       Height = 13
       Caption = 'Descri'#231#227'o'
@@ -79,7 +97,7 @@ object fVisualizarProduto: TfVisualizarProduto
     end
     object lblCategoria: TLabel
       Left = 648
-      Top = 121
+      Top = 73
       Width = 47
       Height = 13
       Caption = 'Categoria'
@@ -87,7 +105,7 @@ object fVisualizarProduto: TfVisualizarProduto
     end
     object dbgProdutos: TDBGrid
       Left = 175
-      Top = 94
+      Top = 22
       Width = 458
       Height = 315
       DataSource = dsProdutos
@@ -126,7 +144,7 @@ object fVisualizarProduto: TfVisualizarProduto
     end
     object dbgCategorias: TDBGrid
       Left = 16
-      Top = 94
+      Top = 22
       Width = 153
       Height = 315
       DataSource = dsCategorias
@@ -152,74 +170,65 @@ object fVisualizarProduto: TfVisualizarProduto
           Visible = True
         end>
     end
-    object edtFiltroNome: TEdit
-      Left = 16
-      Top = 35
-      Width = 257
-      Height = 21
-      TabOrder = 2
-      TextHint = 'Filtre pelo nome do produto'
-      OnChange = edtFiltroNomeChange
-    end
-    object btnLimpaFiltros: TButton
-      Left = 319
-      Top = 33
-      Width = 122
-      Height = 25
-      Caption = 'Limpar Filtro'
-      TabOrder = 3
-      OnClick = btnLimpaFiltrosClick
-    end
     object DBEdit1: TDBEdit
       Left = 648
-      Top = 94
-      Width = 199
+      Top = 46
+      Width = 95
       Height = 21
       DataField = 'id'
       DataSource = dsProdutos
       Enabled = False
-      TabOrder = 4
+      TabOrder = 2
     end
     object DBEdit2: TDBEdit
       Left = 648
-      Top = 192
-      Width = 300
+      Top = 144
+      Width = 209
       Height = 21
       DataField = 'nome'
       DataSource = dsProdutos
-      TabOrder = 5
+      TabOrder = 3
     end
     object DBEdit3: TDBEdit
       Left = 648
-      Top = 292
+      Top = 244
       Width = 95
       Height = 21
       DataField = 'preco'
       DataSource = dsProdutos
-      TabOrder = 6
+      TabOrder = 4
     end
     object DBEdit4: TDBEdit
       Left = 648
-      Top = 240
-      Width = 300
+      Top = 192
+      Width = 209
       Height = 21
       DataField = 'descricao'
       DataSource = dsProdutos
-      TabOrder = 7
+      TabOrder = 5
     end
     object btnSalvar: TButton
-      Left = 888
-      Top = 376
+      Left = 766
+      Top = 304
       Width = 91
       Height = 33
       Caption = 'Salvar'
-      TabOrder = 8
+      TabOrder = 6
       OnClick = btnSalvarClick
+    end
+    object btnDeletar: TButton
+      Left = 652
+      Top = 304
+      Width = 91
+      Height = 33
+      Caption = 'Excluir'
+      TabOrder = 7
+      OnClick = btnDeletarClick
     end
   end
   object DBLookupComboBox1: TDBLookupComboBox
     Left = 648
-    Top = 229
+    Top = 181
     Width = 145
     Height = 21
     DataField = 'categoria_id'
@@ -231,7 +240,7 @@ object fVisualizarProduto: TfVisualizarProduto
   end
   object fdqProdutos: TFDQuery
     Connection = dmConnection.fdcDatabase
-    Left = 1008
+    Left = 712
     Top = 24
     object fdqProdutosid: TLargeintField
       FieldName = 'id'
@@ -261,7 +270,7 @@ object fVisualizarProduto: TfVisualizarProduto
   end
   object dsProdutos: TDataSource
     DataSet = fdqProdutos
-    Left = 944
+    Left = 648
     Top = 24
   end
   object fdqCategorias: TFDQuery
@@ -269,12 +278,12 @@ object fVisualizarProduto: TfVisualizarProduto
     Connection = dmConnection.fdcDatabase
     SQL.Strings = (
       'select * from categorias')
-    Left = 872
+    Left = 576
     Top = 24
   end
   object dsCategorias: TDataSource
     DataSet = fdqCategorias
-    Left = 792
+    Left = 496
     Top = 24
   end
 end

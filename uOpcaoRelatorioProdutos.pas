@@ -162,21 +162,21 @@ end;
 procedure TfOpcaoRelatorioProduto.dbGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (TStringGrid(dbGrid1).RowCount - 1) < 20 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(dbGrid1.Handle, SB_VERT, False); // Remove barra Vertical
-  end;
+//  if (TStringGrid(dbGrid1).RowCount - 1) < 20 then
+//  begin
+//    // Se tiver menos de 10 linhas
+//    ShowScrollBar(dbGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+//  end;
 end;
 
 procedure TfOpcaoRelatorioProduto.dbGrid2DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (TStringGrid(dbGrid1).RowCount - 1) < 20 then
-  begin
-    // Se tiver menos de 10 linhas
-    ShowScrollBar(dbGrid1.Handle, SB_VERT, False); // Remove barra Vertical
-  end;
+//  if (TStringGrid(dbGrid1).RowCount - 1) < 20 then
+//  begin
+//    // Se tiver menos de 10 linhas
+//    ShowScrollBar(dbGrid1.Handle, SB_VERT, False); // Remove barra Vertical
+//  end;
 end;
 
 procedure TfOpcaoRelatorioProduto.buscaProdutoMaisVendido();

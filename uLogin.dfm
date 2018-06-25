@@ -12,7 +12,7 @@ object fLogin: TfLogin
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object panelTop: TPanel
@@ -39,8 +39,8 @@ object fLogin: TfLogin
       Font.Style = [fsBold]
       ParentBiDiMode = False
       ParentFont = False
-      ExplicitWidth = 101
-      ExplicitHeight = 30
+      ExplicitWidth = 106
+      ExplicitHeight = 32
     end
   end
   object panelMid: TPanel
