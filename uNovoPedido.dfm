@@ -1,11 +1,9 @@
 object fNovoPedido: TfNovoPedido
   Left = 0
   Top = 0
-  BorderIcons = []
-  BorderStyle = bsSingle
   Caption = 'Cadastro de Pedido'
-  ClientHeight = 562
-  ClientWidth = 682
+  ClientHeight = 552
+  ClientWidth = 672
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,13 +17,13 @@ object fNovoPedido: TfNovoPedido
   object panelMid: TPanel
     Left = 0
     Top = 65
-    Width = 682
-    Height = 497
+    Width = 672
+    Height = 487
     Align = alClient
     TabOrder = 0
     DesignSize = (
-      682
-      497)
+      672
+      487)
     object lblValor: TLabel
       Left = 534
       Top = 445
@@ -45,7 +43,7 @@ object fNovoPedido: TfNovoPedido
     object dbgProdutos: TDBGrid
       Left = 181
       Top = 6
-      Width = 485
+      Width = 475
       Height = 201
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -78,7 +76,7 @@ object fNovoPedido: TfNovoPedido
     object dbgCategoria: TDBGrid
       Left = 10
       Top = 6
-      Width = 175
+      Width = 165
       Height = 201
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -103,7 +101,7 @@ object fNovoPedido: TfNovoPedido
     object dbgItensPedido: TDBGrid
       Left = 13
       Top = 213
-      Width = 655
+      Width = 645
       Height = 212
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -160,14 +158,10 @@ object fNovoPedido: TfNovoPedido
   object panelTop: TPanel
     Left = 0
     Top = 0
-    Width = 682
+    Width = 672
     Height = 65
     Align = alTop
     TabOrder = 1
-<<<<<<< Updated upstream
-=======
-    ExplicitWidth = 672
->>>>>>> Stashed changes
     object btnSalvar: TButton
       Left = 560
       Top = 12

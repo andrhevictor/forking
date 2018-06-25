@@ -57,9 +57,9 @@ type
     Function getNumeroFichaByPedido(idPedido: Integer): Integer;
     Function countItensByPedido(idPedido: Integer) : Integer;
     procedure checkQuantityItens();
-
   private
   public
+//    constructor Create(AOwner: TComponent; pedidoId: String);
   end;
 
 var

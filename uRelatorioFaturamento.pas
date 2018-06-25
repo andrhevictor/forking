@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ComCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, frxClass, frxDBSet;
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
   TfRelatorioFaturamento = class(TForm)
@@ -29,9 +29,7 @@ type
     fdqFaturamento: TFDQuery;
     fdqFaturamentocategoria: TWideStringField;
     fdqFaturamentoquantidade: TLargeintField;
-    fdqFaturamentosum: TFMTBCDField;
-    frxDBFaturamento: TfrxDBDataset;
-    frxFaturamento: TfrxReport;
+    lblAlerta: TLabel;
   private
     { Private declarations }
   public
