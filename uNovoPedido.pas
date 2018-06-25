@@ -59,6 +59,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure dbgItensPedidoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    Function pedidohasFicha(idPedido: Integer): Boolean;
+    Function getNumeroFichaByPedido(idPedido: Integer): Integer;
   private
   public
 //    constructor Create(AOwner: TComponent; pedidoId: String);
@@ -94,6 +96,13 @@ var
   idPedido:   Integer;
 begin
   idPedido := fPrincipal.GetPedidoId;
+
+  if fNovoPedido.pedidohasFicha(idPedido) then begin
+    fichaInput := fNovoPedido.getNumeroFichaByPedido(idPedido).ToString;
+    ShowMessage('Pedido salvo com sucesso! Número da ficha: ' + fichaInput);
+    fNovoPedido.Close;
+    Exit;
+  end;
 
   if fdqItensPedido.RecordCount = 0 then begin
     ShowMessage('O pedido precisa ter ao menos um item para ser salvo!');
@@ -337,6 +346,26 @@ begin
   fdqFichaDisponivel.Open();
 
   Result := fdqFichaDisponivel.RecordCount > 0;
+end;
+
+function TfNovoPedido.getNumeroFichaByPedido(idPedido: Integer): Integer;
+begin
+  fdqAtualizaPedido.SQL.Clear;
+  fdqAtualizaPedido.SQL.Add('SELECT numero_ficha FROM pedidos WHERE id = :pedido');
+  fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
+  fdqAtualizaPedido.Open();
+
+  Result := fdqAtualizaPedido.FieldByName('numero_ficha').AsInteger;
+end;
+
+function TfNovoPedido.pedidohasFicha(idPedido: Integer): Boolean;
+begin
+  fdqAtualizaPedido.SQL.Clear;
+  fdqAtualizaPedido.SQL.Add('SELECT numero_ficha FROM pedidos WHERE id = :pedido');
+  fdqAtualizaPedido.ParamByName('pedido').Value := idPedido;
+  fdqAtualizaPedido.Open();
+
+  Result := fdqAtualizaPedido.FieldByName('numero_ficha').AsInteger > 0;
 end;
 
 procedure TfNovoPedido.recalculaValorPedido();

@@ -21,9 +21,8 @@ object fNovoPedido: TfNovoPedido
     Height = 487
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 57
-    ExplicitWidth = 875
-    ExplicitHeight = 507
+    ExplicitLeft = -8
+    ExplicitTop = 59
     DesignSize = (
       672
       487)
@@ -168,7 +167,6 @@ object fNovoPedido: TfNovoPedido
     Height = 65
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 875
     object btnSalvar: TButton
       Left = 560
       Top = 12
@@ -256,7 +254,7 @@ object fNovoPedido: TfNovoPedido
   end
   object dsItensPedido: TDataSource
     DataSet = fdqItensPedido
-    Left = 104
+    Left = 128
     Top = 472
   end
   object fdqSomaItens: TFDQuery
